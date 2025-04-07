@@ -107,6 +107,21 @@
 		},
 	},
 
+	"CVT_Advance_Gearbox": {
+		"information":{
+			"name":"Shift Logic CVT Advance Gearbox",
+			"value": 0
+		},
+        "slots": [
+			["type", "default", "description"],
+		],
+		"slotType" : "Shift_Logic",
+
+		"vehicleController":{
+			"shiftLogicName": "cvtGearbox2",
+		},
+	},
+
 	"MT_Gearbox": {
 		"information":{
 			"name":"Shift Logic MT Gearbox",
