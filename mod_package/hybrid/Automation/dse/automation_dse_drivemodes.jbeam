@@ -44,6 +44,7 @@
 						["controller", {"controllerName": "suspensionLift","lift": 0.1}],
 						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 4}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
+						["controller", {"controllerName": "spoiler","mode": "off"}],
 					]
 				},
 				"off": {
@@ -68,6 +69,7 @@
 						["controller", {"controllerName": "suspensionLift","lift": 0}],
 						["controller", {"controllerName": "hybridControl","awd": "partTime", "regen": 3}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
+						["controller", {"controllerName": "spoiler","mode": "auto"}],
 					]
 				},
 				"off2wd": {
@@ -90,6 +92,7 @@
 						["controller", {"controllerName": "suspensionLift","lift": 0}],
 						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 3}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
+						["controller", {"controllerName": "spoiler","mode": "auto"}],
 					]
 				},
 				"comfort": {
@@ -122,6 +125,7 @@
 						["controller", {"controllerName": "suspensionLift","lift": 0}],
 						["controller", {"controllerName": "hybridControl","awd": "partTime", "regen": 3}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
+						["controller", {"controllerName": "spoiler","mode": "auto"}],
 					]
 				},
 				"sport": {
@@ -155,6 +159,7 @@
 						["controller", {"controllerName": "suspensionLift","lift": -0.1}],
 						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 2}],
 						["controller", {"controllerName": "rwsControl","val": 0}],
+						["controller", {"controllerName": "spoiler","mode": "on"}],
 					]
 				},
 				"corsa": {
@@ -179,6 +184,7 @@
 						["controller", {"controllerName": "suspensionLift","lift": -0.1}],
 						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 1}],
 						["controller", {"controllerName": "rwsControl","val": 0}],
+						["controller", {"controllerName": "spoiler","mode": "on"}],
 					]
 				},
 				"eco": {
@@ -211,6 +217,7 @@
 						["controller", {"controllerName": "suspensionLift","lift": 0}],
 						["controller", {"controllerName": "hybridControl","awd": "off", "regen": 5}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
+						["controller", {"controllerName": "spoiler","mode": "off"}],
 					]
 				},
 			},

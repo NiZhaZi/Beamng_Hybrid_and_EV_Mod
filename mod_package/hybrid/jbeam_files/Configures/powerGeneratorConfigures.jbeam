@@ -9,6 +9,12 @@
 		],
 		"slotType" : "Power_Generator_Control_Configure",
 
+		"variables": [
+			["name",  "type",   "unit",  "category",       "default",  "min",  "max",  "title",            "description"],
+			//REEV mode settings
+			["$SOC",  "range",  "%",     "electricmotor",  20,         0,      100,    "State of charge",  "State of charge when REEV on",  {"subCategory": "electricmotor", "stepDis":0.50}],
+		],
+
 		"controller": [
 			["fileName"],
 			["hybrid/powerGenerator", {"name": "powerGenerator"}],
@@ -16,7 +22,7 @@
 
 		"powerGenerator":{
 			"powerGeneratorName": "gearbox",
-			"SOC": 80,
+			"SOC": "$SOC",
 			"defaultMode": "auto",
 			"enhancedDrive": true,
 		}

@@ -32,6 +32,7 @@
 		],
 		"controller": [
 			["fileName"],
+			["spoiler", {"name": "spoiler",}],
 		],
 		"hybridControl":{
 			//EV ondemand AWD settings
