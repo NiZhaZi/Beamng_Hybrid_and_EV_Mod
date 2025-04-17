@@ -1,7 +1,7 @@
 -- motorControl.lua - 2024.3.3 22:21 - motor control for hybrid Vehicles
 -- by NZZ
--- version 0.0.9 alpha
--- final edit - 2024.9.21 18:28
+-- version 0.0.10 alpha
+-- final edit - 2025.4.17 17:07
 
 local M = {}
 
@@ -227,6 +227,14 @@ local function updateGFX(dt)
   electrics.values.remainingpower = storage.remainingRatio
   electrics.values.evfuel = electrics.values.remainingpower * 100
   --log("", "hybrid", "hybrid" .. electrics.values.evfuel)
+
+  for _, v in ipairs(motors) do
+    if v.motorType == "drive" and electrics.values.evfuel <= 0 then
+      v.energySign = 0
+    else
+      v.energySign = 1
+    end
+  end
 
 end
 

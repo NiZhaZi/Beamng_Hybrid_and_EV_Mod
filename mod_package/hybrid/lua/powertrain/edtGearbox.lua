@@ -1,7 +1,7 @@
 -- edtGearbox.lua - 2024.4.20 14:45 - DCT Gearbox with electric motor
 -- by NZZ
--- version 0.2.8 beta
--- final edit - 2025.3.21 18:54
+-- version 0.2.9 beta
+-- final edit - 2025.4.17 17:07
 
 local M = {}
 
@@ -251,8 +251,8 @@ local function motorTorque(device, dt)
 
   local timeSign = 1
   --log("", "", "" .. (actualTorque - frictionTorque) * timeSign)
-  device.motorTorque = (actualTorque - frictionTorque) * timeSign * device.motorRatio
-  return (actualTorque - frictionTorque) * timeSign * device.motorRatio --/ device.gearRatios[device.gearIndex]
+  device.motorTorque = (actualTorque - frictionTorque) * device.energySign * device.motorRatio
+  return (actualTorque - frictionTorque) * device.energySign * device.motorRatio --/ device.gearRatios[device.gearIndex]
 end
 
 local function engineCoup()
@@ -865,6 +865,8 @@ end
 local function new(jbeamData)
   local device = {
     --insert0
+    energySign = 1,
+
     motorTorque = 0,
 
     visualType = "dctGearbox",
