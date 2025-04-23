@@ -77,7 +77,7 @@
 			["type", "default", "description"],
 			["Hybrid_Control_Configure", "Hybrid_Control_Parallel", "Hybrid Control Configure", {"coreSlot":true}],
 			["Motor_Control_Configure", "Motor_Control_Parallel", "Motor Control Configure", {"coreSlot":true}],
-			["Power_Generator_Control_Configure", "", "Power Generator Control Configure"],
+			["Power_Generator_Control_Configure", "Power_Generator_Control", "Power Generator Control Configure"],
 		],
 		"slotType" : "Hybrid_Configure",
 		"variables": [
