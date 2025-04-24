@@ -9,6 +9,7 @@
 			["type", "default", "description"],
 			["Battery", "Lithium_Titanate_Battery", "Battery"],
 			["Hybrid_Configure", "", "Hybrid Configure", {"coreSlot":true}],
+			["default_mode", "default_hybrid_mode", "Default Hybrid Mode", {"coreSlot":true}],
 			["AVAS", "AVAS", "Automated Voice Annunciator Systemsery"],
 		],
 		"variables": [
@@ -57,6 +58,50 @@
 			"defaultBrakeMode": "onePedal"
 			//electric reverse
 			"electricReverse": true
+		},
+	},
+
+	"default_auto_mode": {
+		"information":{
+			"name":"Default Mode Auto",
+			"value": 0
+		},
+		"slotType" : "default_mode",
+		"hybridControl":{
+			"defaultMode": "auto"
+		},
+	},
+
+	"default_hybrid_mode": {
+		"information":{
+			"name":"Default Mode Hybrid",
+			"value": 0
+		},
+		"slotType" : "default_mode",
+		"hybridControl":{
+			"defaultMode": "auto"
+		},
+	},
+
+	"default_electric_mode": {
+		"information":{
+			"name":"Default Mode Electric",
+			"value": 0
+		},
+		"slotType" : "default_mode",
+		"hybridControl":{
+			"defaultMode": "electric"
+		},
+	},
+
+	"default_fuel_mode": {
+		"information":{
+			"name":"Default Mode Fuel",
+			"value": 0
+		},
+		"slotType" : "default_mode",
+		"hybridControl":{
+			"defaultMode": "fuel"
 		},
 	},
 }
