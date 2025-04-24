@@ -10,6 +10,7 @@
             ["Dynamic_System", "", "dynamic system"],
 			["Rear_Wheel_Steering", "", "Rear Wheel Steering"],
 			["Suspension_Lift", "", "Suspension Lift"],
+			["Spoiler_Control", "Spoiler", "Spoiler Control"],
 		],
 		"slotType" : "Functions",
 		"variables": [
@@ -28,8 +29,8 @@
 		}
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
-			["$switchVelocity", "range", "km/h", "Suspension", 45, 0, 650, "Rear Steering Switch Velocity", "Adjusts the Rear Steering Switch Velocity"{"subCategory":"", "minDis": 0, "maxDis": 650}],
-			["$rwsAngle", "range", "Angle", "Suspension", 0.35, 0, 1, "Rear Steering Angle", "Adjusts the Rear Steering Angle"{"subCategory":"", "minDis": 0.00, "maxDis": 1.00, "stepDis": 0.01}],
+			["$switchVelocity", "range", "km/h", "Functions", 45, 0, 650, "Rear Steering Switch Velocity", "Adjusts the Rear Steering Switch Velocity"{"subCategory":"Suspension", "minDis": 0, "maxDis": 650}],
+			["$rwsAngle", "range", "Angle", "Functions", 0.35, 0, 1, "Rear Steering Angle", "Adjusts the Rear Steering Angle"{"subCategory":"Suspension", "minDis": 0.00, "maxDis": 1.00, "stepDis": 0.01}],
 		],
 		"slotType" : "Rear_Wheel_Steering",
 		"controller": [
@@ -58,12 +59,12 @@
 		}
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
-			["$suspensionLift", "range", "class", "Suspension", -0.80, -1.20, 1.20, "Suspension Lift Range", "Adjusts the Suspension Lift Range"{"subCategory":"", "minDis": -1.20, "maxDis": 1.20, "stepDis": 0.01}],
-			["$inLimit", "range", "number", "Suspension", 1.20, 0, 1.20, "Suspension In Limit", "Adjusts the Suspension In Limit"{"subCategory":"", "minDis": 0.00, "maxDis": 1.20}],
-			["$outLimit", "range", "number", "Suspension", 1.20, 0, 1.20, "Suspension Out Limit", "Adjusts the Suspension Out Limit"{"subCategory":"", "minDis": 0.00, "maxDis": 1.20}],
-			["$liftVelocity", "range", "km/h", "Suspension", 80, 1, 1000, "Suspension Fall Velocity", "Velocity of when suspension fall"{"subCategory":"", "minDis": 1, "maxDis": 1000}],
-			["$liftLevel", "range", "level", "Suspension", 0.10, 0, 1, "Suspension Max Lift Level", "Max level of suspension lift"{"subCategory":"", "minDis": 1, "maxDis": 1000}],
-			["$dropLevel", "range", "level", "Suspension", 0.10, 0, 1, "Suspension Max Fall Level", "Max level of suspension fall"{"subCategory":"", "minDis": 1, "maxDis": 1000}],
+			["$suspensionLift", "range", "class", "Functions", -0.80, -1.20, 1.20, "Suspension Lift Range", "Adjusts the Suspension Lift Range"{"subCategory":"Suspension", "minDis": -1.20, "maxDis": 1.20, "stepDis": 0.01}],
+			["$inLimit", "range", "X", "Functions", 1.20, 0, 1.20, "Suspension In Limit", "Adjusts the Suspension In Limit"{"subCategory":"Suspension", "minDis": 0.00, "maxDis": 1.20}],
+			["$outLimit", "range", "X", "Functions", 1.20, 0, 1.20, "Suspension Out Limit", "Adjusts the Suspension Out Limit"{"subCategory":"Suspension", "minDis": 0.00, "maxDis": 1.20}],
+			["$liftVelocity", "range", "km/h", "Functions", 80, 1, 1000, "Suspension Fall Velocity", "Velocity of when suspension fall"{"subCategory":"Suspension", "minDis": 1, "maxDis": 1000}],
+			["$liftLevel", "range", "level", "Functions", 0.10, 0, 1, "Suspension Max Lift Level", "Max level of suspension lift"{"subCategory":"Suspension", "minDis": 1, "maxDis": 1000}],
+			["$dropLevel", "range", "level", "Functions", 0.10, 0, 1, "Suspension Max Fall Level", "Max level of suspension fall"{"subCategory":"Suspension", "minDis": 1, "maxDis": 1000}],
 		],
 		"slotType" : "Suspension_Lift",
 		"controller": [
@@ -137,9 +138,9 @@
 		},
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
-			["$defaultMainOutput", "range", "%", "Dynamic", 0.67, 0, 1, "default main output ratio", "Adjusts power output to main axle"{"subCategory":"", "minDis": 0, "maxDis": 100}],
-			["$minMainOutput", "range", "%", "Dynamic", 0.0, 0, 1, "min main output ratio", "Adjusts min power output to main axle"{"subCategory":"", "minDis": 0, "maxDis": 100}],
-			["$maxMainOutput", "range", "%", "Dynamic", 1.0, 0, 1, "max main output ratio", "Adjusts max power output to main axle"{"subCategory":"", "minDis": 0, "maxDis": 100}],
+			["$defaultMainOutput", "range", "%", "Functions", 0.70, 0, 1, "default main output ratio", "Adjusts power output to main axle"{"subCategory":"Dynamic System", "minDis": 0, "maxDis": 100}],
+			["$minMainOutput", "range", "%", "Functions", 0.0, 0, 1, "min main output ratio", "Adjusts min power output to main axle"{"subCategory":"Dynamic System", "minDis": 0, "maxDis": 100}],
+			["$maxMainOutput", "range", "%", "Functions", 1.0, 0, 1, "max main output ratio", "Adjusts max power output to main axle"{"subCategory":"Dynamic System", "minDis": 0, "maxDis": 100}],
 		],
 		"slotType" : "Dynamic_awd",
         "controller": [
@@ -176,6 +177,27 @@
 				"stepping" : 0.01,
 			}]
 
+    	],
+	},
+
+	"Spoiler": {
+		"information":{
+			"name":"Spoiler Control",
+			"value": 500
+		},
+		"slotType" : "Spoiler_Control",
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+			["$spoilerRunningMultiple", "range", "X", "Functions", 3, 0, 100, "stretch out speed ratio", "Spoiler stretch out speed ratio"{"subCategory":"Spoiler", "stepDis":0.01}],
+			["$spoilerActiveSpeed", "range", "km/h", "Functions", 60, 0, 999, "active velocity", "Spoiler active velocity"{"subCategory":"Spoiler", "stepDis":1.00}],
+		],
+        "controller": [
+        	["fileName"],
+			["functions/spoilerControl", {
+				"name": "spoiler",
+				"spoilerRunningMultiple": "$spoilerRunningMultiple",
+				"spoilerActiveSpeed": "$spoilerActiveSpeed",
+			}],
     	],
 	},
 

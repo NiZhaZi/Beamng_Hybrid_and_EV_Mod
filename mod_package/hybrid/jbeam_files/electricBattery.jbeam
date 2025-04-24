@@ -11,8 +11,8 @@
 		],
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
-			["$totalCapacity", "range", "kWh", "Battery", 40, 0, 150, "Total Battery Level", "Total battery charge", {"stepDis":0.1}]
-			["$startCapacity", "range", "kWh", "Battery", 40, 0, 150, "Start Battery Level", "Initial battery charge", {"stepDis":0.1}]
+			["$totalCapacity", "range", "kWh", "Hybrid System", 40, 0, 150, "Total Battery Level", "Total battery charge", {"subCategory": "Battery", "stepDis":0.1}]
+			["$startCapacity", "range", "kWh", "Hybrid System", 40, 0, 150, "Start Battery Level", "Initial battery charge", {"subCategory": "Battery", "stepDis":0.1}]
 		],
 		"mainBattery": {
 			"energyType":"electricEnergy",
