@@ -25,7 +25,7 @@
 			//auto mode settings
 			["$startVelocity",   "range",  "kph",   "Hybrid System",  35,         5,      99999,  "Start Velocity",        "Velocity of Engine Start",           		   {"subCategory": "Auto Mode",    "stepDis":1.00}],
 			["$connectVelocity", "range",  "kph",   "Hybrid System",  40,         7,      99999,  "Connect Velocity",      "Velocity of Engine Involve",         		   {"subCategory": "Auto Mode",    "stepDis":1.00}],
-			["$lowSpeed",        "range",  "kph",   "Hybrid System",  0.5,        0.5,    10,     "Low Speed",       	   "Engine Start If Hign Throttle and Low Speed",  {"subCategory": "Auto Mode",    "stepDis":0.01}],
+			["$lowSpeed",        "range",  "kph",   "Hybrid System",  5,        0.5,    10,     "Low Speed",       	   "Engine Start If Hign Throttle and Low Speed",  {"subCategory": "Auto Mode",    "stepDis":0.01}],
 			//REEV mode settings
 			["$highEfficentRPM", "range",  "RPM",   "Hybrid System",  3500,       0,      99999,  "High Efficent RPM",     "High Efficent Engine RPM",           		   {"subCategory": "REEV Mode",    "stepDis":1.00}],
 			["$REEVRPM",         "range",  "RPM",   "Hybrid System",  1500,       0,      99999,  "REEV RPM",              "Default REEV Engine RPM",           		   {"subCategory": "REEV Mode",    "stepDis":1.00}],

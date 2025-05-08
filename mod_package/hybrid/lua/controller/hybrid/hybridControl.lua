@@ -1,7 +1,7 @@
 -- hybridContrl.lua - 2024.4.30 13:28 - hybrid control for hybrid Vehicles
 -- by NZZ
--- version 0.0.53 alpha
--- final edit - 2025.4.8 11:41
+-- version 0.0.54 alpha
+-- final edit - 2025.5.8 23:17
 
 local M = {}
 
@@ -505,7 +505,17 @@ local function updateGFX(dt)
         proxyEngine:setTempRevLimiter(proxyEngine.maxRPM)
     end
 
-    electrics.values.reevThrottle = reevThrottle
+    if autoModeStage == 1 and proxyEngine.outputRPM > 100 and powerGeneratorOff and not ifLowSpeed() then
+        engineMode("off")
+        electrics.values.reevThrottle = 0.02
+    elseif autoModeStage == 3 and proxyEngine.outputRPM <= 100 then
+        engineMode("on")
+        electrics.values.reevThrottle = reevThrottle
+    else
+        electrics.values.reevThrottle = reevThrottle
+    end
+
+    log("D", "", electrics.values.reevThrottle)
 
     --reev mode end
 
