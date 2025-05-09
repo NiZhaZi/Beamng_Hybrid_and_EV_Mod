@@ -2,7 +2,7 @@
 "bindings" :   [
      {
           "control": "e",
-          "action":  "Fog Light"
+          "action":  "Customed Light"
      } 
 ],
 
