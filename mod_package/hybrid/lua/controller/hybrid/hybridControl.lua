@@ -1,7 +1,9 @@
 -- hybridContrl.lua - 2024.4.30 13:28 - hybrid control for hybrid Vehicles
 -- by NZZ
--- version 0.0.54 alpha
--- final edit - 2025.5.8 23:17
+-- version 0.0.55 alpha
+-- final edit - 2025.5.9 11:41
+
+-- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
 local M = {}
 
@@ -49,6 +51,7 @@ local ifComfortRegen = nil
 local comfortRegenBegine = nil
 local comfortRegenEnd = nil
 local lowSpeed = nil
+local lowACC = nil
 
 local brakeMode = nil
 
@@ -363,7 +366,7 @@ local function setPartTimeDriveMode(mode)
 end
 
 local function ifLowSpeed()
-    if input.throttle > 0.8 and electrics.values.airspeed <= lowSpeed then
+    if input.throttle > 0.8 and (electrics.values.airspeed <= lowSpeed or abs(electrics.values.accXSmooth) <= lowACC) then
         return true
     else
         return false
@@ -505,6 +508,8 @@ local function updateGFX(dt)
         proxyEngine:setTempRevLimiter(proxyEngine.maxRPM)
     end
 
+    -- electrics.values.reevThrottle = reevThrottle
+
     if autoModeStage == 1 and proxyEngine.outputRPM > 100 and powerGeneratorOff and not ifLowSpeed() then
         engineMode("off")
         electrics.values.reevThrottle = 0.02
@@ -514,8 +519,6 @@ local function updateGFX(dt)
     else
         electrics.values.reevThrottle = reevThrottle
     end
-
-    log("D", "", electrics.values.reevThrottle)
 
     --reev mode end
 
@@ -718,6 +721,7 @@ local function init(jbeamData)
     AdvanceAWD = jbeamData.AdvanceAWD or false
     AdAWDDiffRPM = jbeamData.AdAWDDiffRPM or 250
     lowSpeed = (jbeamData.lowSpeed or 0.08) * 0.2778
+    lowACC = jbeamData.lowACC or 2.00
     ifComfortRegen = jbeamData.ifComfortRegen or true
     comfortRegenBegine = jbeamData.comfortRegenBegine or 0.75
     comfortRegenEnd = jbeamData.comfortRegenEnd or 0.15

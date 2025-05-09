@@ -3,6 +3,8 @@
 -- version 0.0.9 alpha
 -- final edit - 2024.10.21 23:58
 
+-- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
+
 local M = {}
 
 local abs = math.abs

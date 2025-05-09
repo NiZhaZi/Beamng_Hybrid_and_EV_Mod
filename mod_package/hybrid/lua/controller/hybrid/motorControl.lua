@@ -3,6 +3,8 @@
 -- version 0.0.10 alpha
 -- final edit - 2025.4.17 17:07
 
+-- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
+
 local M = {}
 
 local max = math.max

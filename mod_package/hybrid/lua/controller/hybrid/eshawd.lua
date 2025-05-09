@@ -1,6 +1,9 @@
---eSH-AWD version 0.0.2alpha
---Final Edit 2024年3月18日22点06分
---by NZZ
+-- eshawd.lua - 2024.3.18 22:06 - eSH-AWD
+-- by NZZ
+-- version 0.0.2 alpha
+-- Final Edit 2024.3.18 22:06
+
+-- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
 local M = {}
 
