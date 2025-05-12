@@ -1,0 +1,27 @@
+{
+  "signal_on": {
+    "name": "signal_on",
+    "mapTo": "signal_on",
+    "class": "material",
+    "Stages": [
+      {
+        "emissiveFactor": [
+          8.27450991,
+          0.50588303,
+          0
+        ]
+      },
+      {
+        "emissiveFactor": null
+      },
+      {
+        "emissiveFactor": null
+      },
+      {
+        "emissiveFactor": null
+      }
+    ],
+    "translucentBlendOp": "None",
+    "version": 1.5
+  }
+}

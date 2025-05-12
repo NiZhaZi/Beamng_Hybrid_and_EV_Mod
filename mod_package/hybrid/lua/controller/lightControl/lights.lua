@@ -1,47 +1,90 @@
 local M = {}
 
-local lightSign = nil
+local lightSign = {
+    saftyLight = nil,
+    fogLight = nil,
+    muitiLightL = nil,
+    muitiLightR = nil
+}
 
+-- safty light
 local light1 = nil
 local light2 = nil
-
 local t1 = nil
 local t2 = nil
 local range1 = nil
-
 local timerange = nil
 
 local function updateGFX(dt)
 
-    if timerange < 4 then
-        t1 = t1 + dt
-        if t1 >= 0.1 then
-            light1 = 1
-            t1 = 0
-            timerange = timerange + 1
-        else
-            light1 = 0
-        end
-    else
-        light1 = 0
-        t2 = t2 + dt
-        if t2 >= 0.5 then
-            timerange = 0
-            t2 = 0
-        end
-    end
-
-    local igi
+    local ifIgnition
     if electrics.values.ignitionLevel == 2 then
-        igi = 1
+        ifIgnition = 1
     else
-        igi = 0
+        ifIgnition = 0
     end
 
-    electrics.values.saftylight = light1 * igi * lightSign
-    electrics.values.fog = lightSign
+    -- safty light
+    -- if timerange < 4 then
+    --     t1 = t1 + dt
+    --     if t1 >= 0.1 then
+    --         light1 = 1
+    --         t1 = 0
+    --         timerange = timerange + 1
+    --     else
+    --         light1 = 0
+    --     end
+    -- else
+    --     light1 = 0
+    --     t2 = t2 + dt
+    --     if t2 >= 0.5 then
+    --         timerange = 0
+    --         t2 = 0
+    --     end
+    -- end
+    -- electrics.values.saftyLight = light1 * ifIgnition * lightSign
 
-    --log("", "light", "light" .. timerange)
+    -- fog light
+    -- electrics.values.fogLight = lightSign * ifIgnition
+
+    -- muitilight
+    if electrics.values.signal_left_input == 1 then
+        electrics.values.muitiLightL = electrics.values.signal_L * 2
+
+        electrics.values.mlrunnigL = 0
+        electrics.values.mlsignalL = electrics.values.signal_L
+    else
+        electrics.values.muitiLightL = electrics.values.running
+
+        electrics.values.mlrunnigL = electrics.values.running
+        electrics.values.mlsignalL = 0
+    end
+
+    if electrics.values.signal_right_input == 1 then
+        electrics.values.muitiLightR = electrics.values.signal_R * 2
+
+        electrics.values.mlrunnigR = 0
+        electrics.values.mlsignalR = electrics.values.signal_R
+    else
+        electrics.values.muitiLightR = electrics.values.running
+
+        electrics.values.mlrunnigR = electrics.values.running
+        electrics.values.mlsignalR = 0
+    end
+
+    if electrics.values.fog == 1 then
+        electrics.values.turnAsisR = 1
+        electrics.values.turnAsisL = 1
+    elseif electrics.values.steering >= 450 * 0.6 then
+        electrics.values.turnAsisR = 0
+        electrics.values.turnAsisL = 1
+    elseif electrics.values.steering <= 450 * -0.6 then
+        electrics.values.turnAsisR = 1
+        electrics.values.turnAsisL = 0
+    else
+        electrics.values.turnAsisR = 0
+        electrics.values.turnAsisL = 0
+    end
 
 end
 
@@ -54,14 +97,18 @@ local function setsign()
 end 
 
 local function init()
-    lightSign = 0
+    -- lightSign = 0
+    -- electrics.values.saftyLight = 0
+    -- electrics.values.fogLight = 0
+    electrics.values.muitiLightL = 0
+    electrics.values.muitiLightR = 0
 
-    light1 = 0
-    light2 = 0
-    t1 = 0
-    t2 = 0
-    range1 = 0
-    timerange = 0
+    -- light1 = 0
+    -- light2 = 0
+    -- t1 = 0
+    -- t2 = 0
+    -- range1 = 0
+    -- timerange = 0
 end
 
 M.setsign = setsign

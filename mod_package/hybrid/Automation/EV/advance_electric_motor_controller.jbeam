@@ -33,7 +33,6 @@
 	        ["fileName"],
 			["advanceEV/evdrive", {"name": "evdrive"}],
 			["advanceEV/motorLimit", {"name": "motorLimit",}],
-			["spoiler", {"name": "spoiler",}],
 	    ],
 
 		"evdrive": {
@@ -52,7 +51,7 @@
 
 		"vehicleController": {
 			"shiftLogicName":"electricMotor",
-			"motorNames": ["frontMotor", "rearMotor", "rearMotor_R"],
+			"motorNames": ["frontMotor", "frontMotor_R", "rearMotor", "rearMotor_R"],
 			"topSpeedLimitReverse": 15,
 			//"defaultRegen": 0.5,
 			//"brakeRegenCoef": 1,
