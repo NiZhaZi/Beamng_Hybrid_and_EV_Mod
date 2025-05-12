@@ -23,5 +23,31 @@
     ],
     "translucentBlendOp": "None",
     "version": 1.5
+  },
+
+  "running_on": {
+    "name": "running_on",
+    "mapTo": "running_on",
+    "class": "material",
+    "Stages": [
+      {
+        "emissiveFactor": [
+          9,
+          9,
+          9
+        ]
+      },
+      {
+        "emissiveFactor": null
+      },
+      {
+        "emissiveFactor": null
+      },
+      {
+        "emissiveFactor": null
+      }
+    ],
+    "translucentBlendOp": "None",
+    "version": 1.5
   }
 }
