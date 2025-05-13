@@ -27,6 +27,9 @@
 			["$FinalDriveRatioFront", "range", ":1", "Motor Controller", 5.25, 0, 100, "Front Motor Final Drive Ratio", "Final Drive Ratio Front", {"stepDis": 0.01, "minDis":0, "maxDis":100}],
 			["$FinalDriveRatioRear",  "range", ":1", "Motor Controller", 5.25, 0, 100, "Rear Motor Final Drive Ratio",  "Final Drive Ratio Rear",  {"stepDis": 0.01, "minDis":0, "maxDis":100}],
 			["$assistSteeringSpeed",  "range", "km/h", "Motor Controller", 75, 0, 600, "Assist Steering Speed",  "speed of when Assist Steering intervene",  {"stepDis": 1, "minDis":0, "maxDis":600}],
+
+			["$ondemandMaxRPM",  "range",  "RPM",   	"EV System",  50,         0,      99999,  "Ondemand Max RPM",      "Ondemand Max RPM Differencial",                		{"subCategory": "E AWD",        "stepDis":1.00}],
+			["$AWDMultiplier",   "range",  "X",     	"EV System",  1.08,       1,      99999,  "AWD Multiplier",        "Ondemand Max RPM Differencial Coef",           		{"subCategory": "E AWD",        "stepDis":0.01}],
 		],
 
 		"controller": [
@@ -47,6 +50,9 @@
 			"ifSportBrake": false,
 			"ifAssistSteering": false,
 			"assistSteeringSpeed": "$assistSteeringSpeed",
+
+			"ondemandMaxRPM": "$ondemandMaxRPM",
+    		"AWDMultiplier": "$AWDMultiplier",
 		},
 
 		"vehicleController": {

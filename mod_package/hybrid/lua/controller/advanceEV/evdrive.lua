@@ -1,7 +1,7 @@
 -- evdrive.lua - 2024.5.5 16:54 - advance control for EVs
 -- by NZZ
 -- version 0.0.8 alpha
--- final edit - 2025.5.13 13:48
+-- final edit - 2025.5.13 15:22
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -24,6 +24,7 @@ local brakeMode = nil
 local ifAssistSteering = nil
 local assistSteeringSpeed = nil
 
+local AWDMultiplier = nil
 local ondemandMaxRPM = nil
 
 local ifecrawl = nil
@@ -129,6 +130,7 @@ local function onInit(jbeamData)
     end
 
     ondemandMaxRPM = jbeamData.ondemandMaxRPM or 50
+    AWDMultiplier = jbeamData.AWDMultiplier or 1
 end
 
 local function ifLowSpeed()
@@ -204,7 +206,7 @@ local function updateGFX(dt)
     electrics.values.mainThrottle = electrics.values.throttle
     electrics.values.subThrottle = electrics.values.throttle
     if edriveMode == "partTime" then
-        if abs(mianRPM - subRPM) >= ondemandMaxRPM or ifLowSpeed() then
+        if (abs(mianRPM - subRPM * AWDMultiplier) >= ondemandMaxRPM) or ifLowSpeed() then
             electrics.values.subThrottle = electrics.values.throttle
         else
             electrics.values.subThrottle = 0
