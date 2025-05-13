@@ -64,11 +64,35 @@ Here is the guide for using it.
    4. Copy the code under.
 
       ```
+      "Camso_Engine": "Advance_Engine_ElectricController",
+      // "Motor_Drive_Type": "Front_Single_Rear_None",
+      // "Motor_Drive_Type": "Front_Dual_Rear_None",
+      // "Motor_Drive_Type": "Front_None_Rear_Single",
+      // "Motor_Drive_Type": "Front_None_Rear_Dual",
+      "Motor_Drive_Type": "Front_Single_Rear_Single",
+      // "Motor_Drive_Type": "Front_Single_Rear_Dual",
+      // "Motor_Drive_Type": "Front_Dual_Rear_Single",
+      // "Motor_Drive_Type": "Front_Dual_Rear_Dual",
+
+      "Camso_ElectricMotor_F": "Single_ElectricMotor_F",
+      // "Camso_ElectricMotor_F": "Dual_ElectricMotor_F",
+      "Camso_ElectricMotor_R": "Single_ElectricMotor_R",
+      //"Camso_ElectricMotor_R": "Dual_ElectricMotor_R",
       "Camso_differential_front": "Single_motor_differential_front",
       // "Camso_differential_front": "Dual_motor_differential_front",
-      // "Camso_differential_rear": "Single_motor_differential_rear",
-      "Camso_differential_rear": "Dual_motor_differential_rear",
-      "Camso_Engine": "Advance_Engine_ElectricController",
+      "Camso_differential_rear": "Single_motor_differential_rear",
+      // "Camso_differential_rear": "Dual_motor_differential_rear",
+
+      "Camso_DSE": "EV_DSE_01",
+      "Camso_TC": "EV_TC",
+      "Camso_ESC": "EV_ESC",
+      "Camso_DriveModes": "EV_DriveModes_01",
+
+      "Dynamic_System": "",
+      "Dynamic_awd": "",
+      "Dynamic_lsd": "",
+      "Rear_Wheel_Steering": "",
+      "Suspension_Lift": "",
       ```
 
    5. Open the .pc file of the car which is waiting for being modified and paste the content under "parts" part. Comment the duplicate lines. If the function is not needed, the content in the quotation marks can be deleted.

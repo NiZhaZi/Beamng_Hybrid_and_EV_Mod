@@ -37,10 +37,10 @@
 
 		"evdrive": {
 			"mainMotorNames": ["rearMotor", "rearMotor_R"],
-			"subMotorNames": ["frontMotor"],
+			"subMotorNames": ["frontMotor", "frontMotor_R"],
 
-			"leftMotorNames": ["rearMotor"],
-			"rightMotorNames": ["rearMotor_R"],
+			"leftMotorNames": ["frontMotor", "rearMotor"],
+			"rightMotorNames": ["frontMotor_R", "rearMotor_R"],
 
 			"defaultEAWDMode": "partTime",
 			"ifAdvanceBrake": false,
@@ -51,7 +51,6 @@
 
 		"vehicleController": {
 			"shiftLogicName":"electricMotor",
-			"motorNames": ["frontMotor", "frontMotor_R", "rearMotor", "rearMotor_R"],
 			"topSpeedLimitReverse": 15,
 			//"defaultRegen": 0.5,
 			//"brakeRegenCoef": 1,
@@ -62,7 +61,106 @@
 			["type", "default", "description"],
 			["Camso_engine_structure", "", "Engine Structure", {"coreSlot": true}],
 			["Camso_SpeedLimiter", "", "Speed Limiter", {"coreSlot": true}],
-			["Functions", "Functions", "Functions"]
+			["Camso_ElectricMotor_F", "", "Front Motor", {"coreSlot": true}],
+			["Camso_ElectricMotor_R", "", "Rear Motor", {"coreSlot": true}],
+			["Motor_Drive_Type", "", "Motor Drive Type", {"coreSlot": true}],
+			["AVAS", "AVAS", "Automated Voice Annunciator Systemsery"]
 		]
-	}
+	},
+
+	"Front_Single_Rear_None": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F1R0",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["frontMotor"],
+		},
+	},
+
+	"Front_Dual_Rear_None": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F2R0",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["frontMotor", "frontMotor_R"],
+		},
+	},
+
+	"Front_None_Rear_Single": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F0R1",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["rearMotor"],
+		},
+	},
+
+	"Front_None_Rear_Dual": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F0R2",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["rearMotor", "rearMotor_R"],
+		},
+	},
+
+	"Front_Single_Rear_Single": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F1R1",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["frontMotor", "rearMotor"],
+		},
+	},
+
+	"Front_Single_Rear_Dual": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F1R2",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["frontMotor", "rearMotor", "rearMotor_R"],
+		},
+	},
+
+	"Front_Dual_Rear_Single": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F2R1",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["frontMotor", "frontMotor_R", "rearMotor"],
+		},
+	},
+
+	"Front_Dual_Rear_Dual": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F2R2",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["frontMotor", "frontMotor_R", "rearMotor", "rearMotor_R"],
+		},
+	},
 }

@@ -1,7 +1,9 @@
 -- evdrive.lua - 2024.5.5 16:54 - advance control for EVs
 -- by NZZ
--- version 0.0.7 alpha
--- final edit - 2024.11.25 20:35
+-- version 0.0.8 alpha
+-- final edit - 2025.5.13 13:48
+
+-- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
 local M = {}
 
@@ -24,7 +26,46 @@ local assistSteeringSpeed = nil
 
 local ondemandMaxRPM = nil
 
+local ifecrawl = nil
+local ifComfortRegen = nil
+local comfortRegenBegine = nil
+local comfortRegenEnd = nil
+
+local function reduceRegen()
+
+    guihooks.message("Energy Recovery Level is " .. regenLevel , 5, "")
+
+    if regenLevel > 0 then
+        regenLevel = regenLevel - 1
+    end
+
+end
+
+local function enhanceRegen()
+
+    guihooks.message("Energy Recovery Level is " .. regenLevel , 5, "")
+
+    if regenLevel < 5 then
+        regenLevel = regenLevel + 1
+    end
+
+end
+
+local function cauculateRegen(percentage)
+    if percentage > comfortRegenBegine then
+        return 1
+    elseif percentage <= comfortRegenBegine and percentage > comfortRegenEnd then
+        return percentage
+    else
+        return comfortRegenEnd
+    end
+end
+
 local function onInit(jbeamData)
+
+    comfortRegenBegine = jbeamData.comfortRegenBegine or 0.75
+    comfortRegenEnd = jbeamData.comfortRegenEnd or 0.15
+
     battery =  jbeamData.energyStorage or "mainBattery"
     edriveMode = jbeamData.defaultEAWDMode or "partTime"
     brakeMode = jbeamData.brakeMode or "onePedal" -- "onePedal" "CRBS" "sport"
@@ -238,6 +279,44 @@ local function updateGFX(dt)
     end
     -- assist steering end
 
+    --comfortable regen
+    ifComfortRegen = false
+    ifecrawl = false
+    if ifComfortRegen then
+        local comfortRegen
+        for _, v in ipairs(mainMotors) do
+            if v then
+                v.wantedRegenTorque1 = v.originalRegenTorque * cauculateRegen( v.outputAV1 * avToRPM / v.maxRPM ) * regenLevel
+            end
+        end
+
+        for _, v in ipairs(subMotors) do
+            if v then
+                if electrics.values.throttle > 0 or ifecrawl then
+                    v.wantedRegenTorque1 = 0
+                else
+                    v.wantedRegenTorque1 = v.originalRegenTorque * cauculateRegen( v.outputAV1 * avToRPM / v.maxRPM ) * regenLevel
+                end
+            end
+        end
+    else
+        for _, v in ipairs(mainMotors) do
+            if v then
+                v.wantedRegenTorque1 = v.originalRegenTorque * regenLevel
+            end
+        end
+
+        for _, v in ipairs(subMotors) do
+            if v then
+                if electrics.values.throttle > 0 or ifecrawl then
+                    v.wantedRegenTorque1 = 0
+                else
+                    v.wantedRegenTorque1 = v.originalRegenTorque * regenLevel
+                end
+            end
+        end
+    end
+
 end
 
 local function getMainMotors()
@@ -250,6 +329,15 @@ end
 
 local function getMotors()
     return motors
+end
+
+local function setParameters(parameters)
+    if parameters.awd then-- partTime fullTime off
+        edriveMode = parameters.awd
+    end
+    if parameters.regen then
+        regenLevel = math.max(0, math.min(5, parameters.regen))
+    end
 end
 
 -- public interface
@@ -265,6 +353,8 @@ M.updateGFX = updateGFX
 M.getMainMotors = getMainMotors
 M.getSubMotors = getSubMotors
 M.getMotors = getMotors
+
+M.setParameters = setParameters
 
 rawset(_G, "evdrive", M)
 return M

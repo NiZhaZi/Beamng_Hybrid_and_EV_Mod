@@ -7,7 +7,6 @@
 		"slotType" : "Camso_differential_front",
 		"slots": [
 			["type", "default", "description"],
-			["Camso_ElectricMotor_F", "Single_ElectricMotor_F", "Front Motor"],
 		],
 		"controller": [
 			["fileName"],

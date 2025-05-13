@@ -1,0 +1,217 @@
+{
+	"EV_DriveModes_01": {
+		"information":{
+			"authors":"Diamondback",
+			"name":"EV Drive Modes",
+			"value":250
+		},
+		"slotType" : "Camso_DriveModes",
+		"slots":[
+			["type", "default", "description"],
+			["Camso_DriveModes_default", "Camso_DriveModes_default_comfort", "Default Mode", {"coreSlot": true}],
+			["Camso_DriveModes_offroad", "Camso_DriveModes_offroad", "Offroad Mode"],
+			["Camso_DriveModes_off2wd", "", "2WD ESC & TC Off Mode"],
+			["Camso_DriveModes_corsa", "Camso_DriveModes_corsa", "Corsa Mode"],
+			["Camso_DriveModes_eco", "Camso_DriveModes_eco", "Eco Mode"],
+			["Camso_DriveModes_mod", "", "Additional Mode"]
+		],
+
+		"controller": [
+			["fileName"],
+			["driveModes"],
+		],
+
+		"driveModes": {
+			"enabledModes":["comfort", "sport", "race", "off"],
+			"defaultMode": "sport",
+			"defaultSettings": [
+				["type"],
+
+				["controller", {"controllerName":"tractionControl", "isEnabled":true}],
+				["controller", {"controllerName":"yawControl", "isEnabled":true}],
+				["controller", {"controllerName":"motorTorqueControl", "tractionControl": "default", "yawControl": "default"}],
+				["controller", {"controllerName":"brakeControl", "tractionControl": "default", "yawControl": "default"}],
+				["controller", {"controllerName":"adaptiveBrakeLights", "isEnabled":true}]
+			],
+			"modes": {
+				"comfort": {
+					"name": "Comfort",
+					"order": 10,
+					"settings": [
+						["type"],
+						["controller", {"controllerName":"CMU", "uiDisplayData.simplePowertrainApp.activeColor": "238BE6"}],
+
+						["controller", {"controllerName":"adaptiveFrontDamper", "damperMode":"soft"}],
+                        ["controller", {"controllerName":"adaptiveRearDamper", "damperMode":"soft"}],
+
+                        ["controller", {"controllerName":"adaptiveFrontSwayBar", "torsionBarMode":"soft"}],
+                        ["controller", {"controllerName":"adaptiveRearSwayBar", "torsionBarMode":"soft"}],
+
+						["controller", {"controllerName":"motorTorqueControl",
+							"tractionControl.isEnabled":true,
+							"yawControl.yawAvThreshold": 0.6,
+							"yawControl.isEnabled":false
+						}],
+						["controller", {"controllerName":"brakeControl",
+							"tractionControl.isEnabled":true,
+							"yawControl.isEnabled":true,
+							"yawControl.slipAngleThreshold": 0.1,
+							"yawControl.yawAvThreshold": 0.4
+						}],
+
+						["controller", {"controllerName": "suspensionLift","lift": 0}],
+						["controller", {"controllerName": "evdrive","awd": "partTime", "regen": 3}],
+						["controller", {"controllerName": "rwsControl","val": 1}],
+						["controller", {"controllerName": "spoiler","mode": "auto"}],
+					]
+				},
+				"sport": {
+					"name": "Sport",
+					"order": 20,
+					"settings": [
+						["type"],
+						["controller", {"controllerName":"adaptiveFrontDamper", "damperMode":"hard"}],
+                        ["controller", {"controllerName":"adaptiveRearDamper", "damperMode":"hard"}],
+
+                        ["controller", {"controllerName":"adaptiveFrontSwayBar", "torsionBarMode":"hard"}],
+                        ["controller", {"controllerName":"adaptiveRearSwayBar", "torsionBarMode":"hard"}],
+
+						["controller", {"controllerName":"motorTorqueControl",
+							"tractionControl.isEnabled":true,
+							"tractionControl.wheelGroupSettings.frontMotor.slipThreshold": 0.3,
+                            "tractionControl.wheelGroupSettings.rearMotor.slipThreshold": 0.3,
+							"yawControl.isEnabled":true
+						}],
+						["controller", {"controllerName":"brakeControl",
+							"tractionControl.isEnabled":true,
+							"tractionControl.wheelGroupSettings.frontMotor.slipThreshold": 0.2,
+                            "tractionControl.wheelGroupSettings.rearMotor.slipThreshold": 0.2,
+							"yawControl.isEnabled":true,
+							"yawControl.slipAngleThreshold": 0.4,
+							"yawControl.yawAvThreshold": 0.5
+						}],
+						["controller", {"controllerName":"CMU", "uiDisplayData.simplePowertrainApp.activeColor": "FFFF00"}],
+
+						["controller", {"controllerName": "suspensionLift","lift": -0.1}],
+						["controller", {"controllerName": "evdrive","awd": "fullTime", "regen": 2}],
+						["controller", {"controllerName": "rwsControl","val": 0}],
+						["controller", {"controllerName": "spoiler","mode": "on"}],
+					]
+				},
+				"offroad": {
+					"name": "Off-road",
+					"order": 30,
+					"settings": [
+						["type"],
+						["controller", {"controllerName":"adaptiveFrontDamper", "damperMode":"soft"}],
+                        ["controller", {"controllerName":"adaptiveRearDamper", "damperMode":"soft"}],
+
+                        ["controller", {"controllerName":"adaptiveFrontSwayBar", "torsionBarMode":"off"}],
+                        ["controller", {"controllerName":"adaptiveRearSwayBar", "torsionBarMode":"off"}],
+
+						["controller", {"controllerName":"yawControl", "isEnabled":false}],
+
+						["controller", {"controllerName":"motorTorqueControl",
+							"tractionControl.isEnabled":true,
+							"tractionControl.wheelGroupSettings.frontMotor.slipThreshold": 0.7,
+                            "tractionControl.wheelGroupSettings.rearMotor.slipThreshold": 0.7,
+							"yawControl.isEnabled":false
+						}],
+						["controller", {"controllerName":"brakeControl",
+							"tractionControl.isEnabled":true,
+							"tractionControl.wheelGroupSettings.frontMotor.slipThreshold": 0.4,
+                            "tractionControl.wheelGroupSettings.rearMotor.slipThreshold": 0.4,
+							"yawControl.isEnabled":false
+						}],
+						["controller", {"controllerName":"CMU", "uiDisplayData.simplePowertrainApp.activeColor": "F5A442"}],
+
+						["controller", {"controllerName": "suspensionLift","lift": 0.1}],
+						["controller", {"controllerName": "evdrive","awd": "fullTime", "regen": 4}],
+						["controller", {"controllerName": "rwsControl","val": 1}],
+						["controller", {"controllerName": "spoiler","mode": "off"}],
+					]
+				},
+				"off": {
+					"name": "ESC & TC Off",
+					"order": 50,
+					"settings": [
+						["type"],
+						["controller", {"controllerName":"adaptiveFrontDamper", "damperMode":"hard"}],
+				        ["controller", {"controllerName":"adaptiveRearDamper", "damperMode":"hard"}],
+
+				        ["controller", {"controllerName":"adaptiveFrontSwayBar", "torsionBarMode":"hard"}],
+				        ["controller", {"controllerName":"adaptiveRearSwayBar", "torsionBarMode":"hard"}],
+
+						["controller", {"controllerName":"tractionControl", "isEnabled":false}],
+						["controller", {"controllerName":"yawControl", "isEnabled":false}],
+						["controller", {"controllerName":"motorTorqueControl"}],
+						["controller", {"controllerName":"brakeControl"}],
+						["transmission", {"defaultForwardMode": "S"}],
+						["controller", {"controllerName":"CMU", "uiDisplayData.simplePowertrainApp.activeColor": "DCDCDC"}],
+
+						["controller", {"controllerName": "suspensionLift","lift": 0}],
+						["controller", {"controllerName": "evdrive","awd": "partTime", "regen": 3}],
+						["controller", {"controllerName": "rwsControl","val": 1}],
+						["controller", {"controllerName": "spoiler","mode": "auto"}],
+					]
+				},
+				"corsa": {
+					"name": "Corsa",
+					"order": 49,
+					"settings": [
+						["type"],
+						["controller", {"controllerName":"adaptiveFrontDamper", "damperMode":"hard"}],
+				        ["controller", {"controllerName":"adaptiveRearDamper", "damperMode":"hard"}],
+
+				        ["controller", {"controllerName":"adaptiveFrontSwayBar", "torsionBarMode":"hard"}],
+				        ["controller", {"controllerName":"adaptiveRearSwayBar", "torsionBarMode":"hard"}],
+
+						["controller", {"controllerName":"tractionControl", "isEnabled":false}],
+						["controller", {"controllerName":"yawControl", "isEnabled":false}],
+						["controller", {"controllerName":"motorTorqueControl"}],
+						["controller", {"controllerName":"brakeControl"}],
+						["transmission", {"defaultForwardMode": "S"}],
+						["controller", {"controllerName":"CMU", "uiDisplayData.simplePowertrainApp.activeColor": "FF0000"}],
+
+						["controller", {"controllerName": "suspensionLift","lift": -0.1}],
+						["controller", {"controllerName": "evdrive","awd": "fullTime", "regen": 1}],
+						["controller", {"controllerName": "rwsControl","val": 0}],
+						["controller", {"controllerName": "spoiler","mode": "on"}],
+					]
+				},
+				"eco": {
+					"name": "Eco",
+					"order": 11,
+					"settings": [
+						["type"],
+						["controller", {"controllerName":"CMU", "uiDisplayData.simplePowertrainApp.activeColor": "00FF00"}],
+
+						["controller", {"controllerName":"adaptiveFrontDamper", "damperMode":"soft"}],
+                        ["controller", {"controllerName":"adaptiveRearDamper", "damperMode":"soft"}],
+
+                        ["controller", {"controllerName":"adaptiveFrontSwayBar", "torsionBarMode":"soft"}],
+                        ["controller", {"controllerName":"adaptiveRearSwayBar", "torsionBarMode":"soft"}],
+
+						["controller", {"controllerName":"motorTorqueControl",
+							"tractionControl.isEnabled":true,
+							"yawControl.yawAvThreshold": 0.6,
+							"yawControl.isEnabled":false
+						}],
+						["controller", {"controllerName":"brakeControl",
+							"tractionControl.isEnabled":true,
+							"yawControl.isEnabled":true,
+							"yawControl.slipAngleThreshold": 0.1,
+							"yawControl.yawAvThreshold": 0.4
+						}],
+
+						["controller", {"controllerName": "suspensionLift","lift": 0}],
+						["controller", {"controllerName": "evdrive","awd": "off", "regen": 5}],
+						["controller", {"controllerName": "rwsControl","val": 1}],
+						["controller", {"controllerName": "spoiler","mode": "off"}],
+					]
+				},
+				
+			}
+		}
+	}
+}

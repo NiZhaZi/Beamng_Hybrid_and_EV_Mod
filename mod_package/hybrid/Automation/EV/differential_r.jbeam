@@ -7,7 +7,6 @@
 		"slotType" : "Camso_differential_rear",
 		"slots": [
 			["type", "default", "description"],
-			["Camso_ElectricMotor_R", "Single_ElectricMotor_R", "Rear Motor"],
 		],
 		"controller": [
 			["fileName"],
@@ -16,7 +15,7 @@
 		"powertrain" : [
 		["type", "name", "inputName", "inputIndex"],
 		//https://wiki.beamng.com/Differential
-		["differential", "rearDiff", "rearDriveShaft", 1, {"diffType": "open", "uiName": "Rear Differential"}],
+		["differential", "rearDiff", "rearDriveShaft", 1, {"diffType": "torqueVectoring", "uiName": "Rear Differential"}],
 		["shaft", "halfshaftRL", "rearDiff", 1, {"breakTriggerBeam": "axle_RL", "uiName": "Rear Left Halfshaft", "friction": 1}],
 		["shaft", "halfshaftRR", "rearDiff", 2, {"breakTriggerBeam": "axle_RR", "uiName": "Rear Right Halfshaft", "friction": 1}]
 		]
