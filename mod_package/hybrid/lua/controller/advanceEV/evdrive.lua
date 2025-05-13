@@ -248,7 +248,7 @@ local function updateGFX(dt)
     else
         ign = 0
     end
-    electrics.values.brakewithign = input.brake * ign
+    -- electrics.values.brakewithign = input.brake * ign
     -- advance brake end
 
     -- assist steering begin
