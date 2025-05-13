@@ -15,6 +15,11 @@ local t2 = nil
 local range1 = nil
 local timerange = nil
 
+local lightNum = nil
+local signalDelayL = 0
+local signalDelayR = 0
+local runningBegin = 0
+
 local function updateGFX(dt)
 
     local ifIgnition
@@ -72,6 +77,76 @@ local function updateGFX(dt)
         electrics.values.mlsignalR = 0
     end
 
+    -- running light 2
+
+    local devide = 0.4 / (lightNum + 1)
+
+    if electrics.values.ignitionLevel == 2 and runningBegin < 0.4 then
+        runningBegin = math.min(runningBegin + dt, 0.4)
+    end
+
+    if electrics.values.ignitionLevel ~= 2 then
+        runningBegin = 0
+    end 
+
+    -- liushuideng
+
+    if electrics.values.signal_L == 1 then
+        signalDelayL = signalDelayL + dt
+    else
+        signalDelayL = 0
+    end
+
+    if electrics.values.signal_left_input == 1 then
+
+        for i = 0, lightNum - 1 do
+            local lightStr = "muitiLightL" .. tostring(i)
+            electrics.values[lightStr] = 0
+            if signalDelayL > devide * i then
+                electrics.values[lightStr] = 2
+            end
+        end
+
+    else
+
+        for i = 0, lightNum - 1 do
+            local lightStr = "muitiLightL" .. tostring(i)
+            electrics.values[lightStr] = 0
+            if runningBegin > devide * i then
+                electrics.values[lightStr] = electrics.values.running
+            end
+        end
+
+    end
+
+    if electrics.values.signal_R == 1 then
+        signalDelayR = signalDelayR + dt
+    else
+        signalDelayR = 0
+    end
+
+    if electrics.values.signal_right_input == 1 then
+
+        for i = 0, lightNum - 1 do
+            local lightStr = "muitiLightR" .. tostring(i)
+            electrics.values[lightStr] = 0
+            if signalDelayR > devide * i then
+                electrics.values[lightStr] = 2
+            end
+        end
+
+    else
+
+        for i = 0, lightNum - 1 do
+            local lightStr = "muitiLightR" .. tostring(i)
+            electrics.values[lightStr] = 0
+            if runningBegin > devide * i then
+                electrics.values[lightStr] = electrics.values.running
+            end
+        end
+
+    end
+
     if electrics.values.fog == 1 then
         electrics.values.turnAsisR = 1
         electrics.values.turnAsisL = 1
@@ -96,12 +171,14 @@ local function setsign()
     end
 end 
 
-local function init()
+local function init(jbeamData)
     -- lightSign = 0
     -- electrics.values.saftyLight = 0
     -- electrics.values.fogLight = 0
     electrics.values.muitiLightL = 0
     electrics.values.muitiLightR = 0
+
+    lightNum = jbeamData.lightNum or 7
 
     -- light1 = 0
     -- light2 = 0

@@ -10,7 +10,8 @@
             ["Dynamic_System", "", "dynamic system"],
 			["Rear_Wheel_Steering", "", "Rear Wheel Steering"],
 			["Suspension_Lift", "", "Suspension Lift"],
-			["Spoiler_Control", "Spoiler", "Spoiler Control"],
+			["Spoiler_Control", "", "Spoiler Control"],
+			["Lights_Control", "", "Lights Control"],
 		],
 		"slotType" : "Functions",
 		"variables": [
@@ -180,7 +181,7 @@
     	],
 	},
 
-	"Spoiler": {
+	"Spoiler_Control": {
 		"information":{
 			"name":"Spoiler Control",
 			"value": 500
@@ -197,6 +198,25 @@
 				"name": "spoiler",
 				"spoilerRunningMultiple": "$spoilerRunningMultiple",
 				"spoilerActiveSpeed": "$spoilerActiveSpeed",
+			}],
+    	],
+	},
+
+	"Lights_Control": {
+		"information":{
+			"name":"Lights Control",
+			"value": 500
+		},
+		"slotType" : "Lights_Control",
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+			["$lightNum", "range", "", "Functions", 7, 0, 100, "Running Lights Num", "Number of Running Lights"{"subCategory":"Lights", "stepDis":0.01}],
+		],
+        "controller": [
+        	["fileName"],
+			["lightControl/lights", {
+				"name": "lights",
+				"lightNum": "$lightNum",
 			}],
     	],
 	},
