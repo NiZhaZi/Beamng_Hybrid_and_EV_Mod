@@ -1,7 +1,7 @@
 -- hybridContrl.lua - 2024.4.30 13:28 - hybrid control for hybrid Vehicles
 -- by NZZ
--- version 0.0.55 alpha
--- final edit - 2025.5.9 11:41
+-- version 0.0.56 alpha
+-- final edit - 2025.5.17 21:21
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -895,6 +895,9 @@ local function setParameters(parameters)
     end
     if parameters.regen then
         regenLevel = math.max(0, math.min(5, parameters.regen))
+    end
+    if parameters.hybridMode then
+        setMode(parameters.hybridMode)
     end
 end
 

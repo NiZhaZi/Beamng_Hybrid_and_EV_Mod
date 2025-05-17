@@ -150,4 +150,43 @@
 			["shaft", "transferCase", "gearbox", 1, {"friction": 0}]
 		]
 	},
+
+	// Parallel without generator
+	"Camso_TransferCase_Parallel_FWD_WG": {
+		"information":{
+			"name":"Advanced Parallel FWD Transfer Case (without generator)",
+			"value":500
+		},
+		"slots": [
+			["type", "default", "description"],
+			["Hybrid_Main", "Hybrid_Main", "Main Hybrid Slot", {"coreSlot":true}],
+			["Rear_ElectricMotor", "", "Rear ElectricMotor"],
+
+			["Camso_driveshaft_front", "Camso_driveshaft_front", "Front Driveshaft"]
+		],
+		"slotType" : "Camso_TransferCase",
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"],
+			["shaft", "frontDriveShaft", "gearbox", 1, {"friction": 0}]
+		]
+	},
+
+	"Camso_TransferCase_Parallel_RWD_WG": {
+		"information":{
+			"name":"Advanced Parallel RWD Transfer Case (without generator)",
+			"value":500
+		},
+		"slots": [
+			["type", "default", "description"],
+			["Hybrid_Main", "Hybrid_Main", "Main Hybrid Slot", {"coreSlot":true}],
+			["Front_ElectricMotor", "", "Front ElectricMotor"],
+
+			["Camso_driveshaft_rear", "Camso_driveshaft_rear", "Rear Driveshaft"]
+		],
+		"slotType" : "Camso_TransferCase",
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"],
+			["shaft", "rearDriveShaft", "gearbox", 1, {"friction": 0}]
+		]
+	},
 }

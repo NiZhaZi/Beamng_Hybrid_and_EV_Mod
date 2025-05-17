@@ -42,7 +42,7 @@
 						["controller", {"controllerName": "advawd","mode": "locked"}],
 
 						["controller", {"controllerName": "suspensionLift","lift": 0.1}],
-						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 4}],
+						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 4, "hybridMode": "hybrid"}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
 						["controller", {"controllerName": "spoiler","mode": "off"}],
 					]
@@ -67,7 +67,7 @@
 						["controller", {"controllerName": "advawd"}],
 
 						["controller", {"controllerName": "suspensionLift","lift": 0}],
-						["controller", {"controllerName": "hybridControl","awd": "partTime", "regen": 3}],
+						["controller", {"controllerName": "hybridControl","awd": "partTime", "regen": 3, "hybridMode": "hybrid"}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
 						["controller", {"controllerName": "spoiler","mode": "auto"}],
 					]
@@ -90,7 +90,7 @@
 						["controller", {"output": 1, "controllerName": "advawd","mode": "2wd"}],
 
 						["controller", {"controllerName": "suspensionLift","lift": 0}],
-						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 3}],
+						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 3, "hybridMode": "hybrid"}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
 						["controller", {"controllerName": "spoiler","mode": "auto"}],
 					]
@@ -123,7 +123,7 @@
 						["controller", {"controllerName": "advawd"}],
 
 						["controller", {"controllerName": "suspensionLift","lift": 0}],
-						["controller", {"controllerName": "hybridControl","awd": "partTime", "regen": 3}],
+						["controller", {"controllerName": "hybridControl","awd": "partTime", "regen": 3, "hybridMode": "auto"}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
 						["controller", {"controllerName": "spoiler","mode": "auto"}],
 					]
@@ -157,7 +157,7 @@
 						["controller", {"controllerName": "advawd"}],
 
 						["controller", {"controllerName": "suspensionLift","lift": -0.1}],
-						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 2}],
+						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 2, "hybridMode": "hybrid"}],
 						["controller", {"controllerName": "rwsControl","val": 0}],
 						["controller", {"controllerName": "spoiler","mode": "on"}],
 					]
@@ -182,7 +182,7 @@
 						["controller", {"controllerName": "advawd"}],
 
 						["controller", {"controllerName": "suspensionLift","lift": -0.1}],
-						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 1}],
+						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 1, "hybridMode": "hybrid"}],
 						["controller", {"controllerName": "rwsControl","val": 0}],
 						["controller", {"controllerName": "spoiler","mode": "on"}],
 					]
@@ -215,7 +215,7 @@
 						["controller", {"controllerName": "advawd"}],
 
 						["controller", {"controllerName": "suspensionLift","lift": 0}],
-						["controller", {"controllerName": "hybridControl","awd": "off", "regen": 5}],
+						["controller", {"controllerName": "hybridControl","awd": "off", "regen": 5, "hybridMode": "auto"}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
 						["controller", {"controllerName": "spoiler","mode": "off"}],
 					]
