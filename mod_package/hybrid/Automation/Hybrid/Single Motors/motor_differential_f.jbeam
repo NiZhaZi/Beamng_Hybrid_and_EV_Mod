@@ -11,10 +11,14 @@
 			// ["Single_Motors_Control", "Single_Motors_Control", "Single Motors Control"],
 			// ["Single_Motors_Configure","Front_Single_Motor","Single Motors Configure"],
 		],
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+			["$Front_Motor_Gear_Ratio", "range", "X", "Independent Motor", 4.75, 0.01, 100.00, "Independent Motor Ratio Front", "Gear Ratio of Independent Front Motor(s)", {"subCategory": "Front Motor", "stepDis": 0.01}],
+		],
 		"powertrain" : [
 			["type", "name", "inputName", "inputIndex"],
 			["electricMotor", "frontMotor", "dummy", 0],
-			["shaft", "frontDriveShaft", "frontMotor", 1, {"gearRatio":4.75}],
+			["shaft", "frontDriveShaft", "frontMotor", 1, {"gearRatio":"$Front_Motor_Gear_Ratio"}],
 			["differential", "frontDiff", "frontDriveShaft", 1],
 			["shaft", "halfshaftFL", "frontDiff", 1, {"breakTriggerBeam": "axle_FL", "uiName": "Front Left Halfshaft", "friction": 1}],
 			["shaft", "halfshaftFR", "frontDiff", 2, {"breakTriggerBeam": "axle_FR", "uiName": "Front Right Halfshaft", "friction": 1}]
@@ -56,12 +60,16 @@
 			// ["Single_Motors_Control", "Single_Motors_Control", "Single Motors Control"],
 			// ["Single_Motors_Configure","Front_Dual_Motor","Single Motors Configure"],
 		],
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+			["$Front_Motor_Gear_Ratio", "range", "X", "Independent Motor", 4.75, 0.01, 100.00, "Independent Motor Ratio Front", "Gear Ratio of Independent Front Motor(s)", {"subCategory": "Front Motor", "stepDis": 0.01}],
+		],
 		"powertrain" : [
 			["type", "name", "inputName", "inputIndex"],
 			["electricMotor", "frontMotor_L", "dummy", 0],
 			["electricMotor", "frontMotor_R", "dummy", 0],
-			["shaft", "frontDriveShaft_L", "frontMotor_L", 1, {"gearRatio":4.75}],
-			["shaft", "frontDriveShaft_R", "frontMotor_R", 1, {"gearRatio":4.75}],
+			["shaft", "frontDriveShaft_L", "frontMotor_L", 1, {"gearRatio":"$Front_Motor_Gear_Ratio"}],
+			["shaft", "frontDriveShaft_R", "frontMotor_R", 1, {"gearRatio":"$Front_Motor_Gear_Ratio"}],
 			["shaft", "halfshaftFL", "frontDriveShaft_L", 1, {"breakTriggerBeam": "axle_FL", "uiName": "Front Left Halfshaft", "friction": 1}],
 			["shaft", "halfshaftFR", "frontDriveShaft_R", 1, {"breakTriggerBeam": "axle_FR", "uiName": "Front Right Halfshaft", "friction": 1}]
 		],

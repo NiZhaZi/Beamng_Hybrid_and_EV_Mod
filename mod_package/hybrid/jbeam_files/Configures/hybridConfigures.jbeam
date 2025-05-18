@@ -85,4 +85,21 @@
 		],
 	},
 
+	"Hybrid_Configure_REEV": {
+		"information":{
+			"name":"Hybrid Configure REEV",
+			"value": 0
+		},
+        "slots": [
+			["type", "default", "description"],
+			["Hybrid_Control_Configure", "Hybrid_Control_REEV", "Hybrid Control Configure", {"coreSlot":true}],
+			["Motor_Control_Configure", "Motor_Control_REEV", "Motor Control Configure", {"coreSlot":true}],
+			["Power_Generator_Control_Configure", "Power_Generator_Control", "Power Generator Control Configure"],
+		],
+		"slotType" : "Hybrid_Configure",
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+		],
+	},
+
 }

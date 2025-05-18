@@ -189,4 +189,23 @@
 			["shaft", "rearDriveShaft", "gearbox", 1, {"friction": 0}]
 		]
 	},
+
+	// REEV
+	"Camso_TransferCase_REEV": {
+		"information":{
+			"name":"Advanced REEV Transfer Case",
+			"value":500
+		},
+		"slots": [
+			["type", "default", "description"],
+			["Hybrid_Main", "Hybrid_Main", "Main Hybrid Slot", {"coreSlot":true}],
+			["Front_ElectricMotor", "Front_Single_ElectricMotor", "Front ElectricMotor"],
+			["Rear_ElectricMotor", "Rear_Single_ElectricMotor", "Rear ElectricMotor"],
+		],
+		"slotType" : "Camso_TransferCase",
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"],
+			["shaft", "reevShaft", "gearbox", 1, {"friction": 0}]
+		]
+	},
 }

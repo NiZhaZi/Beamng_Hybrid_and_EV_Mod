@@ -159,6 +159,38 @@
 		},
 	},
 
+	"Hybrid_Control_REEV": {
+		"information":{
+			"name":"Hybrid Control REEV",
+			"value": 0
+		},
+        "slots": [
+			["type", "default", "description"],
+			["auto", "", "Auto Mode"],
+			["hybrid", "", "Hybrid Mode"],
+			["electric", "electric_mode", "Electric Mode"],
+			["fuel", "", "Fuel Mode"],
+		],
+		"slotType" : "Hybrid_Control_Configure",
+
+		"controller": [
+			["fileName"],
+			["hybrid/hybridControl", {"name": "hybridControl",}],
+		],
+		
+		"hybridControl":{
+			//get all motors Names
+			"motorNames": ["rearMotor", "rearMotor_L", "rearMotor_R", "frontMotor", "frontMotor_L", "frontMotor_R"],
+			//EV ondemand AWD settings
+			"mainMotorNames": ["rearMotor", "rearMotor_L", "rearMotor_R"],
+			"subMotorNames": ["frontMotor", "frontMotor_L", "frontMotor_R"],
+			//comfortable regen settings
+			"ifComfortRegen": true,
+			"comfortRegenBegine": 0.75,//should be bigger than comfortRegenEnd
+			"comfortRegenEnd": 0.15,
+		},
+	},
+
 
 
 

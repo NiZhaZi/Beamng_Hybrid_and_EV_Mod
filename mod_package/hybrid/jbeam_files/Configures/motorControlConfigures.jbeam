@@ -99,4 +99,24 @@
 		},
 	},
 
+	"Motor_Control_REEV": {
+		"information":{
+			"name":"Motor Control REEV",
+			"value": 0
+		},
+        "slots": [
+			["type", "default", "description"],
+		],
+		"slotType" : "Motor_Control_Configure",
+
+		"controller": [
+			["fileName"],
+			["hybrid/motorControl", {"name": "motorControl",}],
+		],
+		
+		"motorControl":{
+			"motorNames": ["gearbox", "frontMotor", "frontMotor_L", "frontMotor_R", "rearMotor", "rearMotor_L", "rearMotor_R"],
+		},
+	},
+
 }
