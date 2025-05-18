@@ -1,7 +1,7 @@
 -- hybridContrl.lua - 2024.4.30 13:28 - hybrid control for hybrid Vehicles
 -- by NZZ
--- version 0.0.56 alpha
--- final edit - 2025.5.17 21:21
+-- version 0.0.57 alpha
+-- final edit - 2025.5.18 11:23
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -671,9 +671,10 @@ local function init(jbeamData)
     gearbox = powertrain.getDevice("gearbox")
     
     local _modes = {jbeamData.autoMode, jbeamData.hybridMode, jbeamData.electricMode, jbeamData.fuelMode}
-    for _, v in ipairs(_modes) do 
-        if v then
-            table.insert(enableModes, v)
+
+    for i = 1, 4, 1 do
+        if _modes[i] then
+            table.insert(enableModes, _modes[i])
         end
     end
 
@@ -808,7 +809,9 @@ local function init(jbeamData)
         end
     end
 
-    if jbeamData.defaultMode then
+    if #enableModes == 1 then
+        setMode(enableModes[1])
+    elseif jbeamData.defaultMode then
         setMode(jbeamData.defaultMode)
     else
         setMode("hybrid")
@@ -847,7 +850,9 @@ local function reset(jbeamData)
 
     tcsMultiper = 1
 
-    if jbeamData.defaultMode then
+    if #enableModes == 1 then
+        setMode(enableModes[1])
+    elseif jbeamData.defaultMode then
         setMode(jbeamData.defaultMode)
     else
         setMode("hybrid")
