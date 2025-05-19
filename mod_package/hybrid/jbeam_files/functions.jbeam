@@ -36,8 +36,8 @@
 		"slotType" : "Rear_Wheel_Steering",
 		"controller": [
 			["fileName"],
-			["chassis/4wsAdvance", {"name": "4wsAdvance"}],
-			["chassis/rwsControl", {"name": "rwsControl"}],
+			["chassis/4wsAdvance", {"name": "rwsControl", "switchVelocity": "$switchVelocity"}],
+			// ["chassis/rwsControl", {"name": "rwsControl"}],
 		],
 
 		"hydros": [

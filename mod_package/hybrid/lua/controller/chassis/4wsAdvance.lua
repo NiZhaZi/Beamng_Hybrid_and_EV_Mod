@@ -1,41 +1,46 @@
 -- 4wsAdvance.lua - 2024.4.19 17:09 - advance rear wheel steering
 -- by NZZ
--- version 0.0.2 alpha
--- final edit - 2024.5.6 22:51
+-- version 0.0.3 alpha
+-- final edit - 2025.5.19 20:37
 
 local M = {}
 
+local abs = math.abs
+local sin = math.sin
+local max = math.max
+local min = math.min
+
 local switchVelocity = nil
-local switchFlag = 1
+local ifRWS = 1
 
 local judge = nil
 local direction = nil
 
 local function switch()
-    if switchFlag == 1 then
-        switchFlag = 0
-    elseif switchFlag == 0 then
-        switchFlag = 1
+    ifRWS = not ifRWS
+    if not ifRWS then
+        gui.message({ txt = "Rear Wheel Steering Off" }, 5, "", "")
     else
-        switchFlag = 1
+        gui.message({ txt = "Rear Wheel Steering On" }, 5, "", "")
     end
 end
 
-local function onInit()
-    electrics.values.fws = 1
+local function onInit(jbeamData)
+    ifRWS = true
     electrics.values['4wsAdvance'] = 0
-    switchVelocity = (v.data.variables["$switchVelocity"].val or 7) * 0.2778
+
+    switchVelocity = (jbeamData.switchVelocity / 3.6) or 12.5
 end
 
 local function judgeUpdateSteer()
     if electrics.values.airspeed <= switchVelocity then
         if electrics.values['steering_input'] < 0.01 then
-            direction = 1
+            direction = -1
         else
         end
     else
         if electrics.values['steering_input'] < 0.01 then
-            direction = 2
+            direction = 1
         else
         end
     end
@@ -43,40 +48,41 @@ end
 
 local function updateGFX(dt)
     if not electrics.values['steering_input'] then return end
-    --local steer = -electrics.values['steering_input']
-    if not v.data.variables["$switchVelocity"] then return end
     
     local steer
-    local formedSteer
 
     judgeUpdateSteer()
 
-    if direction == 1 then
-        formedSteer = -electrics.values['steering_input']
+    steer = direction * electrics.values['steering_input']
+    local rwsTarget = sin(abs(steer) * 1.57) * -1 * fsign(steer)
+
+    if ifRWS then
+        rwsTarget = sin(abs(steer) * 1.57) * -1 * fsign(steer)
     else
-        formedSteer = electrics.values['steering_input']
+        rwsTarget = 0
     end
-
-    steer = formedSteer
-
-    local absSteer = math.abs(steer)
-
-    --local rws = (math.sin(absSteer * 1) * math.cos((absSteer * 3.3))) * 1.21
-    local rws = math.sin(absSteer * 1.57) * -1
-    rws = rws * fsign(steer) --Use the sign of the steering input to know the sign of rws output
-
-    if electrics.values.fws == 1 then
-        electrics.values['4wsAdvance'] = rws
-    elseif electrics.values.fws == 0 then
-        electrics.values['4wsAdvance'] = 0
+    
+    if electrics.values['4wsAdvance'] < rwsTarget then
+        electrics.values['4wsAdvance'] = min(electrics.values['4wsAdvance'] + dt * 1.7, rwsTarget)
+    elseif electrics.values['4wsAdvance'] > rwsTarget then
+        electrics.values['4wsAdvance'] = max(electrics.values['4wsAdvance'] - dt * 1.7, rwsTarget)
     end
-
-    --log("W", "4ws", "test 4ws" .. electrics.values['4wsAdvance'])
 
 end
 
+local function setParameters(parameters)
+    local Val
+    if parameters.val < 0.5 then
+        Val = 0
+        ifRWS = false
+    else
+        Val = 1
+        ifRWS = true
+    end
+end
+
 -- public interface
-M.switch = switch
+M.switchFWS = switch
 
 M.onInit      = onInit
 M.onReset     = onInit
@@ -85,5 +91,6 @@ M.init      = onInit
 M.reset     = onInit
 
 M.updateGFX = updateGFX
+M.setParameters = setParameters
 
 return M
