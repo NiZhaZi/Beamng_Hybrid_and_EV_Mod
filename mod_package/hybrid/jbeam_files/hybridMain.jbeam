@@ -59,7 +59,14 @@
 			//brake mode settings
 			"defaultBrakeMode": "onePedal"
 			//electric reverse
-			"electricReverse": true
+			"electricReverse": true,
+			//extra settings
+			"ifLowSpeedActive": true,
+			// "velocityRangeBegin": 120,
+			// "velocityRangEnd": 250
+		},
+		"clutch": {
+			// "electricsClutchRatioName":"hybridClutch"
 		},
 	},
 

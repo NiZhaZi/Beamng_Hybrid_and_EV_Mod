@@ -1,7 +1,7 @@
 -- hybridContrl.lua - 2024.4.30 13:28 - hybrid control for hybrid Vehicles
 -- by NZZ
--- version 0.0.57 alpha
--- final edit - 2025.5.18 11:23
+-- version 0.0.58 alpha
+-- final edit - 2025.5.21 23:46
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -18,6 +18,7 @@ local mainMotors = nil
 local subMotors = nil
 local motors = nil
 local directMotors = nil 
+local clutch = nil
 
 local motorDirection = 0
 local velocityRangeBegin = nil
@@ -75,13 +76,10 @@ local enhanceDrive = false
 local ecrawlMode = false
 
 local tcsMultiper = nil
+local ifLowSpeedActive = nil
 
 local function ifMotorGearbox()
-    if (gearbox.type == "eatGearbox" or gearbox.type == "ectGearbox" or gearbox.type == "edtGearbox" or gearbox.type == "emtGearbox" or gearbox.type == "estGearbox") then
-        return true
-    else
-        return false
-    end
+    return gearbox.type == "eatGearbox" or gearbox.type == "ectGearbox" or gearbox.type == "edtGearbox" or gearbox.type == "emtGearbox" or gearbox.type == "estGearbox"
 end
 
 local function reduceRegen()
@@ -128,25 +126,18 @@ local function getRegenLevel()
 end
 
 local function getGear()
-    local rangeSign
+    local rangeSign = false
     if velocityRangeBegin and velocityRangEnd then
-        rangeSign = false
-        if electrics.values.airspeed >= velocityRangeBegin * 0.2778 and electrics.values.airspeed <= velocityRangEnd * 0.2778 then
-            rangeSign = true
-        end
+        rangeSign = electrics.values.airspeed >= velocityRangeBegin / 3.6 and electrics.values.airspeed <= velocityRangEnd / 3.6
     elseif velocityRangeBegin and not velocityRangEnd then
-        rangeSign = false
-        if electrics.values.airspeed >= velocityRangeBegin * 0.2778 then
-            rangeSign = true
-        end
+        rangeSign = electrics.values.airspeed >= velocityRangeBegin / 3.6
     elseif not velocityRangeBegin and velocityRangEnd then
-        rangeSign = false
-        if electrics.values.airspeed <= velocityRangEnd * 0.2778 then
-            rangeSign = true
-        end
+        rangeSign = electrics.values.airspeed <= velocityRangEnd / 3.6
     else
         rangeSign = true
     end
+
+    rangeSign = hybridMode == "auto" and electrics.values.airspeed <= connectVelocity or rangeSign
 
     if ifMotorOn and rangeSign then
         local directFlag = 0
@@ -366,12 +357,7 @@ local function setPartTimeDriveMode(mode)
 end
 
 local function ifLowSpeed()
-    if input.throttle > 0.8 and (electrics.values.airspeed <= lowSpeed or abs(electrics.values.accXSmooth) <= lowACC) then
-        return true
-    else
-        return false
-    end
-    return false
+    return ifLowSpeedActive and input.throttle > 0.8 and (electrics.values.airspeed <= lowSpeed or abs(electrics.values.accXSmooth) <= lowACC)
 end
 
 local function updateGFX(dt)
@@ -413,12 +399,15 @@ local function updateGFX(dt)
                 motorMode("on2")
             end
             autoModeStage = 1
+            electrics.values["hybridClutch"] = 0
         elseif electrics.values.airspeed >= startVelocity and electrics.values.airspeed < connectVelocity and not ifLowSpeed() and autoModeStage ~= 2 then
             autoModeStage = 2
+            electrics.values["hybridClutch"] = 0
         elseif (electrics.values.airspeed >= connectVelocity or ifLowSpeed()) and autoModeStage ~= 3 then
             engineMode("on")
             motorMode("on1")
             autoModeStage = 3
+            electrics.values["hybridClutch"] = -1 * electrics.values.clutch + 1
         end
 
         if autoModeStage == 1 and not powerGeneratorOff then
@@ -669,7 +658,8 @@ local function init(jbeamData)
 
     proxyEngine = powertrain.getDevice("mainEngine")
     gearbox = powertrain.getDevice("gearbox")
-    
+    -- clutch = powertrain.getDevice("clutch")
+
     local _modes = {jbeamData.autoMode, jbeamData.hybridMode, jbeamData.electricMode, jbeamData.fuelMode}
 
     for i = 1, 4, 1 do
@@ -726,6 +716,8 @@ local function init(jbeamData)
     ifComfortRegen = jbeamData.ifComfortRegen or true
     comfortRegenBegine = jbeamData.comfortRegenBegine or 0.75
     comfortRegenEnd = jbeamData.comfortRegenEnd or 0.15
+
+    ifLowSpeedActive = jbeamData.ifLowSpeedActive or false
 
     ifGearMotorDrive = ifGearMotorDrive and ifMotorGearbox()
     if enhanceDrive then
