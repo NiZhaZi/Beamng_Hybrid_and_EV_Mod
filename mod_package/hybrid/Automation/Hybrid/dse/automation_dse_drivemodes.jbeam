@@ -215,7 +215,7 @@
 						["controller", {"controllerName": "advawd"}],
 
 						["controller", {"controllerName": "suspensionLift","lift": 0}],
-						["controller", {"controllerName": "hybridControl","awd": "off", "regen": 5, "hybridMode": "auto"}],
+						["controller", {"controllerName": "hybridControl","awd": "off", "regen": 5, "hybridMode": "electric"}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
 						["controller", {"controllerName": "spoiler","mode": "off"}],
 					]
