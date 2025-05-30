@@ -1,11 +1,12 @@
 -- vehicleInfo.lua - 2024.5.16 18:52 - vehicle information
 -- by NZZ
--- version 0.0.1 alpha
--- final edit - 2024.5.16 20:42
+-- version 0.0.2 alpha
+-- final edit - 2025.5.30 17:53
 
 local M = {}
 
 local floor = math.floor
+local pi = math.pi
 
 local location = {
     x = 0,
@@ -20,6 +21,13 @@ local acceleration = {
     x = 0,
     y = 0,
     z = 0,
+}
+
+local posture = {
+    roll = 0,
+    pitch = 0,
+    yaw = 0,
+    direction = nil,
 }
 
 local battery = nil
@@ -115,6 +123,30 @@ local function updateGFX(dt)
     acceleration.z = electrics.values.accZSmooth
     -- acceleration end
 
+    -- posture begin
+    local roll, pitch, yaw = obj:getRollPitchYaw()
+    posture.roll = roll
+    posture.pitch = pitch
+    posture.yaw = yaw -- 0 for South, 3.14(pi) for north
+    if yaw > -pi / 8 and yaw <= pi / 8 then
+        posture.direction = "South"
+    elseif yaw > pi / 8 and yaw <= pi * 3 / 8 then
+        posture.direction = "SouthEast"
+    elseif yaw > pi * 3 / 8 and yaw <= pi * 5 / 8 then
+        posture.direction = "East"
+    elseif yaw > pi * 5 / 8 and yaw <= pi * 7 / 8 then
+        posture.direction = "NorthEast"
+    elseif yaw > pi * 7 / 8 or yaw <= -pi * 7 / 8 then
+        posture.direction = "North"
+    elseif yaw > -pi * 7 / 8 and yaw <= -pi * 5 / 8 then
+        posture.direction = "NorthWest"
+    elseif yaw > -pi * 5 / 8 and yaw <= -pi * 3 / 8 then
+        posture.direction = "West"
+    elseif yaw > -pi * 3 / 8 and yaw <= -pi / 8 then
+        posture.direction = "SouthWest"
+    end
+    -- posture end
+
     -- mileage begin
     local speed = electrics.values.airspeed -- m/s
     local dtMileage = speed * dt -- meter
@@ -172,6 +204,7 @@ end
 
 M.location = location
 M.acceleration = acceleration
+M.posture = posture
 M.mileage = mileage
 M.averageConsum = averageConsum
 
@@ -179,4 +212,5 @@ M.updateGFX = updateGFX
 M.init = init
 M.reset = reset
 
+rawset(_G, "vehicleInfo", M)
 return M
