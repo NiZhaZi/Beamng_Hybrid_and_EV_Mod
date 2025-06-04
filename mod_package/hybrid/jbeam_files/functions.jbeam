@@ -211,6 +211,7 @@
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
 			["$lightNum", "range", "", "Functions", 7, 0, 100, "Running Lights Num", "Number of Running Lights"{"subCategory":"Lights", "stepDis":0.01}],
+			["$autolights", "range", "", "Functions", 1, 0, 1, "Auto Head Light", "Whether auto head light active"{"subCategory":"Lights", "minDis": 0, "maxDis": 1, "stepDis": 1}],
 		],
         "controller": [
         	["fileName"],
@@ -218,6 +219,10 @@
 				"name": "lights",
 				"lightNum": "$lightNum",
 			}],
+			["lightControl/autoHeadLight", {
+				"name": "autoHeadLight",
+				"autoHeadLight": "$autolights"
+			}]
     	],
 	},
 
