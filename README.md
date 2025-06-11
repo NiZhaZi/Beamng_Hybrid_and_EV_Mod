@@ -102,3 +102,29 @@ Here is the guide for using it.
    6. Start the game and choose the car to check if the car was modified correctly.
 
       ![alt text](pictures/image11_1.png)
+
+
+
+## Automation Description Scriptions
+
+   Replace the "indexNumber"s with fixtures' index number and put them into Automation game's description box to use.
+
+   1. Steering Wheel
+   ```
+   ~prop:indexNumber,steering,0,1,0,0,0,0,-900,900,0,1.75~
+   ```
+
+   2. Pedals and Parking Brake (For pedals' first number, -1 represents firewall mount and 1 represents floor mount.)
+   ```
+   ~prop:indexNumber,throttle_input,-1,0,0,0,0,0,0,40,0,10~
+   ~prop:indexNumber,brake_input,-1,0,0,0,0,0,0,40,0,10~
+   ~prop:indexNumber,clutch_input,-1,0,0,0,0,0,0,40,0,10~
+   ~prop:indexNumber,parkingbrake_input,1,0,0,0,0,0,0,10,0,10~
+   ```
+   3. Extensional Functions
+   ```
+   ~prop:indexNumber,hourNeedle,0,-1,0,0,0,0,0,360,0,1~
+   ~prop:indexNumber,minuNeedle,0,-1,0,0,0,0,0,360,0,1~
+   ~prop:indexNumber,wiper,0,-1,0,0,0,0,0,90,0,1~
+   ~prop:indexNumber,wiper,0,1,0,0,0,0,0,173,0,2~
+   ```
