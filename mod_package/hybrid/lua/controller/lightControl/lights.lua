@@ -20,6 +20,8 @@ local signalDelayL = 0
 local signalDelayR = 0
 local runningBegin = 0
 
+local autoDrive = nil
+
 local function updateGFX(dt)
 
     local ifIgnition
@@ -161,6 +163,20 @@ local function updateGFX(dt)
         electrics.values.turnAsisL = 0
     end
 
+    local running = 0
+    if electrics.values.running then
+        running = 1
+    end
+    if autoDrive then
+        electrics.values.autoDrive = running * 2
+        electrics.values.AuRuA = 1
+        electrics.values.AuRuR = 0
+    else
+        electrics.values.autoDrive = running
+        electrics.values.AuRuA = 0
+        electrics.values.AuRuR = 1
+    end
+
 end
 
 local function setsign()
@@ -186,9 +202,18 @@ local function init(jbeamData)
     -- t2 = 0
     -- range1 = 0
     -- timerange = 0
+
+    electrics.values.autoDrive = 0
+    electrics.values.innerLight = 0
+end
+
+local function switchInnerLight()
+    electrics.values.innerLight = -1 * electrics.values.innerLight + 1
 end
 
 M.setsign = setsign
+
+M.switchInnerLight = switchInnerLight
 
 M.updateGFX = updateGFX
 M.init = init

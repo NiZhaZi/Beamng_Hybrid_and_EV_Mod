@@ -1,3 +1,0 @@
-{
-"Customed Light":                    {"order": 71, "onDown":"controller.getControllerSafe('light').setsign()",                                       "title": "Fog Light", 	                    "desc": "Fog Light"                                                                         }
-}

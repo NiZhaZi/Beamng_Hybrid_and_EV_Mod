@@ -1,0 +1,5 @@
+{
+"Wiper":             {"order": 200, "onDown":"controller.getControllerSafe('wiper').swicthWiper()",        "title": "Wiper", 	         "desc": "Wiper"            },
+"Wiper Speed Up":    {"order": 201, "onDown":"controller.getControllerSafe('wiper').setWiperSpeed(50)",   "title": "Wiper Speed Up",    "desc": "Wiper Speed Up"   },
+"Wiper Speed Down":  {"order": 202, "onDown":"controller.getControllerSafe('wiper').setWiperSpeed(-50)",  "title": "Wiper Speed Down",  "desc": "Wiper Speed Down" }
+}

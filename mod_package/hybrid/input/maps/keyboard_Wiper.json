@@ -1,9 +1,19 @@
 {
 "bindings" :   [
      {
-          "control": "e",
-          "action":  "Customed Light"
-     } 
+          "control": "alt w",
+          "action":  "Wiper"
+     },
+
+     {
+          "control": "alt up",
+          "action":  "Wiper Speed Up"
+     },
+
+     {
+          "control": "alt down",
+          "action":  "Wiper Speed Down"
+     }
 ],
 
 "name"              : "Keyboard"          , 

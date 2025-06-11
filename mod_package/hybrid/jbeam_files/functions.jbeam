@@ -19,7 +19,8 @@
 		],
         "controller": [
         	["fileName"],
-			["vehicleInfo", {"name": "functionInfo"}],
+			["functions/vehicleInfo", {"name": "functionInfo"}],
+			["functions/wiper", {"name": "wiper"}],
     	],
 	},
 

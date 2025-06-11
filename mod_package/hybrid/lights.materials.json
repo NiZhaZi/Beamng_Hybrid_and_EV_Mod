@@ -6,8 +6,8 @@
     "Stages": [
       {
         "emissiveFactor": [
-          8.27450991,
-          2.50588303,
+          6,
+          1,
           0
         ]
       },
@@ -35,6 +35,32 @@
           4,
           4,
           4
+        ]
+      },
+      {
+        "emissiveFactor": null
+      },
+      {
+        "emissiveFactor": null
+      },
+      {
+        "emissiveFactor": null
+      }
+    ],
+    "translucentBlendOp": "None",
+    "version": 1.5
+  },
+
+  "autoDrive_on": {
+    "name": "autoDrive_on",
+    "mapTo": "autoDrive_on",
+    "class": "material",
+    "Stages": [
+      {
+        "emissiveFactor": [
+          0,
+          1,
+          5
         ]
       },
       {

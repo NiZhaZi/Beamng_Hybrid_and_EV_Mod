@@ -1,0 +1,4 @@
+{
+"Customed Light":                    {"order": 71, "onDown":"controller.getControllerSafe('light').setsign()",                                       "title": "Fog Light", 	                    "desc": "Fog Light"                                                                         },
+"Inner Light":                       {"order": 72, "onDown":"controller.getControllerSafe('lights').switchInnerLight()",                             "title": "Inner Light", 	                "desc": "Inner Light"                                                                       }
+}
