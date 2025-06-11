@@ -12,6 +12,7 @@
 			["Suspension_Lift", "", "Suspension Lift"],
 			["Spoiler_Control", "", "Spoiler Control"],
 			["Lights_Control", "", "Lights Control"],
+			["Wiper_Control", "", "Wiper Control"],
 		],
 		"slotType" : "Functions",
 		"variables": [
@@ -20,7 +21,6 @@
         "controller": [
         	["fileName"],
 			["functions/vehicleInfo", {"name": "functionInfo"}],
-			["functions/wiper", {"name": "wiper"}],
     	],
 	},
 
@@ -223,6 +223,26 @@
 			["lightControl/autoHeadLight", {
 				"name": "autoHeadLight",
 				"autoHeadLight": "$autolights"
+			}]
+    	],
+	},
+
+	"Wiper_Control": {
+		"information":{
+			"name":"Wiper Control",
+			"value": 0
+		},
+		"slotType" : "Wiper_Control",
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+		],
+        "controller": [
+        	["fileName"],
+			["functions/wiper", {
+				"name": "wiper",
+				"nodeNames": "",
+				"soundVolume": 0.25,
+				// Get sound from https://pixabay.com/sound-effects/search/wiper/.
 			}]
     	],
 	},
