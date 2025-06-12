@@ -1,3 +1,10 @@
+-- lights.lua - 2025.6.12 17:37 - lights control
+-- by NZZ
+-- version 0.0.5 alpha
+-- final edit - 2025.6.12 18:17
+
+-- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
+
 local M = {}
 
 local lightSign = {
@@ -19,6 +26,7 @@ local lightNum = nil
 local signalDelayL = 0
 local signalDelayR = 0
 local runningBegin = 0
+local flowLightType = nil
 
 local autoDrive = nil
 
@@ -82,16 +90,17 @@ local function updateGFX(dt)
     -- running light 2
 
     local devide = 0.4 / (lightNum + 1)
+    local devideR = 0.6 / (lightNum + 1)
 
-    if electrics.values.ignitionLevel == 2 and runningBegin < 0.4 then
-        runningBegin = math.min(runningBegin + dt, 0.4)
+    if electrics.values.ignitionLevel == 2 and runningBegin < 0.6 then
+        runningBegin = math.min(runningBegin + dt, 0.6)
     end
 
     if electrics.values.ignitionLevel ~= 2 then
         runningBegin = 0
     end 
 
-    -- liushuideng
+    -- flow light
 
     if electrics.values.signal_L == 1 then
         signalDelayL = signalDelayL + dt
@@ -111,11 +120,21 @@ local function updateGFX(dt)
 
     else
 
-        for i = 0, lightNum - 1 do
+        for i = 0, lightNum + 2 do
             local lightStr = "muitiLightL" .. tostring(i)
+            local lightStr2 = "muitiLightL" .. tostring(i - 3)
             electrics.values[lightStr] = 0
-            if runningBegin > devide * i then
-                electrics.values[lightStr] = electrics.values.running
+            if flowLightType == 1 then
+                if runningBegin > devide * i then
+                    electrics.values[lightStr] = electrics.values.running
+                end
+            elseif flowLightType == 2 then
+                if runningBegin >= 0.55 then
+                    electrics.values[lightStr] = electrics.values.running
+                elseif runningBegin > devide * i then
+                    electrics.values[lightStr] = electrics.values.running
+                    electrics.values[lightStr2] = 0
+                end
             end
         end
 
@@ -139,11 +158,21 @@ local function updateGFX(dt)
 
     else
 
-        for i = 0, lightNum - 1 do
+        for i = 0, lightNum + 2 do
             local lightStr = "muitiLightR" .. tostring(i)
+            local lightStr2 = "muitiLightR" .. tostring(i - 3)
             electrics.values[lightStr] = 0
-            if runningBegin > devide * i then
-                electrics.values[lightStr] = electrics.values.running
+            if flowLightType == 1 then
+                if runningBegin > devide * i then
+                    electrics.values[lightStr] = electrics.values.running
+                end
+            elseif flowLightType == 2 then
+                if runningBegin >= 0.55 then
+                    electrics.values[lightStr] = electrics.values.running
+                elseif runningBegin > devide * i then
+                    electrics.values[lightStr] = electrics.values.running
+                    electrics.values[lightStr2] = 0
+                end
             end
         end
 
@@ -169,12 +198,12 @@ local function updateGFX(dt)
     end
     if autoDrive then
         electrics.values.autoDrive = running * 2
-        electrics.values.AuRuA = 1
+        electrics.values.AuRuA = running
         electrics.values.AuRuR = 0
     else
         electrics.values.autoDrive = running
         electrics.values.AuRuA = 0
-        electrics.values.AuRuR = 1
+        electrics.values.AuRuR = running
     end
 
 end
@@ -203,6 +232,16 @@ local function init(jbeamData)
     -- range1 = 0
     -- timerange = 0
 
+    flowLightType = jbeamData.flowLightType or 1
+
+    electrics.values.autoDrive = 0
+    electrics.values.innerLight = 0
+end
+
+local function reset()
+    electrics.values.muitiLightL = 0
+    electrics.values.muitiLightR = 0
+
     electrics.values.autoDrive = 0
     electrics.values.innerLight = 0
 end
@@ -217,6 +256,6 @@ M.switchInnerLight = switchInnerLight
 
 M.updateGFX = updateGFX
 M.init = init
-M.reset = init
+M.reset = reset
 
 return M
