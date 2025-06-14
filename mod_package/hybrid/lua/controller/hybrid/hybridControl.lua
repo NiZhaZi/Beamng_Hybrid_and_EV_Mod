@@ -1,7 +1,7 @@
 -- hybridContrl.lua - 2024.4.30 13:28 - hybrid control for hybrid Vehicles
 -- by NZZ
--- version 0.0.58 alpha
--- final edit - 2025.5.21 23:46
+-- version 0.0.59 alpha
+-- final edit - 2025.6.14 21:55
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -845,9 +845,9 @@ local function reset(jbeamData)
     if #enableModes == 1 then
         setMode(enableModes[1])
     elseif jbeamData.defaultMode then
-        setMode(jbeamData.defaultMode)
+        -- setMode(jbeamData.defaultMode)
     else
-        setMode("hybrid")
+        -- setMode("hybrid")
     end
 
     enhanceDrive = false

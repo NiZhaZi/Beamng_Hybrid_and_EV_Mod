@@ -213,7 +213,7 @@
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
 			["$lightNum", "range", "", "Functions", 7, 0, 100, "Running Lights Num", "Number of Running Lights"{"subCategory":"Lights", "stepDis":0.01}],
 			["$autolights", "range", "", "Functions", 1, 0, 1, "Auto Head Light", "Whether auto head light active"{"subCategory":"Lights", "minDis": 0, "maxDis": 1, "stepDis": 1}],
-			["$flowLightType", "range", "", "Functions", 1, 1, 2, "Flow Light Type", "Type of flow light"{"subCategory":"Lights", "minDis": 1, "maxDis": 2, "stepDis": 1}],
+			["$flowLightType", "range", "", "Functions", 1, 1, 3, "Flow Light Type", "Type of flow light"{"subCategory":"Lights", "minDis": 1, "maxDis": 2, "stepDis": 1}],
 		],
         "controller": [
         	["fileName"],
@@ -224,7 +224,7 @@
 			}],
 			["lightControl/autoHeadLight", {
 				"name": "autoHeadLight",
-				"autoHeadLight": "$autolights"
+				"autoHeadLight": "$autolights",
 			}]
     	],
 	},
@@ -242,7 +242,7 @@
         	["fileName"],
 			["functions/wiper", {
 				"name": "wiper",
-				"nodeNames": "",
+				"nodeNames": "0d3b5_EFixtureType::EFT_TRIM_MISC_PROP_39_0",
 				"soundVolume": 0.25,
 				// Get sound from https://pixabay.com/sound-effects/search/wiper/.
 			}]
