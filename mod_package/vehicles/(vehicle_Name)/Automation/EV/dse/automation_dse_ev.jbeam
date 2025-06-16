@@ -14,7 +14,7 @@
 			["Camso_ESC", "", "Stability Control"]
 			
 			["Functions", "Functions", "Functions"],
-			["adas_mod", "driver_assistance_angelo234_mainslot_alt", "ADAS"] 
+			["adas_mod", "", "ADAS"] 
 		],
 
 		"controller": [
