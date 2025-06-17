@@ -1,7 +1,7 @@
 -- hybridContrl.lua - 2024.4.30 13:28 - hybrid control for hybrid Vehicles
 -- by NZZ
--- version 0.0.59 alpha
--- final edit - 2025.6.14 21:55
+-- version 0.0.60 alpha
+-- final edit - 2025.6.17 22:00
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -318,6 +318,7 @@ local function rollingMode(direct)
         setMode(enableModes[modeNum - 1])
     else
     end
+    dump(1)
 end
 
 local function cauculateRegen(percentage)
@@ -660,7 +661,7 @@ local function init(jbeamData)
     gearbox = powertrain.getDevice("gearbox")
     -- clutch = powertrain.getDevice("clutch")
 
-    local _modes = {jbeamData.autoMode, jbeamData.hybridMode, jbeamData.electricMode, jbeamData.fuelMode}
+    local _modes = {jbeamData.electricMode, jbeamData.autoMode, jbeamData.hybridMode, jbeamData.fuelMode}
 
     for i = 1, 4, 1 do
         if _modes[i] then

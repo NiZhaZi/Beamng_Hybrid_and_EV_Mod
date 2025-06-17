@@ -1,4 +1,6 @@
 {
+"Select Hybrid Mode":           {"order":  3, "onDown":"controller.getControllerSafe('hybridControl').rollingMode(1)",  	                    "title": "Select Hybrid Mode", 	            "desc": "Select Hybrid Mode by Order"                                                       },
+
 "Auto":                         {"order":  4, "onDown":"controller.getControllerSafe('hybridControl').setMode('auto')",  	                    "title": "Auto Mode", 	                    "desc": "Auto choose power source to drive the car"                                         },
 "EV":                           {"order":  5, "onDown":"controller.getControllerSafe('hybridControl').setMode('electric')",  	                "title": "EV Mode", 	                    "desc": "Use electric motor to drive the car"                                               },
 "ICE":                          {"order":  6, "onDown":"controller.getControllerSafe('hybridControl').setMode('fuel')",  	                    "title": "ICE Mode", 	                    "desc": "Use combustion engine to drive the car"                                            },

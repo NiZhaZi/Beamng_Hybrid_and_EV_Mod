@@ -268,7 +268,6 @@ end
 
 local function switchInnerLight()
     electrics.values.innerLight = -1 * electrics.values.innerLight + 1
-    dump(electrics.values.innerLight)
 end
 
 M.setsign = setsign

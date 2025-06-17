@@ -1,12 +1,12 @@
 {
 "bindings" :   [
-     // {
-     //      "control": "e",
-     //      "action":  "Customed Light"
-     // }, 
+     {
+          "control": "",
+          "action":  "Customed Light"
+     }, 
 
      {
-          "control": "e",
+          "control": "alt e",
           "action":  "Inner Light"
      } 
 ],
