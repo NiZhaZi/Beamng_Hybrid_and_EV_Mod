@@ -1,11 +1,13 @@
 -- wiper.lua - 2025.6.10 - wiper control
 -- by NZZ
--- version 0.0.3 alpha
--- final edit - 2025.6.16 17:46
+-- version 0.0.4 alpha
+-- final edit - 2025.6.18 18:51
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
 local M = {}
+
+local abs = math.abs
 
 local wiper = nil
 local wiperSpeed = nil
@@ -14,6 +16,9 @@ local direction = 1
 local wiperSoundUp = nil
 local wiperSoundDown = nil
 local soundVolume = nil
+
+local ifImpactActive = nil
+local brakeThreshold = nil
 
 local function updateGFX(dt)
     if wiper and electrics.values.ignitionLevel == 2 then
@@ -47,6 +52,13 @@ local function updateGFX(dt)
         obj:setVolume(wiperSoundDown, 0)
         obj:stopSFX(wiperSoundDown)
     end
+
+    if ifImpactActive then
+        if (abs(sensors.gx2) > brakeThreshold or abs(sensors.gy2) > brakeThreshold) or ((sensors.gz2 - powertrain.currentGravity) > brakeThreshold) then
+            wiper = true
+        end
+    end
+
 end
 
 local function init(jbeamData)
@@ -65,6 +77,9 @@ local function init(jbeamData)
 	end
 
     soundVolume = jbeamData.soundVolume or 0.25
+
+    ifImpactActive = jbeamData.ifImpactActive or true
+    brakeThreshold = jbeamData.brakeThreshold or 50
 end
 
 local function reset(jbeamData)
