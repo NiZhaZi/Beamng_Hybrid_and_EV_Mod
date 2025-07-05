@@ -1,7 +1,7 @@
 -- autoContrl.lua - 2024.3.17 12:48 - auto functions control
 -- by NZZ
--- version 0.0.16 alpha
--- final edit - 2025.6.16 00:50
+-- version 0.0.17 alpha
+-- final edit - 2025.7.5 22:35
 
 local M = {}
 local debugTime = 0
@@ -90,8 +90,20 @@ local function updateGFX(dt)
         ign = 0
     end
 
-    electrics.values.brakewithign = input.brake * electrics.values.brakelights * ign
+    local ifRegen = 0
+    for _, v in ipairs(motors) do
+        if v.outputTorque1 < -50 then
+            ifRegen = 1
+            break
+        end
+    end
 
+    if ifRegen == 1 then
+        electrics.values.brakewithign = ifRegen * ign
+    else
+        electrics.values.brakewithign = input.brake * electrics.values.brakelights * ign
+    end
+    
     local hybridMode = electrics.values.hybridMode
 
     local autoHoldMode
@@ -219,13 +231,19 @@ local function init(jbeamData)
     proxyEngine = powertrain.getDevice("mainEngine")
     gearbox =  powertrain.getDevice("gearbox")
     motors = {}
-    local motorNames = jbeamData.motorNames or {"mainMotor"}
-    for _, v in ipairs(motorNames) do
-        local motor = powertrain.getDevice(v)
-        if motor then
-            table.insert(motors, motor)
-            motor.originalRegenTorque = motor.maxWantedRegenTorque
-        end
+    -- local motorNames = jbeamData.motorNames or {"mainMotor"}
+    -- for _, v in ipairs(motorNames) do
+    --     local motor = powertrain.getDevice(v)
+    --     if motor then
+    --         table.insert(motors, motor)
+    --         motor.originalRegenTorque = motor.maxWantedRegenTorque
+    --     end
+    -- end
+    local emotors = powertrain.getDevicesByType("electricMotor")
+    local smotors = powertrain.getDevicesByType("motorShaft")
+    motors = emotors
+    for _,v in ipairs(smotors) do
+        table.insert(motors, v)
     end
 
     mode.autoHold = jbeamData.defaultAutoHold or "off"
