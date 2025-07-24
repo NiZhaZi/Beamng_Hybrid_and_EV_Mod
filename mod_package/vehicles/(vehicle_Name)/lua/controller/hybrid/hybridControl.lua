@@ -1,7 +1,7 @@
 -- hybridContrl.lua - 2024.4.30 13:28 - hybrid control for hybrid Vehicles
 -- by NZZ
--- version 0.0.60 alpha
--- final edit - 2025.6.17 22:00
+-- version 0.0.61 alpha
+-- final edit - 2025.7.25 0:32
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -358,7 +358,7 @@ local function setPartTimeDriveMode(mode)
 end
 
 local function ifLowSpeed()
-    return ifLowSpeedActive and input.throttle > 0.8 and (electrics.values.airspeed <= lowSpeed or abs(electrics.values.accXSmooth) <= lowACC)
+    return ifLowSpeedActive and input.throttle > 0.8 and (electrics.values.airspeed <= lowSpeed or abs(electrics.values.accXSmooth) <= lowACC) and motorDirection == 1
 end
 
 local function updateGFX(dt)
