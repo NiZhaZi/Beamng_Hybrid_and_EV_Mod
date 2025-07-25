@@ -36,7 +36,7 @@
 		"vehicleController": {
 			//"shiftLogicName":"",
 			"motorNames": [],
-			"topSpeedLimitReverse": 15,
+			// "topSpeedLimitReverse": 15,
 			//"defaultRegen": 0.5,
 			//"brakeRegenCoef": 1,
 			"onePedalRegenCoef": 0.85
@@ -85,7 +85,7 @@
 		"vehicleController": {
 			//"shiftLogicName":"",
 			"motorNames": [],
-			"topSpeedLimitReverse": 15,
+			// "topSpeedLimitReverse": 15,
 			//"defaultRegen": 0.5,
 			//"brakeRegenCoef": 1,
 			"onePedalRegenCoef": 0.85
@@ -134,7 +134,7 @@
 		"vehicleController": {
 			//"shiftLogicName":"",
 			"motorNames": [],
-			"topSpeedLimitReverse": 15,
+			// "topSpeedLimitReverse": 15,
 			//"defaultRegen": 0.5,
 			//"brakeRegenCoef": 1,
 			"onePedalRegenCoef": 0.85

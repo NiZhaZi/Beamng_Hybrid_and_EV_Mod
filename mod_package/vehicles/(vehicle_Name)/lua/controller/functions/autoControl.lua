@@ -1,7 +1,7 @@
 -- autoContrl.lua - 2024.3.17 12:48 - auto functions control
 -- by NZZ
--- version 0.0.18 alpha
--- final edit - 2025.7.25 0:32
+-- version 0.0.19 alpha
+-- final edit - 2025.7.25 13:00
 
 local M = {}
 local debugTime = 0
@@ -12,6 +12,8 @@ local motors = nil
 
 local brake = nil
 local throttle = nil
+
+local brakeLightRegenTorque = nil
 
 local mode = {
     autoHold = nil,
@@ -92,7 +94,7 @@ local function updateGFX(dt)
 
     local ifRegen = 0
     for _, v in ipairs(motors) do
-        if v.outputTorque1 < -50 then
+        if v.outputTorque1 < brakeLightRegenTorque then
             ifRegen = 1
             break
         end
@@ -262,6 +264,15 @@ local function init(jbeamData)
         electrics.values.autohold = 0
     end
     electrics.values.autoholdActive = 0
+
+    brakeLightRegenTorque = -100
+    if jbeamData.brakeLightRegenTorque then
+        if jbeamData.brakeLightRegenTorque >= 0 then
+            brakeLightRegenTorque = -1 * jbeamData.brakeLightRegenTorque
+        else
+            brakeLightRegenTorque = jbeamData.brakeLightRegenTorque
+        end
+    end
 
 end
 

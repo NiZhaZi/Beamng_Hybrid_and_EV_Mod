@@ -105,6 +105,10 @@
 			"value": 500
 		},
 		"slotType" : "Auto_Control",
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+			["$brakeLightRegenTorque", "range", "Nm", "Functions", 100, 10, 99999, "Brake Light Regen Torque", "Minimum Torque Brake Light Active"{"subCategory":"brake", "stepDis":1.00}],
+		],
         "controller": [
         	["fileName"],
 			["functions/autoControl", {
@@ -113,6 +117,7 @@
 				"defaultAutoStart": "off",
 				"HDC": "disable",
 				"defaultECrawl": "disable",
+				"brakeLightRegenTorque": "$brakeLightRegenTorque",
 			}],
     	],
 	},

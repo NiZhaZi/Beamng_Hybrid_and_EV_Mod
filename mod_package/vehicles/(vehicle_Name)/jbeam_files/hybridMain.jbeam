@@ -31,11 +31,16 @@
 			["$highEfficentRPM", "range",  "RPM",   	"Hybrid System",  3500,       0,      99999,  "High Efficent RPM",     "High Efficent Engine RPM",           		   		{"subCategory": "REEV Mode",    "stepDis":1.00}],
 			["$REEVRPM",         "range",  "RPM",   	"Hybrid System",  1500,       0,      99999,  "REEV RPM",              "Default REEV Engine RPM",           		   		{"subCategory": "REEV Mode",    "stepDis":1.00}],
 			["$REEVRPMProtect",  "range",  "RPM",   	"Hybrid System",  200,        0,      99999,  "REEV Protect RPM",      "Max REEV Engine RPM Less than Redline",        		{"subCategory": "REEV Mode",    "stepDis":1.00}],
+			// Vehicle controller
+			["$LimitReverse",    "range",  "kph",       "Hybrid System",  30,        10,      99999,  "Reverse Limit",         "Max Reverse Speed",        	                     	{"subCategory": "Vehicle Controller",    "stepDis":0.01}],
 		],
 		"controller": [
 			["fileName"],
 			["lightControl/lights"],
 		],
+		"vehicleController": {
+			"topSpeedLimitReverse": "$=$LimitReverse/3.6",
+		},
 		"hybridControl":{
 			//EV ondemand AWD settings
 			"ondemandMaxRPM" : "$ondemandMaxRPM",
