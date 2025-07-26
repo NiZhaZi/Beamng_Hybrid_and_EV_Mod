@@ -1,7 +1,7 @@
 -- lights.lua - 2025.6.12 17:37 - lights control
 -- by NZZ
--- version 0.0.7 alpha
--- final edit - 2025.6.15 00:29
+-- version 0.0.8 alpha
+-- final edit - 2025.7.27 00:31
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -103,13 +103,13 @@ local function updateGFX(dt)
     end 
 
     for i = 0, lightNum + 2 do
-        if flowLightType == 1 then
+        if flowLightType == 1 and runningBegin < 0.6 then
             local lightStr = "flowRunning" .. tostring(i)
             electrics.values[lightStr] = 0
             if runningBegin > devide * i then
                 electrics.values[lightStr] = electrics.values.running
             end
-        elseif flowLightType == 2 then
+        elseif flowLightType == 2 and runningBegin < 0.6 then
             local lightStr = "flowRunning" .. tostring(i)
             local lightStr2 = "flowRunning" .. tostring(i - 3)
             electrics.values[lightStr] = 0
@@ -119,7 +119,7 @@ local function updateGFX(dt)
                 electrics.values[lightStr] = electrics.values.running
                 electrics.values[lightStr2] = 0
             end
-        elseif flowLightType == 3 then
+        elseif flowLightType == 3 and runningBegin < 0.6 then
             if i == enLight then
                 break
             end
