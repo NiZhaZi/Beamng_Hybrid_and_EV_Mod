@@ -3,7 +3,8 @@
 -- file, You can obtain one at http://beamng.com/bCDDL-1.1.txt
 
 -- version V0.36.X for NZZ's hybrid mod
--- 2025.6.18
+-- updata 2
+-- 2025.7.27
 
 local M = {}
 --Mandatory controller parameters
@@ -432,7 +433,22 @@ local function smartParkingBrake(ivalue, filter, isAxisOverride)
   end
 end
 
+local DownSignal = false
+local UpSignal = false
+
+local function shiftToNetural()
+  controlLogicModule.shiftToGearIndex(0)
+end
+
 local function updateGFXGeneric(dt)
+
+  if DownSignal and UpSignal then
+    shiftToNetural()  
+  else
+    DownSignal = false
+    UpSignal = false
+  end
+
   inputValues.throttle = electrics.values.throttleOverride or min(max(input.throttle or 0, 0), 1)
   inputValues.brake = electrics.values.brakeOverride or min(max(input.brake or 0, 0), 1)
   inputValues.clutch = electrics.values.clutchOverride or min(max(input.clutch or 0, 0), 1)
@@ -610,7 +626,9 @@ local function shiftUpOnDown()
   elseif controlLogicModule.shiftUp then
     controlLogicModule.shiftUp()
   end
+  UpSignal = true
 end
+
 local function shiftUpOnUp()
   if controlLogicModule.shiftUpOnUp then
     controlLogicModule.shiftUpOnUp()
@@ -623,6 +641,7 @@ local function shiftDownOnDown()
   elseif controlLogicModule.shiftDown then
     controlLogicModule.shiftDown()
   end
+  DownSignal = true
 end
 
 local function shiftDownOnUp()
