@@ -1,7 +1,7 @@
 -- lights.lua - 2025.6.12 17:37 - lights control
 -- by NZZ
--- version 0.0.8 alpha
--- final edit - 2025.7.27 00:31
+-- version 0.0.9 alpha
+-- final edit - 2025.8.11 23:25
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -143,6 +143,19 @@ local function updateGFX(dt)
         end
     end
 
+    for i = 0, lightNum - 1 do
+        local lightSourceStrL
+        local lightSourceStrR
+        lightSourceStrL = "lightSourceSignalL" .. tostring(i)
+        lightSourceStrR = "lightSourceSignalR" .. tostring(i)
+        electrics.values[lightSourceStrL] = 0
+        electrics.values[lightSourceStrR] = 0
+        lightSourceStrL = "lightSourceRunningL" .. tostring(i)
+        lightSourceStrR = "lightSourceRunningR" .. tostring(i)
+        electrics.values[lightSourceStrL] = 0
+        electrics.values[lightSourceStrR] = 0
+    end
+
     if electrics.values.signal_L == 1 then
         signalDelayL = signalDelayL + dt
     else
@@ -153,9 +166,11 @@ local function updateGFX(dt)
 
         for i = 0, lightNum - 1 do
             local lightStr = "muitiLightL" .. tostring(i)
+            local lightSourceStr = "lightSourceSignalL" .. tostring(i)
             electrics.values[lightStr] = 0
             if signalDelayL > devide * i then
                 electrics.values[lightStr] = 2
+                electrics.values[lightSourceStr] = 1
             end
         end
 
@@ -164,7 +179,9 @@ local function updateGFX(dt)
         for i = 0, lightNum + 2 do
             local lightStr = "muitiLightL" .. tostring(i)
             local flowStr = "flowRunning" .. tostring(i)
+            local lightSourceStr = "lightSourceRunningL" .. tostring(i)
             electrics.values[lightStr] = electrics.values[flowStr]
+            electrics.values[lightSourceStr] = electrics.values[flowStr]
         end
 
     end
@@ -179,9 +196,11 @@ local function updateGFX(dt)
 
         for i = 0, lightNum - 1 do
             local lightStr = "muitiLightR" .. tostring(i)
+            local lightSourceStr = "lightSourceSignalR" .. tostring(i)
             electrics.values[lightStr] = 0
             if signalDelayR > devide * i then
                 electrics.values[lightStr] = 2
+                electrics.values[lightSourceStr] = 1
             end
         end
 
@@ -190,7 +209,9 @@ local function updateGFX(dt)
         for i = 0, lightNum + 2 do
             local lightStr = "muitiLightR" .. tostring(i)
             local flowStr = "flowRunning" .. tostring(i)
+            local lightSourceStr = "lightSourceRunningR" .. tostring(i)
             electrics.values[lightStr] = electrics.values[flowStr]
+            electrics.values[lightSourceStr] = electrics.values[flowStr]
         end
 
     end

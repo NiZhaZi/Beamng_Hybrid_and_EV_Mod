@@ -219,6 +219,7 @@
 			["$lightNum", "range", "", "Functions", 7, 0, 100, "Running Lights Num", "Number of Running Lights"{"subCategory":"Lights", "stepDis":0.01}],
 			["$autolights", "range", "", "Functions", 1, 0, 1, "Auto Head Light", "Whether auto head light active"{"subCategory":"Lights", "minDis": 0, "maxDis": 1, "stepDis": 1}],
 			["$flowLightType", "range", "", "Functions", 1, 1, 3, "Flow Light Type", "Type of flow light"{"subCategory":"Lights", "minDis": 1, "maxDis": 2, "stepDis": 1}],
+			["$rpmLightNum", "range", "", "Functions", 5, 1, 100, "RPM Lights Num", "Number of RPM Lights"{"subCategory":"Lights", "stepDis": 1}],
 		],
         "controller": [
         	["fileName"],
@@ -230,6 +231,10 @@
 			["lightControl/autoHeadLight", {
 				"name": "autoHeadLight",
 				"autoHeadLight": "$autolights",
+			}],
+			["lightControl/rpmLights", {
+				"name": "rpmLight",
+				"lightNum": "$rpmLightNum",
 			}]
     	],
 	},

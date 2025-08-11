@@ -59,8 +59,8 @@
       {
         "emissiveFactor": [
           0,
-          1,
-          5
+          5,
+          4
         ]
       },
       {
@@ -75,5 +75,134 @@
     ],
     "translucentBlendOp": "None",
     "version": 1.5
+  },
+
+  "red_on": {
+    "name": "red_on",
+    "mapTo": "red_on",
+    "class": "material",
+    "Stages": [
+      {
+        "emissiveFactor": [
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "emissiveFactor": null
+      },
+      {
+        "emissiveFactor": null
+      },
+      {
+        "emissiveFactor": null
+      }
+    ],
+    "translucentBlendOp": "None",
+    "version": 1.5
+  },
+
+  "green_on": {
+    "name": "green_on",
+    "mapTo": "green_on",
+    "class": "material",
+    "Stages": [
+      {
+        "emissiveFactor": [
+          0,
+          2,
+          0
+        ]
+      },
+      {
+        "emissiveFactor": null
+      },
+      {
+        "emissiveFactor": null
+      },
+      {
+        "emissiveFactor": null
+      }
+    ],
+    "translucentBlendOp": "None",
+    "version": 1.5
+  },
+
+  "blue_on": {
+    "name": "blue_on",
+    "mapTo": "blue_on",
+    "class": "material",
+    "Stages": [
+      {
+        "emissiveFactor": [
+          0,
+          0,
+          2
+        ]
+      },
+      {
+        "emissiveFactor": null
+      },
+      {
+        "emissiveFactor": null
+      },
+      {
+        "emissiveFactor": null
+      }
+    ],
+    "translucentBlendOp": "None",
+    "version": 1.5
+  },
+
+  "yellow_on": {
+    "name": "yellow_on",
+    "mapTo": "yellow_on",
+    "class": "material",
+    "Stages": [
+      {
+        "emissiveFactor": [
+          2,
+          2,
+          0
+        ]
+      },
+      {
+        "emissiveFactor": null
+      },
+      {
+        "emissiveFactor": null
+      },
+      {
+        "emissiveFactor": null
+      }
+    ],
+    "translucentBlendOp": "None",
+    "version": 1.5
+  },
+
+  "black" : {
+    "name" : "black",
+    "mapTo" : "black",
+    "class" : "Material",
+    "persistentId" : "7d9f2774-c0f3-4440-ba16-de7086669244",
+    "Stages" : [
+      {
+        "baseColorFactor" : [ 0, 0, 0, 0 ],
+        "roughnessFactor": 0.0,
+        "useAnisotropic": true
+      },
+      {},
+      {},
+      {}
+    ],
+    "activeLayers": 1,
+    "dynamicCubemap": true,
+    "materialTag0": "beamng",
+    "materialTag1": "vehicle",
+    "order_simset": 0,
+    "version": 1.5
   }
+
+
 }
