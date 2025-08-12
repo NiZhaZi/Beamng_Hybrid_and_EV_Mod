@@ -10,8 +10,10 @@
 
 		"controller": [
 			["fileName"],
-			["drivingDynamics/supervisors/HybridTC" {"name": "tractionControl"}],
-			["drivingDynamics/supervisors/slipProviders/HybridVSS"]
+			// ["drivingDynamics/supervisors/HybridTC" {"name": "tractionControl"}],
+			// ["drivingDynamics/supervisors/slipProviders/HybridVSS"]
+			["drivingDynamics/supervisors/tractionControl" {"name": "tractionControl"}],
+			["drivingDynamics/supervisors/slipProviders/virtualSpeedSlip"]
 		],
 
 		"tractionControl": {
@@ -55,8 +57,10 @@
 
 		"controller": [
 			["fileName"],
-			["drivingDynamics/supervisors/HybridTC" {"name": "tractionControl"}],
-			["drivingDynamics/supervisors/slipProviders/HybridVSS"]
+			// ["drivingDynamics/supervisors/HybridTC" {"name": "tractionControl"}],
+			// ["drivingDynamics/supervisors/slipProviders/HybridVSS"]
+			["drivingDynamics/supervisors/tractionControl" {"name": "tractionControl"}],
+			["drivingDynamics/supervisors/slipProviders/virtualSpeedSlip"]
 		],
 
 		"tractionControl": {
@@ -98,8 +102,10 @@
 
 		"controller": [
 			["fileName"],
-			["drivingDynamics/supervisors/HybridTC" {"name": "tractionControl"}],
-			["drivingDynamics/supervisors/slipProviders/HybridVSS"]
+			// ["drivingDynamics/supervisors/HybridTC" {"name": "tractionControl"}],
+			// ["drivingDynamics/supervisors/slipProviders/HybridVSS"]
+			["drivingDynamics/supervisors/tractionControl" {"name": "tractionControl"}],
+			["drivingDynamics/supervisors/slipProviders/virtualSpeedSlip"]
 		],
 
 		"tractionControl": {
@@ -147,8 +153,10 @@
 
 		"controller": [
 			["fileName"],
-			["drivingDynamics/supervisors/HybridTC" {"name": "tractionControl"}],
-			["drivingDynamics/supervisors/slipProviders/HybridVSS"]
+			// ["drivingDynamics/supervisors/HybridTC" {"name": "tractionControl"}],
+			// ["drivingDynamics/supervisors/slipProviders/HybridVSS"]
+			["drivingDynamics/supervisors/tractionControl" {"name": "tractionControl"}],
+			["drivingDynamics/supervisors/slipProviders/virtualSpeedSlip"]
 		],
 
 		"tractionControl": {
@@ -196,8 +204,10 @@
 
 		"controller": [
 			["fileName"],
-			["drivingDynamics/supervisors/HybridTC" {"name": "tractionControl"}],
-			["drivingDynamics/supervisors/slipProviders/HybridVSS"]
+			// ["drivingDynamics/supervisors/HybridTC" {"name": "tractionControl"}],
+			// ["drivingDynamics/supervisors/slipProviders/HybridVSS"]
+			["drivingDynamics/supervisors/tractionControl" {"name": "tractionControl"}],
+			["drivingDynamics/supervisors/slipProviders/virtualSpeedSlip"]
 		],
 
 		"tractionControl": {
@@ -249,8 +259,10 @@
 
 		"controller": [
 			["fileName"],
-			["drivingDynamics/supervisors/HybridTC" {"name": "tractionControl"}],
-			["drivingDynamics/supervisors/slipProviders/HybridVSS"]
+			// ["drivingDynamics/supervisors/HybridTC" {"name": "tractionControl"}],
+			// ["drivingDynamics/supervisors/slipProviders/HybridVSS"]
+			["drivingDynamics/supervisors/tractionControl" {"name": "tractionControl"}],
+			["drivingDynamics/supervisors/slipProviders/virtualSpeedSlip"]
 		],
 
 		"tractionControl": {
