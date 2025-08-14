@@ -117,7 +117,7 @@
 				"defaultAutoStart": "off",
 				"HDC": "disable",
 				"defaultECrawl": "disable",
-				"brakeLightRegenTorque": "$brakeLightRegenTorque",
+				"brakeLightRegenTorque": "$=-1*$brakeLightRegenTorque",
 			}],
     	],
 	},
