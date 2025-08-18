@@ -1,7 +1,7 @@
 -- hybridContrl.lua - 2024.4.30 13:28 - hybrid control for hybrid Vehicles
 -- by NZZ
--- version 0.0.62 alpha
--- final edit - 2025.7.25 13:00
+-- version 0.0.63 alpha
+-- final edit - 2025.8.18 21:29
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -176,7 +176,7 @@ end
 
 local function engineMode(state)
     if state == "on" then
-        if electrics.values.ignitionLevel == 2 and electrics.values.engineRunning == 0 then
+        if electrics.values.ignitionLevel == 2 and electrics.values.engineRunning == 0 and proxyEngine.outputRPM <= proxyEngine.idleRPM - 50 then
             proxyEngine:activateStarter()
         end
     elseif state == "off" then
