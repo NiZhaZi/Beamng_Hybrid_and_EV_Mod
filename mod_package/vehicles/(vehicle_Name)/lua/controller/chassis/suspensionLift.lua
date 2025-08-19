@@ -1,7 +1,7 @@
 -- suspension_lift.lua - 2024.4.19 18:30 - suspension lift control
 -- by NZZ
--- version 0.0.6 alpha
--- final edit - 2024.9.20 11:57
+-- version 0.0.7 alpha
+-- final edit - 2025.8.19 12:49
 
 local M = {}
 
@@ -36,6 +36,10 @@ local function onInit(jbeamData)
     
     lift0 = 0
     electrics.values['lift0'] = lift0
+    electrics.values['liftFL'] = lift0
+    electrics.values['liftFR'] = lift0
+    electrics.values['liftRL'] = lift0
+    electrics.values['liftRR'] = lift0
 
     highSpeed = jbeamData.liftVelocity or 80
     mode = jbeamData.defaultMode or "auto"
@@ -99,6 +103,11 @@ local function updateGFX(dt)
         lift0 = finalLevel
     end 
     
+    electrics.values['liftFL'] = lift0
+    electrics.values['liftFR'] = lift0
+    electrics.values['liftRL'] = lift0
+    electrics.values['liftRR'] = lift0
+
 end
 
 local function setParameters(parameters)
