@@ -1,8 +1,8 @@
-# This is a mod for ICE cars exported from automation the car company tycoon game in BeamNG.drive to turn into hybrid cars or EVs exported from the game to get a advance electric control.
+# 这是一个为从《自动化：汽车公司大亨》导出到《车祸模拟器》的内燃机汽车转变成混合动力汽车和纯电动汽车进阶控制的模组。
 
-# If you want to submit content containing this mod to a media platform, please indicate this repository URL.
+# 如果你想将包含这个模组的内容发布到媒体平台上，请提供此仓库的链接。
 
-Here is the guide for using it.
+下面是使用该模组的指导。
 
 ## Hybrid
 
