@@ -11,7 +11,7 @@
  1.  导出汽车并取消勾选“打包为模组Zip文件”(Zip-Pack Mod)。
     ![alt text](pictures/image1_1.png)
 
- 2.  从 GitHub 下载资源包。
+ 2. 从 GitHub 下载资源包。
 
     https://github.com/NiZhaZi/Beamng-Hybrid-Mod
     https://github.com/NiZhaZi/Hybrid-PC-Edit/releases
@@ -20,28 +20,28 @@
     ![alt text](pictures/image2_2.png)
     ![alt text](pictures/image2_3.png)
 
- 3.  解压从步骤2第一个链接下载的zip文件。将“hybrid”文件夹下的所有文件复制到导出的汽车文件夹中。
+ 3. 解压从步骤2第一个链接下载的zip文件。将“hybrid”文件夹下的所有文件复制到导出的汽车文件夹中。
 
     ![alt text](pictures/image3_1.png)
     ![alt text](pictures/image3_2.png)
     ![alt text](pictures/image3_3.png)
 
- 4.  运行从第二个链接下载的 .exe 文件。选择混合动力形式并点击“复制”按钮。
+ 4. 运行从第二个链接下载的 .exe 文件。选择混合动力形式并点击“复制”按钮。
 
     ![alt text](pictures/image4_1.png)
 
- 5.  打开待修改汽车的 .pc 文件，将复制的内容粘贴到“parts”部分下。注释掉重复的行。如果不需要某项功能，可以删除引号内的内容。
+ 5. 打开待修改汽车的 .pc 文件，将复制的内容粘贴到“parts”部分下。注释掉重复的行。如果不需要某项功能，可以删除引号内的内容。
 
     ![alt text](pictures/image5_1.png)
     ![alt text](pictures/image5_2.png)
     ![alt text](pictures/image5_3.png)
 
- 6.  启动游戏并选择该汽车，检查修改是否正确。部分部件可以在游戏菜单中更换。
+ 6. 启动游戏并选择该汽车，检查修改是否正确。部分部件可以在游戏菜单中更换。
 
     ![alt text](pictures/image6_1.png)
     ![alt text](pictures/image6_2.png)
 
- 7.  ~~可以像这样编辑汽车“main”插槽的“controller”部分，以允许游戏中的AI驾驶修改后的汽车。~~
+ 7. ~~可以像这样编辑汽车“main”插槽的“controller”部分，以允许游戏中的AI驾驶修改后的汽车。~~
 
     ![alt text](pictures/image7_1.png)
 
