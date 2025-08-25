@@ -1,17 +1,17 @@
-**其他语言： [English](README.md), [汉语](README_zh.md).**
+**其他语言: [English](README.md), [汉语](README_zh.md).**
 
-# 这是一个为从《自动化：汽车公司大亨》导出到《车祸模拟器》的内燃机汽车转变成混合动力汽车和纯电动汽车进阶控制的模组。
+# 这是一个用于将从《自动化：汽车公司大亨》导出的内燃机汽车，在《车祸模拟器》中转变为具有进阶控制功能的混合动力汽车和纯电动汽车的模组。
 
-# 如果你想将包含这个模组的内容发布到媒体平台上，请提供此仓库的链接。
+# 如果你想在媒体平台上发布包含此模组的内容，请提供此仓库的链接。
 
-下面是使用该模组的指导。
+以下是使用该模组的指南。
 
-## Hybrid
+## 混合动力 (Hybrid)
 
- 1. Export the car and cancel "Zip-Pack Mod".
+ 1.  导出汽车并取消勾选“打包为模组Zip文件”(Zip-Pack Mod)。
     ![alt text](pictures/image1_1.png)
 
- 2. Download the pack from GitHub.
+ 2.  从 GitHub 下载资源包。
 
     https://github.com/NiZhaZi/Beamng-Hybrid-Mod
     https://github.com/NiZhaZi/Hybrid-PC-Edit/releases
@@ -20,52 +20,51 @@
     ![alt text](pictures/image2_2.png)
     ![alt text](pictures/image2_3.png)
 
- 3. Unzip the zip file from the first link of step 2. Copy all files under "hybrid" folder to the folder of exported car.
+ 3.  解压从步骤2第一个链接下载的zip文件。将“hybrid”文件夹下的所有文件复制到导出的汽车文件夹中。
 
     ![alt text](pictures/image3_1.png)
     ![alt text](pictures/image3_2.png)
     ![alt text](pictures/image3_3.png)
 
- 4. Run the .exe file downloaded from the second link. Choose the form of hybrid and click the "copy" button.
+ 4.  运行从第二个链接下载的 .exe 文件。选择混合动力形式并点击“复制”按钮。
 
     ![alt text](pictures/image4_1.png)
 
- 5. Open the .pc file of the car which is waiting for being modified and paste the content under "parts" part. Comment the duplicate lines. If the function is not needed, the content in the quotation marks can be deleted.
+ 5.  打开待修改汽车的 .pc 文件，将复制的内容粘贴到“parts”部分下。注释掉重复的行。如果不需要某项功能，可以删除引号内的内容。
 
     ![alt text](pictures/image5_1.png)
     ![alt text](pictures/image5_2.png)
     ![alt text](pictures/image5_3.png)
 
- 6. Start the game and choose the car to check if the car was modified correctly. Some parts can be exchanged in the game menu.
+ 6.  启动游戏并选择该汽车，检查修改是否正确。部分部件可以在游戏菜单中更换。
 
     ![alt text](pictures/image6_1.png)
     ![alt text](pictures/image6_2.png)
 
- 7. ~~The "controller" part of the "main" slot of the car can be edited like this to allow AI in the game to drive the modified car.~~
+ 7.  ~~可以像这样编辑汽车“main”插槽的“controller”部分，以允许游戏中的AI驾驶修改后的汽车。~~
 
     ![alt text](pictures/image7_1.png)
 
-    Now the mod can replace the vehicle controller automatically, so this step is no longer necessary.
+    现在该模组可以自动替换车辆控制器，因此此步骤不再必要。
 
+## 纯电动 (EV)
 
-
-## EV
-   1. Export the car and cancel "Zip-Pack Mod".
+   1. 导出汽车并取消勾选“打包为模组Zip文件”(Zip-Pack Mod)。
 
       ![alt text](pictures/image8_1.png)
 
-   2. Download the pack from GitHub.
+   2. 从 GitHub 下载资源包。
 
       https://github.com/NiZhaZi/Beamng-Hybrid-Mod
       https://github.com/NiZhaZi/Torque-Table-Creator/releases
       ![alt text](pictures/image2_1.png)
       ![alt text](pictures/image2_3.png)
 
-   3. Unzip the zip file from the first link of step 2. Copy all files under "EV" folder to the folder of exported car.
+   3. 解压从步骤2第一个链接下载的zip文件。将“EV”文件夹下的所有文件复制到导出的汽车文件夹中。
 
       ![alt text](pictures/image9_1.png)
 
-   4. Copy the code under.
+   4. 复制以下代码。
 
       ```
       "Camso_Engine": "Advance_Engine_ElectricController",
@@ -99,33 +98,32 @@
       "Suspension_Lift": "",
       ```
 
-   5. Open the .pc file of the car which is waiting for being modified and paste the content under "parts" part. Comment the duplicate lines. If the function is not needed, the content in the quotation marks can be deleted.
+   5. 打开待修改汽车的 .pc 文件，将复制的内容粘贴到“parts”部分下。注释掉重复的行。如果不需要某项功能，可以删除引号内的内容。
 
       ![alt text](pictures/image10_1.png)
 
-   6. Start the game and choose the car to check if the car was modified correctly.
+   6. 启动游戏并选择该汽车，检查修改是否正确。
 
       ![alt text](pictures/image11_1.png)
 
+## Automation 描述脚本 (Automation Description Scripts)
 
+   将 "indexNumber" 替换为 fixtures（ fixture 部件）的索引号，并将其放入 Automation 游戏的描述框中即可使用。
 
-## Automation Description Scriptions
-
-   Replace the "indexNumber"s with fixtures' index number and put them into Automation game's description box to use.
-
-   1. Steering Wheel
+   1. 方向盘 (Steering Wheel)
    ```
    ~prop:indexNumber,steering,0,1,0,0,0,0,-900,900,0,1.75~
    ```
-
-   2. Pedals and Parking Brake (For pedals' first number, -1 represents firewall mount and 1 represents floor mount.)
+   
+   2. 踏板和手刹 (Pedals and Parking Brake) (对于踏板的第一个数字，-1 代表防火墙安装，1 代表地板安装。)
    ```
    ~prop:indexNumber,throttle_input,-1,0,0,0,0,0,0,40,0,10~
    ~prop:indexNumber,brake_input,-1,0,0,0,0,0,0,40,0,10~
    ~prop:indexNumber,clutch_input,-1,0,0,0,0,0,0,40,0,10~
    ~prop:indexNumber,parkingbrake_input,1,0,0,0,0,0,0,10,0,10~
    ```
-   3. Extensional Functions
+
+   3. 扩展功能 (Extensional Functions)
    ```
    ~prop:indexNumber,hourNeedle,0,-1,0,0,0,0,0,360,0,1~
    ~prop:indexNumber,minuNeedle,0,-1,0,0,0,0,0,360,0,1~
