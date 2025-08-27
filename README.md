@@ -13,9 +13,9 @@ Here is the guide for using it.
 
  2. Download the pack from GitHub.
 
-    https://github.com/NiZhaZi/Beamng-Hybrid-Mod
-    https://github.com/NiZhaZi/Hybrid-PC-Edit/releases
-    https://github.com/NiZhaZi/Torque-Table-Creator/releases
+   [Main Mod](https://github.com/NiZhaZi/Beamng-Hybrid-Mod)\
+   [.pc File Editor](https://github.com/NiZhaZi/Hybrid-PC-Edit/releases)\
+   [Toque Table Creator](https://github.com/NiZhaZi/Torque-Table-Creator/releases)
     ![alt text](pictures/image2_1.png)
     ![alt text](pictures/image2_2.png)
     ![alt text](pictures/image2_3.png)

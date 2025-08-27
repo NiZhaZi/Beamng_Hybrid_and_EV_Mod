@@ -13,9 +13,9 @@
 
  2. 从 GitHub 下载资源包。
 
-    https://github.com/NiZhaZi/Beamng-Hybrid-Mod
-    https://github.com/NiZhaZi/Hybrid-PC-Edit/releases
-    https://github.com/NiZhaZi/Torque-Table-Creator/releases
+    [主模组](https://github.com/NiZhaZi/Beamng-Hybrid-Mod)\
+    [.pc 文件编辑助手](https://github.com/NiZhaZi/Hybrid-PC-Edit/releases)\
+    [扭矩表生成器](https://github.com/NiZhaZi/Torque-Table-Creator/releases)
     ![alt text](pictures/image2_1.png)
     ![alt text](pictures/image2_2.png)
     ![alt text](pictures/image2_3.png)
