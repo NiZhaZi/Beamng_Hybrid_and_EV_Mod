@@ -1,7 +1,7 @@
 -- autoContrl.lua - 2024.3.17 12:48 - auto functions control
 -- by NZZ
--- version 0.0.21 alpha
--- final edit - 2025.8.15 18:55
+-- version 0.0.22 alpha
+-- final edit - 2025.8.30 16:55
 
 local M = {}
 local debugTime = 0
@@ -94,7 +94,7 @@ local function updateGFX(dt)
 
     local ifRegen = 0
     for _, v in ipairs(motors) do
-        local motorTorque = v.motorTorque or v.outputTorque1
+        local motorTorque = (v.motorTorque or v.outputTorque1) * v.motorDirection
         if motorTorque < brakeLightRegenTorque then
             ifRegen = 1
             break
