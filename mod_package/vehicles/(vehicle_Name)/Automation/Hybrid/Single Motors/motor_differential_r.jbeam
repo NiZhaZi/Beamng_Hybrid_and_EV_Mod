@@ -45,7 +45,14 @@
 			"diffType": "open",
 			"uiName": "Rear Differential", 
 			"friction": 2.6452382432567,
-		}
+		},
+
+		"actionsEnabled": [
+			["id"],
+			["EV part-time AWD"],
+			["EV full-time AWD"],
+			["EV 2WD"],
+		],
 	},
 
 	"Rear_Dual_ElectricMotor": {
@@ -102,6 +109,13 @@
 			"sampleName": "ElectricMotor_02",
 			"mainGain": -10
 		},
+
+		"actionsEnabled": [
+			["id"],
+			["EV part-time AWD"],
+			["EV full-time AWD"],
+			["EV 2WD"],
+		],
 	}
 	
 }

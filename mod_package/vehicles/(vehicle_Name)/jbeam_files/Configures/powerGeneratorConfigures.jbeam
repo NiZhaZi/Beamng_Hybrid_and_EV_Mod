@@ -65,7 +65,18 @@
 		"soundConfigGearbox": {
 			"sampleName": "ElectricMotor_02",
 			"mainGain": -4.5
-		}
+		},
+
+		"actionsEnabled": [
+			["id"],
+			["set SOC increase"],
+			["set SOC decrease"],
+			["reset SOC"],
+
+			["Power Generator On"],
+			["Power Generator Off"],
+			["Power Generator Auto"],
+		],
 	},
 
 	"AT_Gearbox": {

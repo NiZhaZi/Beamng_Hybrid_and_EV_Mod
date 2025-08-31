@@ -205,6 +205,13 @@
 		"hybridControl":{
 			"autoMode": "auto"
 		},
+		"actionsEnabled": [
+			["id"],
+			["Auto"],
+			["Engine Velocity Increase"],
+			["Engine Velocity Decrease"],
+			["Engine Velocity Reset"],
+		],
 
 	},
 
@@ -219,6 +226,10 @@
 		"hybridControl":{
 			"hybridMode": "hybrid"
 		},
+		"actionsEnabled": [
+			["id"],
+			["Hybrid"],
+		],
 
 	},
 
@@ -233,6 +244,10 @@
 		"hybridControl":{
 			"electricMode": "electric"
 		},
+		"actionsEnabled": [
+			["id"],
+			["EV"],
+		],
 
 	},
 
@@ -247,6 +262,10 @@
 		"hybridControl":{
 			"fuelMode": "fuel"
 		},
+		"actionsEnabled": [
+			["id"],
+			["ICE"],
+		],
 
 	},
 

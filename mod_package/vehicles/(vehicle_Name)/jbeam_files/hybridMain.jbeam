@@ -73,6 +73,16 @@
 		"clutch": {
 			// "electricsClutchRatioName":"hybridClutch"
 		},
+		"actionsEnabled": [
+			["id"],
+			["Select Hybrid Mode"],
+			["Enhance Energy Recovery"],
+			["Reduce Energy Recovery"],
+
+			["Switch onePedal brake mode"],
+			["Switch onePedal CRBS mode"],
+			["Switch sport brake mode"],
+		],
 	},
 
 	"default_auto_mode": {

@@ -62,6 +62,23 @@
 			//"brakeRegenCoef": 1,
 			"onePedalRegenCoef": 0.85
 		},
+
+		"actionsEnabled": [
+			["id"],
+			["switch onePedal brake mode(EV)"],
+			["switch onePedal CRBS mode(EV)"],
+			["switch sport brake mode(EV)"],
+
+			["switch to on-demand AWD"],
+			["switch to full-time AWD"],
+			["switch to main motor 2WD"],
+			["switch to sub motor 2WD"],
+
+			["reduce main output"],
+			["increase main output"],
+			["reduce sub output"],
+			["increase sub output"],
+		],
 		
 		"slots": [
 			["type", "default", "description"],

@@ -52,6 +52,10 @@
 			["rh4r","rh3l", {"factor": "$rwsAngle", "inputSource":"4wsAdvance", "steeringWheelLock":400, "inRate":5,"outRate":5}],
 			{"beamPrecompression":1.0, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1}
 		],
+		"actionsEnabled": [
+			["id"],
+			["Switch Rear Wheel Steering"],
+		],
 	},
 
 	"Suspension_Lift": {
@@ -97,6 +101,14 @@
 			["rs1l", "rx1l", {"inputSource":"liftRL", "inLimit":"$inLimit", "outLimit":"$outLimit", "inRate":0.25, "outRate":0.25, "factor":"$suspensionLift"}],
 			["rs1l", "rx2l", {"inputSource":"liftRL", "inLimit":"$inLimit", "outLimit":"$outLimit", "inRate":0.25, "outRate":0.25, "factor":"$suspensionLift"}],
 		],
+		"actionsEnabled": [
+			["id"],
+			["Chassis Adjust Mode"],
+			["Out Of Trouble Mode"],
+			["Chassis Lift"],
+			["Chassis Drop"],
+			["Chassis Reset"],
+		],
 	},
 
     "Auto_Control": {
@@ -120,6 +132,13 @@
 				"brakeLightRegenTorque": "$brakeLightRegenTorque",
 			}],
     	],
+		"actionsEnabled": [
+			["id"],
+			["Switch EV Crawl"],
+			["Switch Auto Hold"],
+			["Switch Auto Start"],
+			["Switch Hill Descent Control"],
+		],
 	},
 
     "Dynamic_System": {
@@ -167,6 +186,13 @@
             }],
 
     	],
+		"actionsEnabled": [
+			["id"],
+			["switchLockMode"],
+			["inhanceMainOut"],
+			["dehanceMainOut"],
+			["resetMainOut"],
+		],
 	},
 
 	"Dynamic_lsd": {
@@ -185,6 +211,11 @@
 			}]
 
     	],
+		"actionsEnabled": [
+			["id"],
+			["switchFrontDifferential"],
+			["switchRearDifferential"],
+		],
 	},
 
 	"Spoiler_Control": {
@@ -237,6 +268,11 @@
 				"lightNum": "$rpmLightNum",
 			}]
     	],
+		"actionsEnabled": [
+			["id"],
+			["Customed Light"],
+			["Inner Light"],
+		],
 	},
 
 	"Wiper_Control": {
@@ -257,6 +293,12 @@
 				// Get sound from https://pixabay.com/sound-effects/search/wiper/.
 			}]
     	],
+		"actionsEnabled": [
+			["id"],
+			["Wiper"],
+			["Wiper Speed Up"],
+			["Wiper Speed Down"],
+		],
 	},
 
 }
