@@ -1,0 +1,100 @@
+{
+    "10_Gears": {
+		"information":{
+			"name":"10 Gear Ratios",
+			"value":1000
+		},
+		"slots": [
+			["type", "default", "description"],
+		],
+		"slotType" : "Gear_Amount"
+        "gearbox": {
+			"gearRatios": ["$=-$gear_R", 0, "$gear_1", "$gear_2", "$gear_3", "$gear_4", "$gear_5", "$gear_6", "$gear_7", "$gear_8", "$gear_9", "$gear_10"],
+		},
+	},
+
+    "9_Gears": {
+		"information":{
+			"name":"9 Gear Ratios",
+			"value":90
+		},
+		"slots": [
+			["type", "default", "description"],
+		],
+		"slotType" : "Gear_Amount"
+        "gearbox": {
+			"gearRatios": ["$=-$gear_R", 0, "$gear_1", "$gear_2", "$gear_3", "$gear_4", "$gear_5", "$gear_6", "$gear_7", "$gear_8", "$gear_9"],
+		},
+	},
+
+    "8_Gears": {
+		"information":{
+			"name":"8 Gear Ratios",
+			"value":80
+		},
+		"slots": [
+			["type", "default", "description"],
+		],
+		"slotType" : "Gear_Amount"
+        "gearbox": {
+			"gearRatios": ["$=-$gear_R", 0, "$gear_1", "$gear_2", "$gear_3", "$gear_4", "$gear_5", "$gear_6", "$gear_7", "$gear_8"],
+		},
+	},
+
+    "7_Gears": {
+		"information":{
+			"name":"7 Gear Ratios",
+			"value":70
+		},
+		"slots": [
+			["type", "default", "description"],
+		],
+		"slotType" : "Gear_Amount"
+        "gearbox": {
+			"gearRatios": ["$=-$gear_R", 0, "$gear_1", "$gear_2", "$gear_3", "$gear_4", "$gear_5", "$gear_6", "$gear_7"],
+		},
+	},
+
+    "6_Gears": {
+		"information":{
+			"name":"6 Gear Ratios",
+			"value":60
+		},
+		"slots": [
+			["type", "default", "description"],
+		],
+		"slotType" : "Gear_Amount"
+        "gearbox": {
+			"gearRatios": ["$=-$gear_R", 0, "$gear_1", "$gear_2", "$gear_3", "$gear_4", "$gear_5", "$gear_6"],
+		},
+	},
+
+    "5_Gears": {
+		"information":{
+			"name":"5 Gear Ratios",
+			"value":50
+		},
+		"slots": [
+			["type", "default", "description"],
+		],
+		"slotType" : "Gear_Amount"
+        "gearbox": {
+			"gearRatios": ["$=-$gear_R", 0, "$gear_1", "$gear_2", "$gear_3", "$gear_4", "$gear_5"],
+		},
+	},
+
+    "4_Gears": {
+		"information":{
+			"name":"4 Gear Ratios",
+			"value":40
+		},
+		"slots": [
+			["type", "default", "description"],
+		],
+		"slotType" : "Gear_Amount"
+        "gearbox": {
+			"gearRatios": ["$=-$gear_R", 0, "$gear_1", "$gear_2", "$gear_3", "$gear_4"],
+		},
+	}
+
+}

@@ -73,6 +73,40 @@
 		"transferCase":{
 		}
 	},
+	"Camso_differential_center_hybrid_gearbox_ondemand": {
+		"information":{
+			"name":"Advanced Center Differential for hybrid gearbox (On-demand AWD)",
+			"value":150
+		},
+		"slotType" : "Camso_differential_center",
+		"slots": [
+			["type", "default", "description"],
+			["Hybrid_Main", "Hybrid_Main", "Main Hybrid Slot", {"coreSlot":true}],
+			["driveshaft_awd", "driveshaft_awd_motor", "AWD Driveshaft", {"coreSlot":true}],
+		],
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+			//["$torquesplit", "range", "", "Gearing", 0.50, 0, 1, "Torque Split", "Power to Rear",{"subCategory": "Transfer Case", "stepDis": 0.01, "minDis":0,"maxDis":100}]
+			["$awdMinLock", "range", "", "Gearing", 0, 0, 1, "Center Coupling Lock", "Minimum Clutchpack Lock Percentage",{"subCategory": "Transfer Case", "stepDis": 0.01, "minDis":0,"maxDis":100}]
+			["$primaryOutputID", "range", " ", "Gearing", 1, 1, 2, "Primary Output ID", "1 for Rear, 2 for Front",{"subCategory": "Transfer Case", "stepDis": 1.00}]
+		],
+		"controller": [
+			["fileName"],
+			["drivingDynamics/actuators/electronicSplitShaftLock", {"name": "electronicSplitShaftLock", "splitShaftName": "transferCase"}]
+		],
+
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"],
+			//https://wiki.beamng.com/Differential
+			["motorShaft", "awdmotor", "gearbox", 1, {"uiSimpleModeControl": false, "canDisconnect": true, "gearRatio": 1, "friction": 1}],
+			["splitShaft", "transferCase", "awdmotor", 1, {"splitType": "locked", "primaryOutputID": "$primaryOutputID", "lockTorque": 3000, "uiName": "Electrically Clutched Torque Splitter", "defaultVirtualInertia": 0.1, "defaultClutchRatio": 0, "friction": 3.9038554709694}],
+			["shaft", "rearDriveShaft", "transferCase", 1, {"uiSimpleModeControl": false, "canDisconnect": false, "gearRatio": 1, "friction": 1}] // 1
+			["shaft", "frontDriveShaft", "transferCase", 2, {"uiSimpleModeControl": false, "canDisconnect": false, "gearRatio": 1, "friction": 1}] // 2
+			
+		],
+		"transferCase":{
+		}
+	},
 
 	// FWD
 	"Camso_TransferCase_FWD": {
