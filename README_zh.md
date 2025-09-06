@@ -112,7 +112,7 @@
 
    1. 方向盘 (Steering Wheel)
    ```
-   ~prop:indexNumber,steering,0,1,0,0,0,0,-900,900,0,1.75~
+   ~prop:indexNumber,steering,0,1,0,0,0,0,-900,900,0,1~
    ```
    
    2. 踏板和手刹 (Pedals and Parking Brake) (对于踏板的第一个数字，-1 代表防火墙安装，1 代表地板安装。)
@@ -121,6 +121,14 @@
    ~prop:indexNumber,brake_input,-1,0,0,0,0,0,0,40,0,10~
    ~prop:indexNumber,clutch_input,-1,0,0,0,0,0,0,40,0,10~
    ~prop:indexNumber,parkingbrake_input,1,0,0,0,0,0,0,10,0,10~
+   ```
+
+   3. 指针 (Pointers) (对于第一个数字，-1 代表顺时针旋转，1 代表逆时针旋转。
+      第八个数字代表最大指针角度。
+      第十个数字应为指针角度值除以源值。)
+   ```
+   ~prop:indexNumber,rpmTacho,0,-1,0,0,0,0,0,270,0,0.03~
+   ~prop:indexNumber,wheelspeed,0,-1,0,0,0,0,0,360,0,2.95~
    ```
 
    3. 扩展功能 (Extensional Functions)

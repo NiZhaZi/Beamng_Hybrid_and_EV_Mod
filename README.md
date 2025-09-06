@@ -115,7 +115,7 @@ Here is the guide for using it.
 
    1. Steering Wheel
    ```
-   ~prop:indexNumber,steering,0,1,0,0,0,0,-900,900,0,1.75~
+   ~prop:indexNumber,steering,0,1,0,0,0,0,-900,900,0,1~
    ```
 
    2. Pedals and Parking Brake (For pedals' first number, -1 represents firewall mount and 1 represents floor mount.)
@@ -125,8 +125,16 @@ Here is the guide for using it.
    ~prop:indexNumber,clutch_input,-1,0,0,0,0,0,0,40,0,10~
    ~prop:indexNumber,parkingbrake_input,1,0,0,0,0,0,0,10,0,10~
    ```
+
+   3. Pointers (For the second number, -1 represents clockwise and 1 represents counterclockwise. 
+      The eighth number represents the maxium pointer angle. 
+      The tenth number should be pointer angle value devided by source value.)
+   ```
+   ~prop:indexNumber,rpmTacho,0,-1,0,0,0,0,0,270,0,0.03~
+   ~prop:indexNumber,wheelspeed,0,-1,0,0,0,0,0,360,0,2.95~
+   ```
    
-   3. Extensional Functions
+   4. Extensional Functions
    ```
    ~prop:indexNumber,hourNeedle,0,-1,0,0,0,0,0,360,0,1~
    ~prop:indexNumber,minuNeedle,0,-1,0,0,0,0,0,360,0,1~
