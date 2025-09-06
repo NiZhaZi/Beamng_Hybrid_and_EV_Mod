@@ -132,4 +132,6 @@ Here is the guide for using it.
    ~prop:indexNumber,minuNeedle,0,-1,0,0,0,0,0,360,0,1~
    ~prop:indexNumber,wiper,0,-1,0,0,0,0,0,90,0,1~
    ~prop:indexNumber,wiper,0,1,0,0,0,0,0,173,0,2~
+   ~prop:indexNumber,spoiler,0,0,0,0,1,0.1,0,1,0,0.1~
+   ~prop:indexNumber,keyAngle,0,0,-1,0,0,0,0,180,0,1~
    ```
