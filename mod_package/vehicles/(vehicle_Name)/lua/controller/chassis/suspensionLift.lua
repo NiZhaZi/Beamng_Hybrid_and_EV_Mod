@@ -1,7 +1,7 @@
 -- suspension_lift.lua - 2024.4.19 18:30 - suspension lift control
 -- by NZZ
--- version 0.0.8 alpha
--- final edit - 2025.9.8 0:12
+-- version 0.0.9 alpha
+-- final edit - 2025.9.8 1:13
 
 local M = {}
 
@@ -85,6 +85,12 @@ local function resetChassis()
 
 end
 
+local function clamp(v, lo, hi)
+  if v < lo then return lo end
+  if v > hi then return hi end
+  return v
+end
+
 local function updateGFX(dt)
 
     local finalLevel = autoLevel
@@ -113,15 +119,17 @@ local function updateGFX(dt)
         local roll
         local pitch
         if vehicleInfo then
-            roll = vehicleInfo.posture.roll * 90 -- vehicleInfo.posture.roll % 0.1
-            pitch = vehicleInfo.posture.pitch * 90 -- vehicleInfo.posture.pitch % 0.1
+            roll = vehicleInfo.posture.roll * 90
+            pitch = vehicleInfo.posture.pitch * 90
             roll = roll - roll % 0.1
-            if roll > 0 then
+            pitch = pitch - pitch % 0.1
+
+            if roll > 0.1 then
                 liftFL = math.min(electrics.values['liftFL'] + 0.01, liftLevel)
                 liftRL = math.min(electrics.values['liftRL'] + 0.01, liftLevel)
                 liftFR = math.max(electrics.values['liftFR'] - 0.01, dropLevel)
                 liftRR = math.max(electrics.values['liftRR'] - 0.01, dropLevel)
-            elseif roll < 0 then
+            elseif roll < -0.1 then
                 liftFL = math.max(electrics.values['liftFL'] - 0.01, dropLevel)
                 liftRL = math.max(electrics.values['liftRL'] - 0.01, dropLevel)
                 liftFR = math.min(electrics.values['liftFR'] + 0.01, liftLevel)
@@ -132,7 +140,7 @@ local function updateGFX(dt)
             guihooks.message("Can't get postrue information, switch to auto mode.", 5, "")
         end
     end 
-    
+
     if mode ~= "adaptive" then
         electrics.values['liftFL'] = lift0
         electrics.values['liftFR'] = lift0
