@@ -7,7 +7,7 @@
 		},
 		"slots": [
 			["type", "default", "description"],
-			["Camso_differential_center", "Camso_differential_center", "Center Differential", {"coreSlot":true}]
+			["Camso_differential_center", "Camso_differential_center", "Center Differential", {"coreSlot":true}],
 		],
 		"slotType" : "Camso_TransferCase"
 	},
@@ -21,7 +21,8 @@
 			["type", "default", "description"],
 			["Hybrid_Main", "Hybrid_Main", "Main Hybrid Slot", {"coreSlot":true}],
 			["driveshaft_front", "driveshaft_front_motor", "Front Driveshaft", {"coreSlot":true}],
-			["driveshaft_rear", "driveshaft_rear_motor", "Rear Driveshaft", {"coreSlot":true}]
+			["driveshaft_rear", "driveshaft_rear_motor", "Rear Driveshaft", {"coreSlot":true}],
+			["Transfer_Case_Type", "Transfer_Case_Type_open", "Transfer Case Type", {"coreSlot":true}],
 		],
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
@@ -34,7 +35,7 @@
 		"powertrain" : [
 			["type", "name", "inputName", "inputIndex"],
 			//https://wiki.beamng.com/Differential
-			["differential", "transferCase", "gearbox", 1, {"diffType": "lsd", "lsdLockCoef": 0.40, "lsdRevLockCoef": 0.40, "lsdPreload": 10.00, "uiName": "Center Differential", "defaultVirtualInertia":0.25, "friction": 0}],
+			["differential", "transferCase", "gearbox", 1, {/*"diffType": "lsd", "lsdLockCoef": 0.40, "lsdRevLockCoef": 0.40, "lsdPreload": 10.00, "uiName": "Center Differential", "defaultVirtualInertia":0.25, "friction": 0*/}],
 			["motorShaft", "rearDriveShaft", "transferCase", 1, {"uiSimpleModeControl": false, "canDisconnect": true, "gearRatio": 1, "friction": 1}] // 1
 			["motorShaft", "frontDriveShaft", "transferCase", 2, {"uiSimpleModeControl": false, "canDisconnect": true, "gearRatio": 1, "friction": 1}] // 2
 			
@@ -52,6 +53,7 @@
 			["type", "default", "description"],
 			["Hybrid_Main", "Hybrid_Main", "Main Hybrid Slot", {"coreSlot":true}],
 			["driveshaft_awd", "driveshaft_awd_motor", "AWD Driveshaft", {"coreSlot":true}],
+			["Transfer_Case_Type", "Transfer_Case_Type_open", "Transfer Case Type", {"coreSlot":true}],
 		],
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
@@ -65,7 +67,7 @@
 			["type", "name", "inputName", "inputIndex"],
 			//https://wiki.beamng.com/Differential
 			["motorShaft", "awdmotor", "gearbox", 1, {"uiSimpleModeControl": false, "canDisconnect": true, "gearRatio": 1, "friction": 1}],
-			["differential", "transferCase", "awdmotor", 1, {"diffType": "lsd", "lsdLockCoef": 0.40, "lsdRevLockCoef": 0.40, "lsdPreload": 10.00, "uiName": "Center Differential", "defaultVirtualInertia":0.25, "friction": 0}],
+			["differential", "transferCase", "awdmotor", 1, {/*"diffType": "lsd", "lsdLockCoef": 0.40, "lsdRevLockCoef": 0.40, "lsdPreload": 10.00, "uiName": "Center Differential", "defaultVirtualInertia":0.25, "friction": 0*/}],
 			["shaft", "rearDriveShaft", "transferCase", 1, {"uiSimpleModeControl": false, "canDisconnect": false, "gearRatio": 1, "friction": 1}] // 1
 			["shaft", "frontDriveShaft", "transferCase", 2, {"uiSimpleModeControl": false, "canDisconnect": false, "gearRatio": 1, "friction": 1}] // 2
 			
@@ -242,4 +244,74 @@
 			["shaft", "reevShaft", "gearbox", 1, {"friction": 0}]
 		]
 	},
+
+
+
+	"Transfer_Case_Type_open": {
+		"information":{
+			"name":"Transfer Case Type open",
+			"value":0
+		},
+		"slotType" : "Transfer_Case_Type",
+		"transferCase":{
+			"diffType": "open"
+		}
+	},
+
+	"Transfer_Case_Type_lsd": {
+		"information":{
+			"name":"Transfer Case Type lsd",
+			"value":500
+		},
+		"slotType" : "Transfer_Case_Type",
+		"transferCase":{
+			"diffType": "lsd"
+		}
+	},
+
+	"Transfer_Case_Type_viscous": {
+		"information":{
+			"name":"Transfer Case Type viscous",
+			"value":1000
+		},
+		"slotType" : "Transfer_Case_Type",
+		"transferCase":{
+			"diffType": "viscous"
+		}
+	},
+
+	"Transfer_Case_Type_locked": {
+		"information":{
+			"name":"Transfer Case Type locked",
+			"value":0
+		},
+		"slotType" : "Transfer_Case_Type",
+		"transferCase":{
+			"diffType": "locked"
+		}
+	},
+
+	"Transfer_Case_Type_activeLock": {
+		"information":{
+			"name":"Transfer Case Type activeLock",
+			"value":1500
+		},
+		"slotType" : "Transfer_Case_Type",
+		"transferCase":{
+			"diffType": "activeLock"
+		}
+	},
+
+	"Transfer_Case_Type_torqueVectoring": {
+		"information":{
+			"name":"Transfer Case Type torqueVectoring",
+			"value":1500
+		},
+		"slotType" : "Transfer_Case_Type",
+		"transferCase":{
+			"diffType": "torqueVectoring"
+		}
+	},
+
+
 }
