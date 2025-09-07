@@ -1,7 +1,7 @@
 -- vehicleInfo.lua - 2024.5.16 18:52 - vehicle information
 -- by NZZ
--- version 0.0.2 alpha
--- final edit - 2025.5.30 17:53
+-- version 0.0.3 alpha
+-- final edit - 2025.9.8 0:12
 
 local M = {}
 
@@ -154,8 +154,20 @@ local function updateGFX(dt)
     -- mileage end
 
     -- fuel and electricity consumption begin
-    local remainingFuel = (fuelTank.storedEnergy or 0) / energyDensity / fuelLiquidDensity -- L
-    local remainingElectricity = (battery.storedEnergy or 0) / 3600000 -- kWh
+    local remainingFuel
+    local remainingElectricity
+
+    if fuelTank then
+        remainingFuel = (fuelTank.storedEnergy or 0) / energyDensity / fuelLiquidDensity -- L
+    else
+        remainingFuel = 0
+    end
+
+    if battery then
+        remainingElectricity = (battery.storedEnergy or 0) / 3600000 -- kWh
+    else
+        remainingElectricity = 0
+    end
 
     local fuelConsumption = averageConsum.InitialFuel - remainingFuel
     local electricityConsumption = averageConsum.InitialElectricity - remainingElectricity
@@ -185,13 +197,26 @@ local function init()
     mileage = 0
 
     fuelTank = energyStorage.getStorage('mainTank')
+    if fuelTank then
+        energyDensity = fuelTank.energyDensity
+        fuelLiquidDensity = fuelTank.fuelLiquidDensity
+        averageConsum.InitialFuel = (fuelTank.initialStoredEnergy or 0) / energyDensity / fuelLiquidDensity -- L
+    else
+        energyDensity = 0
+        fuelLiquidDensity = 0
+        averageConsum.InitialFuel = 0
+    end
+
     battery = energyStorage.getStorage('mainBattery')
-    energyDensity = fuelTank.energyDensity
-    fuelLiquidDensity = fuelTank.fuelLiquidDensity
-    averageConsum.InitialFuel = (fuelTank.initialStoredEnergy or 0) / energyDensity / fuelLiquidDensity -- L
-    averageConsum.InitialElectricity = (battery.initialStoredEnergy or 0) / 3600000 -- kWh
-    averageConsum.fuel = 0
-    averageConsum.electricity = 0
+    if battery then
+        averageConsum.InitialElectricity = (battery.initialStoredEnergy or 0) / 3600000 -- kWh
+        averageConsum.fuel = 0
+        averageConsum.electricity = 0
+    else
+        averageConsum.InitialElectricity = 0
+        averageConsum.fuel = 0
+        averageConsum.electricity = 0
+    end
 
 end
 

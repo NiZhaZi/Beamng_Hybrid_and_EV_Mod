@@ -16,6 +16,11 @@
      },
 
      {
+          "control": "alt '",
+          "action":  "Adaptive Mode"
+     },
+
+     {
           "control": "alt 8",
           "action":  "Chassis Lift"
      },

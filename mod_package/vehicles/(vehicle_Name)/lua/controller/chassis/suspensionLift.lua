@@ -1,7 +1,7 @@
 -- suspension_lift.lua - 2024.4.19 18:30 - suspension lift control
 -- by NZZ
--- version 0.0.7 alpha
--- final edit - 2025.8.19 12:49
+-- version 0.0.8 alpha
+-- final edit - 2025.9.8 0:12
 
 local M = {}
 
@@ -66,7 +66,9 @@ local function adjustChassis(para)
 
         electrics.values['lift0'] = lift0
     else
-        guihooks.message("Chassis Height can not be adjusted manually now.", 5, "")
+        -- guihooks.message("Chassis Height can not be adjusted manually now.", 5, "")
+        mode = "manual"
+        adjustChassis(para)
     end
 
 end
@@ -86,9 +88,15 @@ end
 local function updateGFX(dt)
 
     local finalLevel = autoLevel
+    local liftFL = 0
+    local liftFR = 0
+    local liftRL = 0
+    local liftRR = 0
+
     if mode ~= "outTrouble" and autoLevel == 0 and electrics.values.wheelspeed >= highSpeed / 3.6 then
         finalLevel = dropLevel
     end
+    
     if mode == "auto" then
         electrics.values['lift0'] = finalLevel
         lift0 = finalLevel
@@ -101,12 +109,41 @@ local function updateGFX(dt)
         finalLevel = math.min(math.max(electrics.values['lift0'] + otSign * dt, dropLevel), liftLevel)
         electrics.values['lift0'] = finalLevel
         lift0 = finalLevel
+    elseif mode == "adaptive" then
+        local roll
+        local pitch
+        if vehicleInfo then
+            roll = vehicleInfo.posture.roll * 90 -- vehicleInfo.posture.roll % 0.1
+            pitch = vehicleInfo.posture.pitch * 90 -- vehicleInfo.posture.pitch % 0.1
+            roll = roll - roll % 0.1
+            if roll > 0 then
+                liftFL = math.min(electrics.values['liftFL'] + 0.01, liftLevel)
+                liftRL = math.min(electrics.values['liftRL'] + 0.01, liftLevel)
+                liftFR = math.max(electrics.values['liftFR'] - 0.01, dropLevel)
+                liftRR = math.max(electrics.values['liftRR'] - 0.01, dropLevel)
+            elseif roll < 0 then
+                liftFL = math.max(electrics.values['liftFL'] - 0.01, dropLevel)
+                liftRL = math.max(electrics.values['liftRL'] - 0.01, dropLevel)
+                liftFR = math.min(electrics.values['liftFR'] + 0.01, liftLevel)
+                liftRR = math.min(electrics.values['liftRR'] + 0.01, liftLevel)
+            end
+        else
+            mode = "auto"
+            guihooks.message("Can't get postrue information, switch to auto mode.", 5, "")
+        end
     end 
     
-    electrics.values['liftFL'] = lift0
-    electrics.values['liftFR'] = lift0
-    electrics.values['liftRL'] = lift0
-    electrics.values['liftRR'] = lift0
+    if mode ~= "adaptive" then
+        electrics.values['liftFL'] = lift0
+        electrics.values['liftFR'] = lift0
+        electrics.values['liftRL'] = lift0
+        electrics.values['liftRR'] = lift0
+    else
+        electrics.values['liftFL'] = liftFL
+        electrics.values['liftFR'] = liftFR
+        electrics.values['liftRL'] = liftRL
+        electrics.values['liftRR'] = liftRR
+    end
 
 end
 
@@ -117,7 +154,7 @@ local function setParameters(parameters)
 end
 
 local function switchMode(Mode)
-    if Mode == "auto" or Mode == "manual" or Mode == "outTrouble" then
+    if Mode == "auto" or Mode == "manual" or Mode == "outTrouble" or Mode == "adaptive" then
         mode = Mode
     else
         if mode == "auto" then
