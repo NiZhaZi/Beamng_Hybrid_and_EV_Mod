@@ -1,7 +1,7 @@
 -- suspension_lift.lua - 2024.4.19 18:30 - suspension lift control
 -- by NZZ
--- version 0.0.9 alpha
--- final edit - 2025.9.8 1:13
+-- version 0.0.10 alpha
+-- final edit - 2025.9.8 12:52
 
 local M = {}
 
@@ -123,22 +123,61 @@ local function updateGFX(dt)
             pitch = vehicleInfo.posture.pitch * 90
             roll = roll - roll % 0.1
             pitch = pitch - pitch % 0.1
-
+            --
+            --                          roll > 0.1           roll = 0           roll < 0.1
+            --    pitch > 0.1           FL0 FR/ RL* RR0      FL- FR- RL+ RR+    FL/ FR0 RL0 RR*
+            --
+            --    pitch = 0             FL+ FR- RL+ RR-      ---------------    FL- FR+ RL- RR+
+            --
+            --    pitch < 0.1           FL* FR0 RL0 RR/      FL+ FR+ RL- RR-    FL0 FR* RL/ RR0
+            --
+            --    roll  > 0   right up & left down
+            --    pitch > 0   front up & rear down
+            --
             if roll > 0.1 then
-                liftFL = math.min(electrics.values['liftFL'] + 0.01, liftLevel)
-                liftRL = math.min(electrics.values['liftRL'] + 0.01, liftLevel)
-                liftFR = math.max(electrics.values['liftFR'] - 0.01, dropLevel)
-                liftRR = math.max(electrics.values['liftRR'] - 0.01, dropLevel)
+                if pitch > 0.1 then
+                    liftRL = math.min(electrics.values['liftRL'] + 0.02, liftLevel)
+                    liftFR = math.max(electrics.values['liftFR'] - 0.02, dropLevel)
+                elseif pitch < -0.1 then
+                    liftFL = math.min(electrics.values['liftFL'] + 0.02, liftLevel)
+                    liftRR = math.max(electrics.values['liftRR'] - 0.02, dropLevel)
+                else
+                    liftFL = math.min(electrics.values['liftFL'] + 0.01, liftLevel)
+                    liftRL = math.min(electrics.values['liftRL'] + 0.01, liftLevel)
+                    liftFR = math.max(electrics.values['liftFR'] - 0.01, dropLevel)
+                    liftRR = math.max(electrics.values['liftRR'] - 0.01, dropLevel)
+                end
             elseif roll < -0.1 then
-                liftFL = math.max(electrics.values['liftFL'] - 0.01, dropLevel)
-                liftRL = math.max(electrics.values['liftRL'] - 0.01, dropLevel)
-                liftFR = math.min(electrics.values['liftFR'] + 0.01, liftLevel)
-                liftRR = math.min(electrics.values['liftRR'] + 0.01, liftLevel)
+                if pitch > 0.1 then
+                    liftFL = math.max(electrics.values['liftFL'] - 0.02, dropLevel)
+                    liftRR = math.min(electrics.values['liftRR'] + 0.02, liftLevel)
+                elseif pitch < -0.1 then
+                    liftRL = math.max(electrics.values['liftRL'] - 0.02, dropLevel)
+                    liftFR = math.min(electrics.values['liftFR'] + 0.02, liftLevel)
+                else
+                    liftFL = math.max(electrics.values['liftFL'] - 0.01, dropLevel)
+                    liftRL = math.max(electrics.values['liftRL'] - 0.01, dropLevel)
+                    liftFR = math.min(electrics.values['liftFR'] + 0.01, liftLevel)
+                    liftRR = math.min(electrics.values['liftRR'] + 0.01, liftLevel)
+                end
+            else
+                if pitch > 0.1 then
+                    liftFL = math.max(electrics.values['liftFL'] - 0.01, dropLevel)
+                    liftRL = math.min(electrics.values['liftRL'] + 0.01, liftLevel)
+                    liftFR = math.max(electrics.values['liftFR'] - 0.01, dropLevel)
+                    liftRR = math.min(electrics.values['liftRR'] + 0.01, liftLevel)
+                elseif pitch < -0.1 then
+                    liftFL = math.min(electrics.values['liftFL'] + 0.01, liftLevel)
+                    liftRL = math.max(electrics.values['liftRL'] - 0.01, dropLevel)
+                    liftFR = math.min(electrics.values['liftFR'] + 0.01, liftLevel)
+                    liftRR = math.max(electrics.values['liftRR'] - 0.01, dropLevel)
+                end
             end
         else
             mode = "auto"
             guihooks.message("Can't get postrue information, switch to auto mode.", 5, "")
         end
+
     end 
 
     if mode ~= "adaptive" then
