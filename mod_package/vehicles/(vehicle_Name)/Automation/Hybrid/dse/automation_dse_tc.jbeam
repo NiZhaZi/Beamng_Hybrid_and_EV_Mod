@@ -27,8 +27,8 @@
 				"wheelGroupSettings":[
 					["motorName",   	"slipThreshold",	"kP",   "kI",   "kD",   "integralInCoef",   "integralOutCoef"],
 					["mainEngine",	 	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["frontDriveShaft",	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["rearDriveShaft",	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
+					["frontDriveShaft",	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["rearDriveShaft",	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
 				]
 			}
 		},
@@ -74,7 +74,7 @@
 				"wheelGroupSettings":[
 					["motorName",   	"slipThreshold",	"kP",   "kI",   "kD",   "integralInCoef",   "integralOutCoef"],
 					["mainEngine",	 	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["awdmotor",	     0.15,				 4,		 0,		 4,		 10,				 50				 ],
+					["awdmotor",	     0.25,				 4,		 0,		 4,		 10,				 50				 ],
 				]
 			}
 		},
@@ -119,10 +119,10 @@
 				"wheelGroupSettings":[
 					["motorName",   	"slipThreshold",	"kP",   "kI",   "kD",   "integralInCoef",   "integralOutCoef"],
 					["mainEngine",	 	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["frontDriveShaft",	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["rearMotor",	     0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["rearMotor_L",	 	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["rearMotor_R",	 	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
+					["frontDriveShaft",	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["rearMotor",	     0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["rearMotor_L",	 	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["rearMotor_R",	 	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
 				]
 			}
 		},
@@ -170,10 +170,10 @@
 				"wheelGroupSettings":[
 					["motorName",   	"slipThreshold",	"kP",   "kI",   "kD",   "integralInCoef",   "integralOutCoef"],
 					["mainEngine",	 	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["rearDriveShaft",	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["frontMotor",	     0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["frontMotor_L",	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["frontMotor_R",	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
+					["rearDriveShaft",	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["frontMotor",	     0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["frontMotor_L",	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["frontMotor_R",	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
 				]
 			}
 		},
@@ -184,7 +184,7 @@
 				"wheelGroupSettings":[
 					["motorName",   	"slipThreshold",	"slipRangeThreshold",   "maxVelocity"	"kP",   "kI",   "kD",   "integralInCoef",   "integralOutCoef"],
 					["mainEngine",  	 0.1,				 0.2,					 30,			 1,		 0,		 4,		 20,				 2				 ],
-					["rearDriveShaft",  0.1,				 0.2,					 30,			 1,		 0,		 4,		 20,				 2				 ],
+					["rearDriveShaft",   0.1,				 0.2,					 30,			 1,		 0,		 4,		 20,				 2				 ],
 					["frontMotor",   	 0.1,				 0.2,					 30,			 1,		 0,		 4,		 20,				 2				 ],
 					["frontMotor_L",  	 0.1,				 0.2,					 30,			 1,		 0,		 4,		 20,				 2				 ],
 					["frontMotor_R",   	 0.1,				 0.2,					 30,			 1,		 0,		 4,		 20,				 2				 ],
@@ -221,12 +221,12 @@
 				"wheelGroupSettings":[
 					["motorName",   	"slipThreshold",	"kP",   "kI",   "kD",   "integralInCoef",   "integralOutCoef"],
 					["mainEngine",	 	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["rearMotor",	     0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["rearMotor_L",	 	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["rearMotor_R",	 	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["frontMotor",	     0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["frontMotor_L",	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["frontMotor_R",	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
+					["rearMotor",	     0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["rearMotor_L",	 	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["rearMotor_R",	 	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["frontMotor",	     0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["frontMotor_L",	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["frontMotor_R",	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
 				]
 			}
 		},
@@ -275,12 +275,12 @@
 			"tractionControl": {
 				"wheelGroupSettings":[
 					["motorName",   	"slipThreshold",	"kP",   "kI",   "kD",   "integralInCoef",   "integralOutCoef"],
-					["rearMotor",	     0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["rearMotor_L",	 	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["rearMotor_R",	 	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["frontMotor",	     0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["frontMotor_L",	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
-					["frontMotor_R",	 0.15,				 4,		 0,		 4,		 10,				 50				 ],
+					["rearMotor",	     0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["rearMotor_L",	 	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["rearMotor_R",	 	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["frontMotor",	     0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["frontMotor_L",	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
+					["frontMotor_R",	 0.25,				 4,		 0,		 4,		 10,				 50				 ],
 				]
 			}
 		},
