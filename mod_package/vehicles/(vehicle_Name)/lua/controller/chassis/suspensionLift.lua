@@ -1,7 +1,7 @@
 -- suspension_lift.lua - 2024.4.19 18:30 - suspension lift control
 -- by NZZ
--- version 0.0.10 alpha
--- final edit - 2025.9.8 12:52
+-- version 0.0.11 alpha
+-- final edit - 2025.9.11 21:41
 
 local M = {}
 
@@ -17,6 +17,8 @@ local highSpeed = nil
 local autoLevel = nil
 local otSign = nil
 local mode = nil
+
+local flatAngle = nil
 
 local function getSign(num)
     if type(num) == "number" then
@@ -47,6 +49,9 @@ local function onInit(jbeamData)
 
     liftLevel = jbeamData.liftLevel or 0.10
     dropLevel = jbeamData.dropLevel or -0.10
+
+    flatAngle = jbeamData.flatAngle or 1.00
+
 end
 
 local function adjustChassis(para)
@@ -134,11 +139,11 @@ local function updateGFX(dt)
             --    roll  > 0   right up & left down
             --    pitch > 0   front up & rear down
             --
-            if roll > 0.1 then
-                if pitch > 0.1 then
+            if roll > flatAngle then
+                if pitch > flatAngle then
                     liftRL = math.min(electrics.values['liftRL'] + 0.02, liftLevel)
                     liftFR = math.max(electrics.values['liftFR'] - 0.02, dropLevel)
-                elseif pitch < -0.1 then
+                elseif pitch < -1 * flatAngle then
                     liftFL = math.min(electrics.values['liftFL'] + 0.02, liftLevel)
                     liftRR = math.max(electrics.values['liftRR'] - 0.02, dropLevel)
                 else
@@ -147,11 +152,11 @@ local function updateGFX(dt)
                     liftFR = math.max(electrics.values['liftFR'] - 0.01, dropLevel)
                     liftRR = math.max(electrics.values['liftRR'] - 0.01, dropLevel)
                 end
-            elseif roll < -0.1 then
-                if pitch > 0.1 then
+            elseif roll < -1 * flatAngle then
+                if pitch > flatAngle then
                     liftFL = math.max(electrics.values['liftFL'] - 0.02, dropLevel)
                     liftRR = math.min(electrics.values['liftRR'] + 0.02, liftLevel)
-                elseif pitch < -0.1 then
+                elseif pitch < -1 * flatAngle then
                     liftRL = math.max(electrics.values['liftRL'] - 0.02, dropLevel)
                     liftFR = math.min(electrics.values['liftFR'] + 0.02, liftLevel)
                 else
@@ -161,12 +166,12 @@ local function updateGFX(dt)
                     liftRR = math.min(electrics.values['liftRR'] + 0.01, liftLevel)
                 end
             else
-                if pitch > 0.1 then
+                if pitch > flatAngle then
                     liftFL = math.max(electrics.values['liftFL'] - 0.01, dropLevel)
                     liftRL = math.min(electrics.values['liftRL'] + 0.01, liftLevel)
                     liftFR = math.max(electrics.values['liftFR'] - 0.01, dropLevel)
                     liftRR = math.min(electrics.values['liftRR'] + 0.01, liftLevel)
-                elseif pitch < -0.1 then
+                elseif pitch < -1 * flatAngle then
                     liftFL = math.min(electrics.values['liftFL'] + 0.01, liftLevel)
                     liftRL = math.max(electrics.values['liftRL'] - 0.01, dropLevel)
                     liftFR = math.min(electrics.values['liftFR'] + 0.01, liftLevel)

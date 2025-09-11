@@ -71,6 +71,7 @@
 			["$liftVelocity", "range", "km/h", "Functions", 80, 1, 1000, "Suspension Fall Velocity", "Velocity of when suspension fall"{"subCategory":"Suspension", "minDis": 1, "maxDis": 1000}],
 			["$liftLevel", "range", "level", "Functions", 0.10, 0, 1, "Suspension Max Lift Level", "Max level of suspension lift"{"subCategory":"Suspension", "minDis": 1, "maxDis": 1000}],
 			["$dropLevel", "range", "level", "Functions", 0.10, 0, 1, "Suspension Max Fall Level", "Max level of suspension fall"{"subCategory":"Suspension", "minDis": 1, "maxDis": 1000}],
+			["$flatAngle", "range", "°", "Functions", 1.00, 0, 90, "Adaptive Flat Angle", "The flat angle adaptive suspension try to reach"{"subCategory":"Suspension", "stepDis": 0.01}],
 		],
 		"slotType" : "Suspension_Lift",
 		"controller": [
@@ -81,6 +82,7 @@
 				"liftVelocity": "$liftVelocity",
 				"liftLevel": "$liftLevel",
 				"dropLevel": "$=-$dropLevel",
+				"flatAngle": "$=-$flatAngle",
 			}],
 		],
 

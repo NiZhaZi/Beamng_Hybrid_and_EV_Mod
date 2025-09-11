@@ -18,9 +18,19 @@
 - 3. [x] Hill descent
 - 4. [x] Hill start assist
 - 5. [x] Advance auto hold
+- 6. [x] Active wiper
+- 7. [x] Active key
+- 8. [x] Active spoiler
+- 8. [ ] Variable fuel tank
 
 ## [ ] Chassis
-- 1. [x] Suspension lift and drop
-- 2. [x] Adjust suspension with drive mode
-- 3. [x] Chassis adaptive (roll)
-- 4. [x] Chassis adaptive (pitch)
+- 1. [x] Suspension lift and drop (For Macpherson, Double wishbone, Pushrod and Multi-link)
+- 2. [ ] Suspension lift and drop (For Solid axle)
+- 3. [x] Adjust suspension with drive mode
+- 4. [x] Chassis adaptive (roll)
+- 5. [x] Chassis adaptive (pitch)
+
+## [ ] Lights
+- 1. [x] Flow running light
+- 2. [x] Multiplexing running light and signal light
+- 3. [x] Different kinds of flow lights
