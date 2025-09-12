@@ -67,7 +67,7 @@
 				},
 				"sport": {
 					"name": "Sport",
-					"order": 20,
+					"order": 40,
 					"settings": [
 						["type"],
 						["controller", {"controllerName":"adaptiveFrontDamper", "damperMode":"hard"}],
@@ -133,7 +133,7 @@
 				},
 				"off": {
 					"name": "ESC & TC Off",
-					"order": 50,
+					"order": 60,
 					"settings": [
 						["type"],
 						["controller", {"controllerName":"adaptiveFrontDamper", "damperMode":"hard"}],
@@ -157,7 +157,7 @@
 				},
 				"corsa": {
 					"name": "Corsa",
-					"order": 49,
+					"order": 50,
 					"settings": [
 						["type"],
 						["controller", {"controllerName":"adaptiveFrontDamper", "damperMode":"hard"}],
@@ -181,7 +181,7 @@
 				},
 				"eco": {
 					"name": "Eco",
-					"order": 11,
+					"order": 20,
 					"settings": [
 						["type"],
 						["controller", {"controllerName":"CMU", "uiDisplayData.simplePowertrainApp.activeColor": "00FF00"}],
