@@ -1,7 +1,7 @@
 -- hybridContrl.lua - 2024.4.30 13:28 - hybrid control for hybrid Vehicles
 -- by NZZ
--- version 0.0.63 alpha
--- final edit - 2025.8.18 21:29
+-- version 0.0.64 alpha
+-- final edit - 2025.9.15 00:46
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -77,6 +77,8 @@ local ecrawlMode = false
 
 local tcsMultiper = nil
 local ifLowSpeedActive = nil
+
+local priusMode = nil
 
 local function ifMotorGearbox()
     return gearbox.type == "eatGearbox" or gearbox.type == "ectGearbox" or gearbox.type == "edtGearbox" or gearbox.type == "emtGearbox" or gearbox.type == "estGearbox"
@@ -396,12 +398,17 @@ local function updateGFX(dt)
 
     if electrics.values.hybridMode == "auto" then
         if (electrics.values.airspeed < startVelocity - 5 and not ifLowSpeed()) and autoModeStage ~= 1 then
-            if powerGeneratorOff then
+            if priusMode then
                 engineMode("off")
                 motorMode("on3")
             else
-                engineMode("on")
-                motorMode("on2")
+                if powerGeneratorOff then
+                    engineMode("off")
+                    motorMode("on3")
+                else
+                    engineMode("on")
+                    motorMode("on2")
+                end
             end
             autoModeStage = 1
             electrics.values["hybridClutch"] = 0
@@ -469,10 +476,12 @@ local function updateGFX(dt)
             lastEnergy = electrics.values.remainingpower
 
             proxyEngine:setTempRevLimiter(REEVAV or (REEVRPM * rpmToAV))
-            if electrics.values.engineRunning == 0 and REEVAV > (proxyEngine.idleRPM * rpmToAV) then
+            if electrics.values.engineRunning == 0 and REEVAV > (proxyEngine.idleRPM * rpmToAV) and not priusMode then
                 proxyEngine:activateStarter()
             end
-            reevThrottle = 1
+            if not priusMode then
+                reevThrottle = 1
+            end
         else
             reevThrottle = electrics.values.throttle
 
@@ -819,6 +828,8 @@ local function init(jbeamData)
     electricReverse = jbeamData.electricReverse == nil and true or jbeamData.electricReverse
     electrics.values.electricReverse = 0
 
+    priusMode = jbeamData.priusMode or false
+
 end
 
 local function new()
@@ -875,6 +886,8 @@ local function reset(jbeamData)
     ecrawlMode = jbeamData.ecrawlMode or false
 
     electrics.values.electricReverse = 0
+
+    priusMode = jbeamData.priusMode or false
 
 end
 

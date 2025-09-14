@@ -68,7 +68,9 @@
 			//extra settings
 			"ifLowSpeedActive": true,
 			// "velocityRangeBegin": 120,
-			// "velocityRangEnd": 250
+			// "velocityRangEnd": 250,
+
+			"priusMode": false,
 		},
 		"clutch": {
 			// "electricsClutchRatioName":"hybridClutch"
