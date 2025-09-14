@@ -18,7 +18,7 @@
 
     [主模组](https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod/archive/refs/heads/main.zip) 或通过[Git](https://git-scm.com)拉取仓库\
     [.pc 文件编辑助手](https://github.com/NiZhaZi/Hybrid-PC-Edit/releases)\
-    [扭矩表生成器](https://github.com/NiZhaZi/Torque-Table-Creator/releases)
+    [扭矩表生成器](https://github.com/NiZhaZi/Torque-Table-Creator/releases)\
     ![alt text](pictures/image2_1.png)
     ![alt text](pictures/image2_2.png)
     ![alt text](pictures/image2_3.png)
