@@ -1,4 +1,4 @@
-**其他语言: [English](README.md), [汉语](README_zh.md).**
+**其他语言: [English](README.md), [汉语](README_zh.md).**\
 **待办清单: [待办清单](TODO_LIST.md).**
 
 # 这是一个用于将从《自动化：汽车公司大亨》导出的内燃机汽车，在《车祸模拟器》中转变为具有进阶控制功能的混合动力汽车和纯电动汽车的模组。
@@ -7,25 +7,31 @@
 
 以下是使用该模组的指南。
 
+建议：先下载安装 [Visual Studio Code](https://code.visualstudio.com/) 或 [Visual Studio Codium](https://vscodium.com/) 和 [JBeam extension for vscode](https://marketplace.visualstudio.com/items?itemName=beamng.jbeam-editor) [JBeam extension in vsix](https://marketplace.visualstudio.com/_apis/public/gallery/publishers/beamng/vsextensions/jbeam-editor/0.4.3/vspackage) 。
+
 ## 混合动力 (Hybrid)
 
  1.  导出汽车并取消勾选“打包为模组Zip文件”(Zip-Pack Mod)。
     ![alt text](pictures/image1_1.png)
 
- 2. 从 GitHub 下载资源包。
+ 2. 从 GitHub 下载资源包和最新的发行版。
 
-    [主模组](https://github.com/NiZhaZi/Beamng-Hybrid-Mod)\
+    [主模组](https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod/archive/refs/heads/main.zip) 或通过Git拉取仓库\
     [.pc 文件编辑助手](https://github.com/NiZhaZi/Hybrid-PC-Edit/releases)\
     [扭矩表生成器](https://github.com/NiZhaZi/Torque-Table-Creator/releases)
     ![alt text](pictures/image2_1.png)
     ![alt text](pictures/image2_2.png)
     ![alt text](pictures/image2_3.png)
 
- 3. 解压从步骤2第一个链接下载的zip文件。将“hybrid”文件夹下的所有文件复制到导出的汽车文件夹中。
+ 3. 解压从步骤2第一个链接下载的zip文件（或拉取的文件）。将“mod_package”文件夹下的所有文件复制到导出的汽车模组文件夹中。\
+    打开模组文件夹中的“vehicles”文件夹，复制“(vehicle_Name)”文件夹下的所有文件并粘贴到车名文件夹中。
 
-    ![alt text](pictures/image3_1.png)
-    ![alt text](pictures/image3_2.png)
-    ![alt text](pictures/image3_3.png)
+    ![alt text](pictures/img3_1.png)
+    ![alt text](pictures/img3_2.png)
+    ![alt text](pictures/img3_3.png)
+    ![alt text](pictures/img3_4.png)
+    ![alt text](pictures/img3_5.png)
+    ![alt text](pictures/img3_6.png)
 
  4. 运行从第二个链接下载的 .exe 文件。选择混合动力形式并点击“复制”按钮。
 
@@ -56,8 +62,8 @@
 
    2. 从 GitHub 下载资源包。
 
-      https://github.com/NiZhaZi/Beamng-Hybrid-Mod
-      https://github.com/NiZhaZi/Torque-Table-Creator/releases
+      [主模组](https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod/archive/refs/heads/main.zip) 或通过Git拉取仓库\
+      [扭矩表生成器](https://github.com/NiZhaZi/Torque-Table-Creator/releases)
       ![alt text](pictures/image2_1.png)
       ![alt text](pictures/image2_3.png)
 

@@ -1,4 +1,4 @@
-**Read in other languages: [English](README.md), [汉语](README_zh.md).**
+**Read in other languages: [English](README.md), [汉语](README_zh.md).**\
 **TODO List: [TODO List](TODO_LIST.md).**
 
 # This is a mod for ICE cars exported from automation the car company tycoon game in BeamNG.drive to turn into hybrid cars or EVs exported from the game to get a advance electric control.
@@ -7,25 +7,31 @@
 
 Here is the guide for using it.
 
+Suggestion: Download and install [Visual Studio Code](https://code.visualstudio.com/) or [Visual Studio Codium](https://vscodium.com/) and [JBeam extension for vscode](https://marketplace.visualstudio.com/items?itemName=beamng.jbeam-editor) [JBeam extension in vsix](https://marketplace.visualstudio.com/_apis/public/gallery/publishers/beamng/vsextensions/jbeam-editor/0.4.3/vspackage) first.
+
 ## Hybrid
 
  1. Export the car and cancel "Zip-Pack Mod".
     ![alt text](pictures/image1_1.png)
 
- 2. Download the pack from GitHub.
+ 2. Download the pack and latest release from GitHub.
 
-   [Main Mod](https://github.com/NiZhaZi/Beamng-Hybrid-Mod)\
+   [Main Mod](https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod/archive/refs/heads/main.zip) or pull the repository via Git\
    [.pc File Editor](https://github.com/NiZhaZi/Hybrid-PC-Edit/releases)\
    [Toque Table Creator](https://github.com/NiZhaZi/Torque-Table-Creator/releases)
     ![alt text](pictures/image2_1.png)
     ![alt text](pictures/image2_2.png)
     ![alt text](pictures/image2_3.png)
 
- 3. Unzip the zip file from the first link of step 2. Copy all files under "hybrid" folder to the folder of exported car.
+ 3. Unzip the zip file from the first link of step 2 (or pulled files). Copy all files under "mod_package" folder to the mod folder of exported car.\
+    Open "vehicles" folder in mod folder, copy all the files in "(vehicle_Name)" folder and paste them to the car name folder.
 
-    ![alt text](pictures/image3_1.png)
-    ![alt text](pictures/image3_2.png)
-    ![alt text](pictures/image3_3.png)
+    ![alt text](pictures/img3_1.png)
+    ![alt text](pictures/img3_2.png)
+    ![alt text](pictures/img3_3.png)
+    ![alt text](pictures/img3_4.png)
+    ![alt text](pictures/img3_5.png)
+    ![alt text](pictures/img3_6.png)
 
  4. Run the .exe file downloaded from the second link. Choose the form of hybrid and click the "copy" button.
 
@@ -57,8 +63,8 @@ Here is the guide for using it.
 
    2. Download the pack from GitHub.
 
-      https://github.com/NiZhaZi/Beamng-Hybrid-Mod
-      https://github.com/NiZhaZi/Torque-Table-Creator/releases
+      [Main Mod](https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod/archive/refs/heads/main.zip) or pull the repository via Git\
+      [Toque Table Creator](https://github.com/NiZhaZi/Torque-Table-Creator/releases)
       ![alt text](pictures/image2_1.png)
       ![alt text](pictures/image2_3.png)
 
