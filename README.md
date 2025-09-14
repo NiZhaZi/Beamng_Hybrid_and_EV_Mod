@@ -116,6 +116,22 @@ Suggestion: Download and install [Visual Studio Code](https://code.visualstudio.
 
 
 
+## Extensional Functions (for .pc files)
+
+   ```
+   "Lights_Control": "Lights_Control",
+	"Wiper_Control": "Wiper_Control",
+	"Camso_tpms": "Camso_tpms_4w",
+	"camso_tuning_parameters": "camso_tuning_parameters",
+	"Dynamic_System": "Dynamic_System",
+	"Dynamic_awd": "Dynamic_awd",
+	"Dynamic_lsd": "Dynamic_lsd",
+	"Rear_Wheel_Steering": "Rear_Wheel_Steering",
+	"Suspension_Lift": "Suspension_Lift",
+   ```
+
+
+
 ## Automation Description Scriptions
 
    Replace the "indexNumber"s with fixtures' index number and put them into Automation game's description box to use.
@@ -141,7 +157,7 @@ Suggestion: Download and install [Visual Studio Code](https://code.visualstudio.
    ~prop:indexNumber,wheelspeed,0,-1,0,0,0,0,0,360,0,2.95~
    ```
    
-   4. Extensional Functions
+   4. Extensional Functions (need additional control)
    ```
    ~prop:indexNumber,hourNeedle,0,-1,0,0,0,0,0,360,0,1~
    ~prop:indexNumber,minuNeedle,0,-1,0,0,0,0,0,360,0,1~

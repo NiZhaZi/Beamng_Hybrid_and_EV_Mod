@@ -113,6 +113,24 @@
 
       ![alt text](pictures/image11_1.png)
 
+
+
+## 额外功能 (适用于 .pc 文件)
+
+   ```
+   "Lights_Control": "Lights_Control",
+	"Wiper_Control": "Wiper_Control",
+	"Camso_tpms": "Camso_tpms_4w",
+	"camso_tuning_parameters": "camso_tuning_parameters",
+	"Dynamic_System": "Dynamic_System",
+	"Dynamic_awd": "Dynamic_awd",
+	"Dynamic_lsd": "Dynamic_lsd",
+	"Rear_Wheel_Steering": "Rear_Wheel_Steering",
+	"Suspension_Lift": "Suspension_Lift",
+   ```
+
+
+
 ## Automation 描述脚本 (Automation Description Scripts)
 
    将 "indexNumber" 替换为 fixtures（ fixture 部件）的索引号，并将其放入 Automation 游戏的描述框中即可使用。
@@ -138,7 +156,7 @@
    ~prop:indexNumber,wheelspeed,0,-1,0,0,0,0,0,360,0,2.95~
    ```
 
-   3. 扩展功能 (Extensional Functions)
+   3. 扩展功能 (Extensional Functions) (需要额外控制)
    ```
    ~prop:indexNumber,hourNeedle,0,-1,0,0,0,0,0,360,0,1~
    ~prop:indexNumber,minuNeedle,0,-1,0,0,0,0,0,360,0,1~
