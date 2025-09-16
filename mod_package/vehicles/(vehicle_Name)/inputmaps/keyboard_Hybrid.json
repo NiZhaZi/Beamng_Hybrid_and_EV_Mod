@@ -1,27 +1,27 @@
 {
 "bindings" :   [
      {
-          "control": "tab s",
+          "control": "ctrl alt s",
           "action":  "Select Hybrid Mode"
      },
 
      {
-          "control": "tab a",
+          "control": "ctrl alt a",
           "action":  "Auto"
      },
 
      {
-          "control": "tab e",
+          "control": "ctrl alt e",
           "action":  "EV"
      },
 
      {
-          "control": "tab i",
+          "control": "ctrl alt i",
           "action":  "ICE"
      },
 
      {
-          "control": "tab h",
+          "control": "ctrl alt h",
           "action":  "Hybrid"
      },
 
