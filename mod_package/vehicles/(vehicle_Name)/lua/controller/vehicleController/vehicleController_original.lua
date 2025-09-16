@@ -13,6 +13,8 @@ M.brake = 0
 M.clutchRatio = 0
 M.drivingAggression = 0
 M.shiftingAggression = 0
+M.isArcadeSwitched = false
+M.gearboxBehavior = nil
 -----
 
 local min = math.min
@@ -38,6 +40,8 @@ local gearboxHandling = {
   useSmartAggressionCalculation = true,
   isTryingToAutoStartEngine = false
 }
+
+local drivingStrategy
 
 local energyStorageData = {
   ratio = 0,
@@ -146,12 +150,6 @@ local isFrozen = false
 
 local controlLogicModule = nil
 
-local drivingStrategies = {
-  availableStrategies = {},
-  currentWeights = {},
-  currentStrategyIndex = {}
-}
-
 local function setAggressionOverride(aggression)
   aggressionOverride = aggression
 end
@@ -173,6 +171,7 @@ local function setGearboxBehavior(behavior)
   end
 
   gearboxHandling.behavior = behavior
+  M.gearboxBehavior = behavior
   guihooks.message(
     {
       txt = "vehicle.vehicleController.shifterModeChanged",
@@ -445,6 +444,8 @@ local function updateGFXGeneric(dt)
   updateWheelSlip(dt)
   handleArcadeIgniton(dt)
 
+  --drivingStrategy.core.updateGFX(dt)
+
   controlLogicModule.gearboxHandling = gearboxHandling
   controlLogicModule.timer = timer
   controlLogicModule.timerConstants = timerConstants
@@ -457,6 +458,7 @@ local function updateGFXGeneric(dt)
   M.brake = controlLogicModule.brake
   M.clutchRatio = controlLogicModule.clutchRatio
   M.shiftingAggression = controlLogicModule.shiftingAggression or 0
+  M.isArcadeSwitched = controlLogicModule.isArcadeSwitched
   gearboxHandling.isArcadeSwitched = controlLogicModule.isArcadeSwitched
   currentGearIndex = controlLogicModule.currentGearIndex
   local gearName = controlLogicModule.getGearName()
@@ -821,6 +823,8 @@ local function reset(jbeamData)
   M.throttle = 0
   M.brake = 0
   M.clutchRatio = 0
+  M.isArcadeSwitched = false
+  M.gearboxBehavior = gearboxHandling.behavior
   gearboxHandling.isArcadeSwitched = false
   gearboxHandling.isTryingToAutoStartEngine = false
   gearboxHandling.arcadeAutoBrakeAmount = jbeamData.arcadeAutoBrakeAmount or 0.3
@@ -910,6 +914,7 @@ local function init(jbeamData)
   M.throttle = 0
   M.brake = 0
   M.clutchRatio = 0
+  M.isArcadeSwitched = false
   gearboxHandling.isArcadeSwitched = false
   gearboxHandling.isTryingToAutoStartEngine = false
   gearboxHandling.arcadeAutoBrakeAmount = jbeamData.arcadeAutoBrakeAmount or 0.3
@@ -1095,6 +1100,17 @@ local function init(jbeamData)
     end
   end
   energyStorageData.invEnergyStorageCount = energyStorageCount > 0 and 1 / energyStorageCount or 0
+
+  local drivingStrategyModuleDirectory = "controller/vehicleController/drivingStrategy/"
+  local drivingStrategyCoreModulePath = drivingStrategyModuleDirectory .. "drivingStrategy"
+  drivingStrategy = {}
+  --drivingStrategy.core = require(drivingStrategyCoreModulePath)
+  --drivingStrategy.core.init(M)
+
+  --for _, v in pairs(drivingStrategy.core.strategies) do
+  --  drivingStrategy[v] = require(drivingStrategyModuleDirectory .. v)
+  --  drivingStrategy[v].init(M)
+  --end
 
   setGearboxBehavior(gearboxHandling.previousBehavior or settings.getValue("defaultGearboxBehavior") or "arcade")
 

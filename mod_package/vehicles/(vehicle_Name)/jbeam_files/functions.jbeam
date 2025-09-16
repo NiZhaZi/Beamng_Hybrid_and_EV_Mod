@@ -13,6 +13,7 @@
 			["Spoiler_Control", "", "Spoiler Control"],
 			["Lights_Control", "", "Lights Control"],
 			["Wiper_Control", "", "Wiper Control"],
+			["Brake_Glow", "", "Brake Glow"],
 		],
 		"slotType" : "Functions",
 		"variables": [
