@@ -1,17 +1,17 @@
 {
 "bindings" :   [
      {
-          "control": "alt w",
+          "control": "tab w",
           "action":  "Wiper"
      },
 
      {
-          "control": "alt up",
+          "control": "tab up",
           "action":  "Wiper Speed Up"
      },
 
      {
-          "control": "alt down",
+          "control": "tab down",
           "action":  "Wiper Speed Down"
      }
 ],
