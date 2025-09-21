@@ -23,6 +23,9 @@
         	["fileName"],
 			["functions/vehicleInfo", {"name": "functionInfo"}],
     	],
+		"actionsEnabled": [
+			["id"],
+		],
 	},
 
 	"Rear_Wheel_Steering": {
