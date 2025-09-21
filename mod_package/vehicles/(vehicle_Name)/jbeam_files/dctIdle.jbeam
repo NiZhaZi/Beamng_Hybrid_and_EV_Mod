@@ -22,7 +22,11 @@
 
 		"vehicleController": {
 			"shiftLogicName": "dctGearboxAdv",
-        }
+        },
+		"actionsEnabled": [
+			["id"],
+			["switch DCT idle"],
+		],
 	},
 
 }
