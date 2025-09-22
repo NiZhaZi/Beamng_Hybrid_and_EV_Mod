@@ -1,7 +1,7 @@
 -- autoContrl.lua - 2024.3.17 12:48 - auto functions control
 -- by NZZ
--- version 0.0.22 alpha
--- final edit - 2025.8.30 16:55
+-- version 0.0.23 alpha
+-- final edit - 2025.9.22 13:14
 
 local M = {}
 local debugTime = 0
@@ -251,10 +251,42 @@ local function init(jbeamData)
         table.insert(motors, v)
     end
 
-    mode.autoHold = jbeamData.defaultAutoHold or "off"
-    mode.autoStart = jbeamData.defaultAutoStart or "off"
-    mode.hillDescentControl = jbeamData.HDC or "off"
-    mode.ecrawl = jbeamData.defaultECrawl or "off"
+    local autoHold = jbeamData.defaultAutoHold
+    local autoStart = jbeamData.defaultAutoStart
+    local hillDescentControl = jbeamData.defaultHDC
+    local ecrawl = jbeamData.defaultECrawl
+
+    if type(autoHold) == "number" then
+        if autoHold > 0 then mode.autoHold = "on"
+        elseif autoHold == 0 then mode.autoHold = "off"
+        else mode.autoHold = "disable" end
+    elseif type(autoHold) == "string" then
+        mode.autoHold = autoHold or "off"
+    end
+
+    if type(autoStart) == "number" then
+        if autoStart > 0 then mode.autoStart = "on"
+        elseif autoStart == 0 then mode.autoStart = "off"
+        else mode.autoStart = "disable" end
+    elseif type(autoStart) == "string" then
+        mode.autoStart = autoStart or "off"
+    end
+
+    if type(hillDescentControl) == "number" then
+        if hillDescentControl > 0 then mode.hillDescentControl = "on"
+        elseif hillDescentControl == 0 then mode.hillDescentControl = "off"
+        else mode.hillDescentControl = "disable" end
+    elseif type(hillDescentControl) == "string" then
+        mode.hillDescentControl = hillDescentControl or "off"
+    end
+
+    if type(ecrawl) == "number" then
+        if ecrawl > 0 then mode.ecrawl = "on"
+        elseif ecrawl == 0 then mode.ecrawl = "off"
+        else mode.ecrawl = "disable" end
+    elseif type(ecrawl) == "string" then
+        mode.ecrawl = ecrawl or "off"
+    end
 
     brake = 0
     throttle = 0
@@ -279,10 +311,42 @@ end
 
 local function reset(jbeamData)
     
-    mode.autoHold = jbeamData.defaultAutoHold or "off"
-    mode.autoStart = jbeamData.defaultAutoStart or "off"
-    mode.hillDescentControl = jbeamData.HDC or "off"
-    mode.ecrawl = jbeamData.defaultECrawl or "off"
+    local autoHold = jbeamData.defaultAutoHold
+    local autoStart = jbeamData.defaultAutoStart
+    local hillDescentControl = jbeamData.defaultHDC
+    local ecrawl = jbeamData.defaultECrawl
+
+    if type(autoHold) == "number" then
+        if autoHold > 0 then mode.autoHold = "on"
+        elseif autoHold == 0 then mode.autoHold = "off"
+        else mode.autoHold = "disable" end
+    elseif type(autoHold) == "string" then
+        mode.autoHold = autoHold or "off"
+    end
+
+    if type(autoStart) == "number" then
+        if autoStart > 0 then mode.autoStart = "on"
+        elseif autoStart == 0 then mode.autoStart = "off"
+        else mode.autoStart = "disable" end
+    elseif type(autoStart) == "string" then
+        mode.autoStart = autoStart or "off"
+    end
+
+    if type(hillDescentControl) == "number" then
+        if hillDescentControl > 0 then mode.hillDescentControl = "on"
+        elseif hillDescentControl == 0 then mode.hillDescentControl = "off"
+        else mode.hillDescentControl = "disable" end
+    elseif type(hillDescentControl) == "string" then
+        mode.hillDescentControl = hillDescentControl or "off"
+    end
+
+    if type(ecrawl) == "number" then
+        if ecrawl > 0 then mode.ecrawl = "on"
+        elseif ecrawl == 0 then mode.ecrawl = "off"
+        else mode.ecrawl = "disable" end
+    elseif type(ecrawl) == "string" then
+        mode.ecrawl = ecrawl or "off"
+    end
 
     brake = 0
     throttle = 0

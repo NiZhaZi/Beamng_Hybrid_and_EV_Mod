@@ -126,16 +126,21 @@
 		"slotType" : "Auto_Control",
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
-			["$brakeLightRegenTorque", "range", "Nm", "Functions", 50, 10, 99999, "Brake Light Regen Torque", "Minimum Torque Brake Light Active"{"subCategory":"brake", "stepDis":1.00}],
+			["$brakeLightRegenTorque", "range", "Nm", "Functions", 50, 10, 99999, "Brake Light Regen Torque", "Minimum Torque Brake Light Active", {"subCategory":"brake", "stepDis":1.00}],
+
+			["$defaultAutoHold",       "range", "  ", "Functions",  1, -1,     1, "Default Auto Hold Mode",   "Default Auto Hold Mode",            {"subCategory":"Auto Control", "stepDis":1.00}],
+			["$defaultAutoStart",      "range", "  ", "Functions",  0, -1,     1, "Default Auto Start Mode",  "Default Auto Start Mode",           {"subCategory":"Auto Control", "stepDis":1.00}],
+			["$defaultHDC",            "range", "  ", "Functions", -1, -1,     1, "Default HDC Mode",         "Default HDC Mode",                  {"subCategory":"Auto Control", "stepDis":1.00}],
+			["$defaultECrawl",         "range", "  ", "Functions", -1, -1,     1, "Default ECrawl Mode",      "Default ECrawl Mode",               {"subCategory":"Auto Control", "stepDis":1.00}],
 		],
         "controller": [
         	["fileName"],
 			["functions/autoControl", {
 				"name": "autoControl", 
-				"defaultAutoHold": "on",
-				"defaultAutoStart": "off",
-				"HDC": "disable",
-				"defaultECrawl": "disable",
+				"defaultAutoHold": "$defaultAutoHold",
+				"defaultAutoStart": "$defaultAutoStart",
+				"defaultHDC": "$defaultHDC",
+				"defaultECrawl": "$defaultECrawl",
 				"brakeLightRegenTorque": "$brakeLightRegenTorque",
 			}],
     	],
