@@ -307,6 +307,7 @@
     	],
 		"actionsEnabled": [
 			["id"],
+			["Switch Auto Wiper"],
 			["Wiper"],
 			["Wiper Speed Up"],
 			["Wiper Speed Down"],

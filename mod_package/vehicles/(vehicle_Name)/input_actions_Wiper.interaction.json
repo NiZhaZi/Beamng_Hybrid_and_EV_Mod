@@ -1,5 +1,6 @@
 {
-"Wiper":             {"order": 200, "onDown":"controller.getControllerSafe('wiper').swicthWiper()",        "title": "Wiper", 	         "desc": "Wiper"            },
-"Wiper Speed Up":    {"order": 201, "onDown":"controller.getControllerSafe('wiper').setWiperSpeed(50)",   "title": "Wiper Speed Up",    "desc": "Wiper Speed Up"   },
-"Wiper Speed Down":  {"order": 202, "onDown":"controller.getControllerSafe('wiper').setWiperSpeed(-50)",  "title": "Wiper Speed Down",  "desc": "Wiper Speed Down" }
+"Switch Auto Wiper":   {"order": 200, "onDown":"controller.getControllerSafe('wiper').swicthAutoWiper()",    "title": "Switch Auto WiperWiper",   "desc": "Switch Auto Wiper"            },
+"Wiper":               {"order": 201, "onDown":"controller.getControllerSafe('wiper').swicthWiper()",        "title": "Wiper", 	                  "desc": "Wiper"            },
+"Wiper Speed Up":      {"order": 202, "onDown":"controller.getControllerSafe('wiper').setWiperSpeed(50)",    "title": "Wiper Speed Up",           "desc": "Wiper Speed Up"   },
+"Wiper Speed Down":    {"order": 203, "onDown":"controller.getControllerSafe('wiper').setWiperSpeed(-50)",   "title": "Wiper Speed Down",         "desc": "Wiper Speed Down" }
 }

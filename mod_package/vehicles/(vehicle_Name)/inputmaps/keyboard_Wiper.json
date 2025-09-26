@@ -1,17 +1,22 @@
 {
 "bindings" :   [
      {
-          "control": "ctrl alt w",
+          "control": "shift alt a",
+          "action":  "Switch Auto Wiper"
+     },
+
+     {
+          "control": "shift alt w",
           "action":  "Wiper"
      },
 
      {
-          "control": "ctrl alt up",
+          "control": "shift alt up",
           "action":  "Wiper Speed Up"
      },
 
      {
-          "control": "ctrl alt down",
+          "control": "shift alt down",
           "action":  "Wiper Speed Down"
      }
 ],

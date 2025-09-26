@@ -1,13 +1,15 @@
 -- wiper.lua - 2025.6.10 - wiper control
 -- by NZZ
--- version 0.0.4 alpha
--- final edit - 2025.6.18 18:51
+-- version 0.0.5 alpha
+-- final edit - 2025.9.26 14:09
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
 local M = {}
 
 local abs = math.abs
+
+local wiperAuto = nil
 
 local wiper = nil
 local wiperSpeed = nil
@@ -21,6 +23,18 @@ local ifImpactActive = nil
 local brakeThreshold = nil
 
 local function updateGFX(dt)
+
+    local rainLevel = tonumber(obj:getLastMailbox("rainLevel"))
+    if wiperAuto then
+        if rainLevel > 0 then
+            wiper = true
+            wiperSpeed = 0.075 * rainLevel + 100
+        else
+            wiper = false
+            wiperSpeed = 100
+        end
+    end
+
     if wiper and electrics.values.ignitionLevel == 2 then
         -- action
         electrics.values.wiper = math.min(math.max(electrics.values.wiper + direction * wiperSpeed * dt, 0), 90)
@@ -62,6 +76,11 @@ local function updateGFX(dt)
 end
 
 local function init(jbeamData)
+    obj:queueGameEngineLua('extensions.load("weatherToVe")')
+    -- obj:queueGameEngineLua('extensions.unload("weatherToVe")')
+
+    wiperAuto = true
+
     wiper = false
     wiperSpeed = 100
     electrics.values.wiper = 0
@@ -88,6 +107,8 @@ local function reset(jbeamData)
     obj:setVolume(wiperSoundDown, 0)
     obj:stopSFX(wiperSoundDown)
 
+    wiperAuto = true
+
     wiper = false
     wiperSpeed = 100
     electrics.values.wiper = 0
@@ -103,7 +124,24 @@ local function reset(jbeamData)
 	end
 end
 
+local function swicthAutoWiper()
+    wiperAuto = not wiperAuto
+    if not wiperAuto then
+        wiperSpeed = 100
+    end
+    if wiperAuto then
+        gui.message({ txt = "Wiper Auto" }, 5, "", "")
+    else
+        gui.message({ txt = "Wiper Manual" }, 5, "", "")
+    end
+end
+
 local function swicthWiper()
+    if wiperAuto then
+        wiperAuto = false
+        wiperSpeed = 100
+        gui.message({ txt = "Wiper Manual" }, 5, "", "")
+    end
     wiper = not wiper
     if wiper then
         gui.message({ txt = "Wiper On" }, 5, "", "")
@@ -123,6 +161,7 @@ local function setWiperSpeed(num)
     end
 end
 
+M.swicthAutoWiper = swicthAutoWiper
 M.swicthWiper = swicthWiper
 M.setWiperSpeed = setWiperSpeed
 
