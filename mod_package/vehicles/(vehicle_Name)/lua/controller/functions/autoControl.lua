@@ -1,7 +1,7 @@
 -- autoContrl.lua - 2024.3.17 12:48 - auto functions control
 -- by NZZ
 -- version 0.0.23 alpha
--- final edit - 2025.9.22 13:14
+-- final edit - 2025.9.30 23:53
 
 local M = {}
 local debugTime = 0
@@ -84,6 +84,12 @@ local function switchECrawl()
 end
 
 local function updateGFX(dt)
+
+    local assistBrake = electrics.values.brakeOverride
+    local assistThrottle = nil
+    if assistBrake then
+        assistThrottle = 0
+    end
 
     local ign
     if electrics.values.ignitionLevel == 2 then
@@ -214,7 +220,10 @@ local function updateGFX(dt)
         end
     end
 
-    brake = math.max(math.min(brake, 1), 0)
+    brake = math.max(math.min(brake, 1), tonumber(assistBrake or 0))
+    if assistThrottle then
+        electrics.values.throttle = assistThrottle
+    end
 
     --if throttle ~= electrics.values.throttle then
     --    electrics.values.throttle = throttle

@@ -14,7 +14,7 @@
 			["Camso_ESC", "", "Stability Control"],
 
 			["Functions", "Functions", "Functions"],
-			["adas_mod", "", "ADAS"] 
+			["licenseplate_design_2_1", "", "ADAS"] 
 		],
 
 		"controller": [

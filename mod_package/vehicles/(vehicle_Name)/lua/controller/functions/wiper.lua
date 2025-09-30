@@ -1,7 +1,7 @@
 -- wiper.lua - 2025.6.10 - wiper control
 -- by NZZ
--- version 0.0.5 alpha
--- final edit - 2025.9.26 14:09
+-- version 0.0.6 alpha
+-- final edit - 2025.9.30 23:36
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -69,6 +69,7 @@ local function updateGFX(dt)
 
     if ifImpactActive then
         if (abs(sensors.gx2) > brakeThreshold or abs(sensors.gy2) > brakeThreshold) or ((sensors.gz2 - powertrain.currentGravity) > brakeThreshold) then
+            wiperAuto = false
             wiper = true
         end
     end
