@@ -119,7 +119,7 @@ Suggestion: Download and install [Visual Studio Code](https://code.visualstudio.
 ## Extensional Functions (for .pc files)
 
    ```
-   "Lights_Control": "Lights_Control",
+    "Lights_Control": "Lights_Control",
 	"Wiper_Control": "Wiper_Control",
 	"Camso_tpms": "Camso_tpms_4w",
 	"camso_tuning_parameters": "camso_tuning_parameters",
@@ -129,6 +129,7 @@ Suggestion: Download and install [Visual Studio Code](https://code.visualstudio.
 	"Rear_Wheel_Steering": "Rear_Wheel_Steering",
 	"Suspension_Lift": "Suspension_Lift",
    ```
+   Adapt to mods: [MK's Dynamic Weather](https://www.beamng.com/resources/mks-dynamic-weather.33820/), [Advanced Driver Assistance Systems](https://www.beamng.com/resources/advanced-driver-assistance-systems.17384/)
 
 
 
