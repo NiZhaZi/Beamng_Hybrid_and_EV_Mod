@@ -21,6 +21,11 @@
      },
 
      {
+          "control": "alt ;",
+          "action":  "Adaptive Sport Mode"
+     },
+
+     {
           "control": "alt 8",
           "action":  "Chassis Lift"
      },

@@ -1,7 +1,7 @@
 -- suspension_lift.lua - 2024.4.19 18:30 - suspension lift control
 -- by NZZ
--- version 0.0.11 alpha
--- final edit - 2025.9.11 21:41
+-- version 0.0.12 alpha
+-- final edit - 2025.10.1 22:55
 
 local M = {}
 
@@ -19,6 +19,17 @@ local otSign = nil
 local mode = nil
 
 local flatAngle = nil
+
+-- === Sport mode state/params ===
+local sportPrevRoll = nil
+local sportRollRate = 0
+local sportSpeedMin = nil        -- m/s (converted from km/h)
+local sportSteerDead = nil
+local sportRollKp = nil          -- proportional gain for roll angle (/deg * unit/s)
+local sportRollKd = nil          -- derivative gain for roll rate (/(deg/s) * unit/s)
+local sportFFgain = nil          -- steering x speed feedforward (unit/s)
+local sportRateMax = nil         -- maximum adjustment per second (unit/s)
+local sportRelaxRate = nil       -- return-to-zero rate when straight/small attitude (unit/s)
 
 local function getSign(num)
     if type(num) == "number" then
@@ -51,6 +62,16 @@ local function onInit(jbeamData)
     dropLevel = jbeamData.dropLevel or -0.10
 
     flatAngle = jbeamData.flatAngle or 1.00
+
+    -- === adaptiveSport params (overridable via jbeam) ===
+    sportSpeedMin  = (jbeamData.sportSpeedMinKmh or 30) / 3.6  -- 30 km/h
+    sportSteerDead = jbeamData.sportSteerDead or 0.05          -- steering deadband
+    sportRollKp    = jbeamData.sportRollKp or 0.08
+    sportRollKd    = jbeamData.sportRollKd or 0.02
+    sportFFgain    = jbeamData.sportFFgain or 0.60
+    sportRateMax   = jbeamData.sportRateMax or 0.80            -- unit/s
+    sportRelaxRate = jbeamData.sportRelaxRate or 0.25           -- unit/s
+    sportPrevRoll  = nil
 
 end
 
@@ -96,6 +117,16 @@ local function clamp(v, lo, hi)
   return v
 end
 
+local function bump(v, sgn, step)  -- sgn in {+1, -1}
+        return clamp(v + sgn * step, dropLevel, liftLevel)
+    end
+
+local function relax(v, relaxRate)
+    if v >  relaxRate then return v - relaxRate
+    elseif v < -relaxRate then return v + relaxRate
+    else return 0 end
+end
+
 local function updateGFX(dt)
 
     local finalLevel = autoLevel
@@ -121,80 +152,160 @@ local function updateGFX(dt)
         electrics.values['lift0'] = finalLevel
         lift0 = finalLevel
     elseif mode == "adaptive" then
-        local roll
-        local pitch
-        if vehicleInfo then
-            roll = vehicleInfo.posture.roll * 90
-            pitch = vehicleInfo.posture.pitch * 90
-            roll = roll - roll % 0.1
-            pitch = pitch - pitch % 0.1
-            --
-            --                          roll > 0.1           roll = 0           roll < 0.1
-            --    pitch > 0.1           FL0 FR/ RL* RR0      FL- FR- RL+ RR+    FL/ FR0 RL0 RR*
-            --
-            --    pitch = 0             FL+ FR- RL+ RR-      ---------------    FL- FR+ RL- RR+
-            --
-            --    pitch < 0.1           FL* FR0 RL0 RR/      FL+ FR+ RL- RR-    FL0 FR* RL/ RR0
-            --
-            --    roll  > 0   right up & left down
-            --    pitch > 0   front up & rear down
-            --
+        local roll, pitch
+
+        -- if vehicleInfo then
+        --     roll = vehicleInfo.posture.roll * 90
+        --     pitch = vehicleInfo.posture.pitch * 90
+        --     roll = roll - roll % 0.1
+        --     pitch = pitch - pitch % 0.1
+        if obj and obj.getRollPitchYaw then
+            local r, p = obj:getRollPitchYaw()     -- radians
+            roll  = math.deg(r)
+            pitch = math.deg(p)
+        elseif obj and obj.getRollPitchYawWS then
+            local r, p = obj:getRollPitchYawWS()   -- radians
+            roll  = math.deg(r)
+            pitch = math.deg(p)
+        else
+            roll, pitch = 0, 0
+        end
+
+        liftFL = electrics.values['liftFL'] or 0
+        liftFR = electrics.values['liftFR'] or 0
+        liftRL = electrics.values['liftRL'] or 0
+        liftRR = electrics.values['liftRR'] or 0
+
+        local stepFast  = 1.0 * dt     -- ~ 1.0 / s
+        local stepSlow  = 0.5 * dt     -- ~ 0.5 / s
+        local relaxRate = 0.6 * dt     
+
+        if math.abs(roll) <= flatAngle and math.abs(pitch) <= flatAngle then
+            liftFL = relax(liftFL, relaxRate); liftFR = relax(liftFR, relaxRate)
+            liftRL = relax(liftRL, relaxRate); liftRR = relax(liftRR, relaxRate)
+        else
             if roll > flatAngle then
                 if pitch > flatAngle then
-                    liftRL = math.min(electrics.values['liftRL'] + 0.02, liftLevel)
-                    liftFR = math.max(electrics.values['liftFR'] - 0.02, dropLevel)
-                elseif pitch < -1 * flatAngle then
-                    liftFL = math.min(electrics.values['liftFL'] + 0.02, liftLevel)
-                    liftRR = math.max(electrics.values['liftRR'] - 0.02, dropLevel)
+                    liftRL = bump(liftRL,  1, stepFast)
+                    liftFR = bump(liftFR, -1, stepFast)
+                elseif pitch < -flatAngle then
+                    liftFL = bump(liftFL,  1, stepFast)
+                    liftRR = bump(liftRR, -1, stepFast)
                 else
-                    liftFL = math.min(electrics.values['liftFL'] + 0.01, liftLevel)
-                    liftRL = math.min(electrics.values['liftRL'] + 0.01, liftLevel)
-                    liftFR = math.max(electrics.values['liftFR'] - 0.01, dropLevel)
-                    liftRR = math.max(electrics.values['liftRR'] - 0.01, dropLevel)
+                    liftFL = bump(liftFL,  1, stepSlow)
+                    liftRL = bump(liftRL,  1, stepSlow)
+                    liftFR = bump(liftFR, -1, stepSlow)
+                    liftRR = bump(liftRR, -1, stepSlow)
                 end
-            elseif roll < -1 * flatAngle then
+            elseif roll < -flatAngle then
                 if pitch > flatAngle then
-                    liftFL = math.max(electrics.values['liftFL'] - 0.02, dropLevel)
-                    liftRR = math.min(electrics.values['liftRR'] + 0.02, liftLevel)
-                elseif pitch < -1 * flatAngle then
-                    liftRL = math.max(electrics.values['liftRL'] - 0.02, dropLevel)
-                    liftFR = math.min(electrics.values['liftFR'] + 0.02, liftLevel)
+                    liftRR = bump(liftRR,  1, stepFast)
+                    liftFL = bump(liftFL, -1, stepFast)
+                elseif pitch < -flatAngle then
+                    liftFR = bump(liftFR,  1, stepFast)
+                    liftRL = bump(liftRL, -1, stepFast)
                 else
-                    liftFL = math.max(electrics.values['liftFL'] - 0.01, dropLevel)
-                    liftRL = math.max(electrics.values['liftRL'] - 0.01, dropLevel)
-                    liftFR = math.min(electrics.values['liftFR'] + 0.01, liftLevel)
-                    liftRR = math.min(electrics.values['liftRR'] + 0.01, liftLevel)
+                    liftFR = bump(liftFR,  1, stepSlow)
+                    liftRR = bump(liftRR,  1, stepSlow)
+                    liftFL = bump(liftFL, -1, stepSlow)
+                    liftRL = bump(liftRL, -1, stepSlow)
                 end
             else
                 if pitch > flatAngle then
-                    liftFL = math.max(electrics.values['liftFL'] - 0.01, dropLevel)
-                    liftRL = math.min(electrics.values['liftRL'] + 0.01, liftLevel)
-                    liftFR = math.max(electrics.values['liftFR'] - 0.01, dropLevel)
-                    liftRR = math.min(electrics.values['liftRR'] + 0.01, liftLevel)
-                elseif pitch < -1 * flatAngle then
-                    liftFL = math.min(electrics.values['liftFL'] + 0.01, liftLevel)
-                    liftRL = math.max(electrics.values['liftRL'] - 0.01, dropLevel)
-                    liftFR = math.min(electrics.values['liftFR'] + 0.01, liftLevel)
-                    liftRR = math.max(electrics.values['liftRR'] - 0.01, dropLevel)
+                    liftRL = bump(liftRL,  1, stepSlow)
+                    liftRR = bump(liftRR,  1, stepSlow)
+                    liftFL = bump(liftFL, -1, stepSlow)
+                    liftFR = bump(liftFR, -1, stepSlow)
+                elseif pitch < -flatAngle then
+                    liftFL = bump(liftFL,  1, stepSlow)
+                    liftFR = bump(liftFR,  1, stepSlow)
+                    liftRL = bump(liftRL, -1, stepSlow)
+                    liftRR = bump(liftRR, -1, stepSlow)
                 end
             end
+        end
+    elseif mode == "adaptiveSport" then
+        -- Read attitude (prefer physics object; fallback to vehicleInfo)
+        local roll
+        if obj and obj.getRollPitchYaw then
+            local r, _ = obj:getRollPitchYaw()   -- radians
+            roll = math.deg(r)
+        elseif vehicleInfo and vehicleInfo.posture then
+            roll = (vehicleInfo.posture.roll or 0) * 90  -- consistent with the original script
         else
-            mode = "auto"
-            guihooks.message("Can't get postrue information, switch to auto mode.", 5, "")
+            roll = 0
         end
 
-    end 
+        -- Use the current value as the baseline (avoid being zeroed)
+        liftFL = electrics.values['liftFL'] or 0
+        liftFR = electrics.values['liftFR'] or 0
+        liftRL = electrics.values['liftRL'] or 0
+        liftRR = electrics.values['liftRR'] or 0
 
-    if mode ~= "adaptive" then
-        electrics.values['liftFL'] = lift0
-        electrics.values['liftFR'] = lift0
-        electrics.values['liftRL'] = lift0
-        electrics.values['liftRR'] = lift0
-    else
+        -- Inputs (steering, speed)
+        local steer = electrics.values.steering or electrics.values.steering_input or 0
+        local v     = electrics.values.wheelspeed or 0 -- m/s
+
+        -- Roll rate (for D term)
+        if sportPrevRoll ~= nil then
+            sportRollRate = (roll - sportPrevRoll) / math.max(dt, 1e-3)
+        else
+            sportRollRate = 0
+        end
+        sportPrevRoll = roll
+
+        -- Normalized speed (for feedforward)
+        local vmax = math.max((highSpeed or 80) / 3.6, sportSpeedMin + 0.1)
+        local vNorm = clamp((v - sportSpeedMin) / (vmax - sportSpeedMin), 0, 1)
+
+        local steerMag = math.max(math.abs(steer) - sportSteerDead, 0)
+        local err      = math.max(math.abs(roll) - flatAngle, 0)
+
+        -- Target adjustment rate (unit/s), then multiply by dt to get per-frame step
+        local rateCmd = err * sportRollKp + math.abs(sportRollRate) * sportRollKd + steerMag * vNorm * sportFFgain
+        rateCmd = clamp(rateCmd, 0, sportRateMax)
+
+        local step = rateCmd * dt
+
+        local function relax(vv)
+            if vv >  sportRelaxRate * dt then return vv - sportRelaxRate * dt
+            elseif vv < -sportRelaxRate * dt then return vv + sportRelaxRate * dt
+            else return 0 end
+        end
+
+        -- Straight/too slow or small attitude -> gently return to zero
+        if steerMag <= 1e-4 or v < sportSpeedMin then
+            liftFL = relax(liftFL); liftFR = relax(liftFR)
+            liftRL = relax(liftRL); liftRR = relax(liftRR)
+        else
+            -- Anti-roll: outer up, inner down (positive roll = right high, left low)
+            if roll > 0 then
+                liftFL = clamp(liftFL + step, dropLevel, liftLevel)
+                liftRL = clamp(liftRL + step, dropLevel, liftLevel)
+                liftFR = clamp(liftFR - step, dropLevel, liftLevel)
+                liftRR = clamp(liftRR - step, dropLevel, liftLevel)
+            elseif roll < 0 then
+                liftFR = clamp(liftFR + step, dropLevel, liftLevel)
+                liftRR = clamp(liftRR + step, dropLevel, liftLevel)
+                liftFL = clamp(liftFL - step, dropLevel, liftLevel)
+                liftRL = clamp(liftRL - step, dropLevel, liftLevel)
+            else
+                liftFL = relax(liftFL); liftFR = relax(liftFR)
+                liftRL = relax(liftRL); liftRR = relax(liftRR)
+            end
+        end
+    end
+
+    if mode == "adaptive" or mode == "adaptiveSport" then
         electrics.values['liftFL'] = liftFL
         electrics.values['liftFR'] = liftFR
         electrics.values['liftRL'] = liftRL
         electrics.values['liftRR'] = liftRR
+    else
+        electrics.values['liftFL'] = lift0
+        electrics.values['liftFR'] = lift0
+        electrics.values['liftRL'] = lift0
+        electrics.values['liftRR'] = lift0
     end
 
 end
@@ -206,7 +317,7 @@ local function setParameters(parameters)
 end
 
 local function switchMode(Mode)
-    if Mode == "auto" or Mode == "manual" or Mode == "outTrouble" or Mode == "adaptive" then
+    if Mode == "auto" or Mode == "manual" or Mode == "outTrouble" or Mode == "adaptive" or Mode == "adaptiveSport" then
         mode = Mode
     else
         if mode == "auto" then
