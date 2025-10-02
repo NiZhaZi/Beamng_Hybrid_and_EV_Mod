@@ -1,7 +1,7 @@
 -- motorShaft.lua - 2024.3.8 14:45 - Shaft with electric motor
 -- by NZZ
--- version 0.0.10 alpha
--- final edit - 2024.9.24 14:42
+-- version 0.0.11 alpha
+-- final edit - 2025.10.2 23:37
 
 local M = {}
 
@@ -211,7 +211,7 @@ local function motorTorque(device, dt)
   local torqueRPM = floor(rpm)
 
   --local torqueCoef = clamp(device.torqueCoef, 0, 1) --can be used to externally reduce the available torque, for example to limit output power
-  local torqueCoef = 1
+  local torqueCoef = clamp(device.torqueCoef or 1, 0, 1)
   local torque = (torqueCurve[torqueRPM] or (torqueRPM < 0 and torqueCurve[0] or 0)) * device.outputTorqueState * torqueCoef
   torque = torque * throttle * motorDirection
   torque = min(torque, device.maxTorqueLimit) --limit output torque to a specified max, math.huge by default
@@ -544,6 +544,7 @@ local function reset(device, jbeamData)
   device[device.outputAVName] = 0
 
   --insert0
+  device.torqueCoef = 1
   device.torqueDiff = 0
 
   device.maxTorqueLimit = math.huge
@@ -754,6 +755,7 @@ local function new(jbeamData)
     updateSimpleControlButtons = updateSimpleControlButtons,
 
     --insert0
+    torqueCoef = 1,
     motorOutputRPM = 0,
     motorTorque = 0,
     motorOutputTorque = 0,

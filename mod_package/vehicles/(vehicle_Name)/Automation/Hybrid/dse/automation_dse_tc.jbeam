@@ -19,6 +19,7 @@
 		"tractionControl": {
 			"tractionControlledMotors": ["mainEngine", "frontDriveShaft", "rearDriveShaft"],
 			"REEVTCMotors": ["frontDriveShaft", "rearDriveShaft"],
+			"velocityOffsetThreshold": 1.0
 		},
 
 		"motorTorqueControl": {
@@ -66,6 +67,7 @@
 		"tractionControl": {
 			"tractionControlledMotors": ["mainEngine", "awdmotor"],
 			"REEVTCMotors": ["awdmotor"],
+			"velocityOffsetThreshold": 1.0
 		},
 
 		"motorTorqueControl": {
@@ -111,6 +113,7 @@
 		"tractionControl": {
 			"tractionControlledMotors": ["mainEngine", "frontDriveShaft", "rearMotor", "rearMotor_L", "rearMotor_R"],
 			"REEVTCMotors": ["frontDriveShaft", "rearMotor", "rearMotor_L", "rearMotor_R"],
+			"velocityOffsetThreshold": 1.0
 		},
 
 		"motorTorqueControl": {
@@ -162,6 +165,7 @@
 		"tractionControl": {
 			"tractionControlledMotors": ["mainEngine", "rearDriveShaft", "frontMotor", "frontMotor_L", "frontMotor_R"],
 			"REEVTCMotors": ["rearDriveShaft", "frontMotor", "frontMotor_L", "frontMotor_R"],
+			"velocityOffsetThreshold": 1.0
 		},
 
 		"motorTorqueControl": {
@@ -213,6 +217,7 @@
 		"tractionControl": {
 			"tractionControlledMotors": ["mainEngine", "rearMotor", "rearMotor_L", "rearMotor_R", "frontMotor", "frontMotor_L", "frontMotor_R"],
 			"REEVTCMotors": ["rearMotor", "rearMotor_L", "rearMotor_R", "frontMotor", "frontMotor_L", "frontMotor_R"],
+			"velocityOffsetThreshold": 1.0
 		},
 
 		"motorTorqueControl": {
@@ -268,6 +273,7 @@
 		"tractionControl": {
 			"tractionControlledMotors": ["rearMotor", "rearMotor_L", "rearMotor_R", "frontMotor", "frontMotor_L", "frontMotor_R"],
 			"REEVTCMotors": ["rearMotor", "rearMotor_L", "rearMotor_R", "frontMotor", "frontMotor_L", "frontMotor_R"],
+			"velocityOffsetThreshold": 1.0
 		},
 
 		"motorTorqueControl": {
