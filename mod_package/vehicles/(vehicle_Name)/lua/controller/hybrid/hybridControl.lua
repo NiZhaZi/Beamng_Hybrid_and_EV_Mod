@@ -1,7 +1,7 @@
 -- hybridContrl.lua - 2024.4.30 13:28 - hybrid control for hybrid Vehicles
 -- by NZZ
--- version 0.0.64 alpha
--- final edit - 2025.9.15 00:46
+-- version 0.0.65 alpha
+-- final edit - 2025.10.5 00:57
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -815,13 +815,7 @@ local function init(jbeamData)
         end
     end
 
-    if #enableModes == 1 then
-        setMode(enableModes[1])
-    elseif jbeamData.defaultMode then
-        setMode(jbeamData.defaultMode)
-    else
-        setMode("hybrid")
-    end
+    
     
     ecrawlMode = jbeamData.ecrawlMode or false
 
@@ -830,6 +824,16 @@ local function init(jbeamData)
 
     priusMode = jbeamData.priusMode or false
 
+end
+
+local function initSecondStage(jbeamData)
+    if #enableModes == 1 then
+        setMode(enableModes[1])
+    elseif jbeamData.defaultMode then
+        setMode(jbeamData.defaultMode)
+    else
+        setMode("hybrid")
+    end
 end
 
 local function new()
@@ -932,6 +936,7 @@ M.changeAutoVelocity = changeAutoVelocity
 M.enhanceDriveMode = enhanceDriveMode
 
 M.init = init
+M.initSecondStage = initSecondStage
 M.reset = reset
 M.onInit = onInit
 M.onReset = onReset
