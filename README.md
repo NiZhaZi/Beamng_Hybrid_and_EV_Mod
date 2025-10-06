@@ -119,17 +119,18 @@ Suggestion: Download and install [Visual Studio Code](https://code.visualstudio.
 ## Extensional Functions (for .pc files)
 
    ```
-    "Lights_Control": "Lights_Control",
-	"Wiper_Control": "Wiper_Control",
-	"Camso_tpms": "Camso_tpms_4w",
-	"camso_tuning_parameters": "camso_tuning_parameters",
-	"Dynamic_System": "Dynamic_System",
-	"Dynamic_awd": "Dynamic_awd",
-	"Dynamic_lsd": "Dynamic_lsd",
-	"Rear_Wheel_Steering": "Rear_Wheel_Steering",
-	"Suspension_Lift": "Suspension_Lift",
+   "Camso_tpms": "Camso_tpms_4w",
+   "camso_tuning_parameters": "camso_tuning_parameters",
+   
+   "Lights_Control": "Lights_Control",
+   "Wiper_Control": "Wiper_Control",
+   "Dynamic_System": "Dynamic_System",
+   "Dynamic_awd": "Dynamic_awd",
+   "Dynamic_lsd": "Dynamic_lsd",
+   "Rear_Wheel_Steering": "Rear_Wheel_Steering",
+   "Suspension_Lift": "Suspension_Lift",
    ```
-   Adapt to mods: [MK's Dynamic Weather](https://www.beamng.com/resources/mks-dynamic-weather.33820/), [Advanced Driver Assistance Systems](https://www.beamng.com/resources/advanced-driver-assistance-systems.17384/)
+   Adapted to mods: [MK's Dynamic Weather](https://www.beamng.com/resources/mks-dynamic-weather.33820/), [Advanced Driver Assistance Systems](https://www.beamng.com/resources/advanced-driver-assistance-systems.17384/)
 
 
 

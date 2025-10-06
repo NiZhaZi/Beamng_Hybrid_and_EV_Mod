@@ -118,15 +118,16 @@
 ## 额外功能 (适用于 .pc 文件)
 
    ```
-    "Lights_Control": "Lights_Control",
-	"Wiper_Control": "Wiper_Control",
-	"Camso_tpms": "Camso_tpms_4w",
-	"camso_tuning_parameters": "camso_tuning_parameters",
-	"Dynamic_System": "Dynamic_System",
-	"Dynamic_awd": "Dynamic_awd",
-	"Dynamic_lsd": "Dynamic_lsd",
-	"Rear_Wheel_Steering": "Rear_Wheel_Steering",
-	"Suspension_Lift": "Suspension_Lift",
+   "Camso_tpms": "Camso_tpms_4w",
+   "camso_tuning_parameters": "camso_tuning_parameters",
+   
+   "Lights_Control": "Lights_Control",
+   "Wiper_Control": "Wiper_Control",
+   "Dynamic_System": "Dynamic_System",
+   "Dynamic_awd": "Dynamic_awd",
+   "Dynamic_lsd": "Dynamic_lsd",
+   "Rear_Wheel_Steering": "Rear_Wheel_Steering",
+   "Suspension_Lift": "Suspension_Lift",
    ```
    已适配模组：[MK's Dynamic Weather](https://www.beamng.com/resources/mks-dynamic-weather.33820/), [Advanced Driver Assistance Systems](https://www.beamng.com/resources/advanced-driver-assistance-systems.17384/)
 
