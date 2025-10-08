@@ -1,7 +1,7 @@
 -- motorShaft.lua - 2024.3.8 14:45 - Shaft with electric motor
 -- by NZZ
--- version 0.0.11 alpha
--- final edit - 2025.10.2 23:37
+-- version 0.0.12 alpha
+-- final edit - 2025.10.8 19:59
 
 local M = {}
 
@@ -211,8 +211,12 @@ local function motorTorque(device, dt)
   local torqueRPM = floor(rpm)
 
   --local torqueCoef = clamp(device.torqueCoef, 0, 1) --can be used to externally reduce the available torque, for example to limit output power
-  local torqueCoef = clamp(device.torqueCoef or 1, 0, 1)
-  local torque = (torqueCurve[torqueRPM] or (torqueRPM < 0 and torqueCurve[0] or 0)) * device.outputTorqueState * torqueCoef
+  -- local torqueCoef = clamp(device.torqueCoef or 1, 0, 1)
+  -- local torque = (torqueCurve[torqueRPM] or (torqueRPM < 0 and torqueCurve[0] or 0)) * device.outputTorqueState * torqueCoef
+  local rawCoef = clamp((device.torqueCoef or 1) * (device.outputTorqueState or 1), 0, 1)
+  local torqueCoef = device.torqueCoefSmoother and device.torqueCoefSmoother:getCapped(rawCoef, dt) or rawCoef
+  local torque = (torqueCurve[torqueRPM] or (torqueRPM < 0 and torqueCurve[0] or 0)) * torqueCoef
+
   torque = torque * throttle * motorDirection
   torque = min(torque, device.maxTorqueLimit) --limit output torque to a specified max, math.huge by default
 
@@ -578,6 +582,7 @@ local function reset(device, jbeamData)
 
   device.loadSmoother:reset()
   device.throttleSmoother:reset()
+  if device.torqueCoefSmoother then device.torqueCoefSmoother:reset() end
   device.engineLoad = 0
   device.instantEngineLoad = 0
 
@@ -795,6 +800,7 @@ local function new(jbeamData)
     engineLoad = 0,
     loadSmoother = newTemporalSmoothing(1, 1),
     throttleSmoother = newTemporalSmoothing(30, 10),
+    torqueCoefSmoother = newTemporalSmoothing(30, 8),
     grossWorkPerUpdate = 0,
     frictionLossPerUpdate = 0,
     spentEnergy = 0,
