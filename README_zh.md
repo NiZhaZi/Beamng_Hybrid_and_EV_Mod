@@ -156,6 +156,8 @@
    ```
    ~prop:indexNumber,rpmTacho,0,-1,0,0,0,0,0,270,0,0.03~
    ~prop:indexNumber,wheelspeed,0,-1,0,0,0,0,0,360,0,2.95~
+   ~prop:indexNumber,fuel,0,-1,0,0,0,0,0,360,0,110~
+   ~prop:indexNumber,watertemp,0,-1,0,0,0,0,0,360,0,0.60~
    ```
 
    3. 扩展功能 (Extensional Functions) (需要额外控制)

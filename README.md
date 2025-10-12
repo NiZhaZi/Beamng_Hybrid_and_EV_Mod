@@ -157,6 +157,8 @@ Suggestion: Download and install [Visual Studio Code](https://code.visualstudio.
    ```
    ~prop:indexNumber,rpmTacho,0,-1,0,0,0,0,0,270,0,0.03~
    ~prop:indexNumber,wheelspeed,0,-1,0,0,0,0,0,360,0,2.95~
+   ~prop:indexNumber,fuel,0,-1,0,0,0,0,0,360,0,110~
+   ~prop:indexNumber,watertemp,0,-1,0,0,0,0,0,360,0,0.60~
    ```
    
    4. Extensional Functions (need additional control)
