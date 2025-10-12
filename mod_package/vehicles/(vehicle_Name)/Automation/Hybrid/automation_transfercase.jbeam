@@ -264,8 +264,13 @@
 			"value":500
 		},
 		"slotType" : "Transfer_Case_Type",
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+			["$diffTorqueSplit", "range", "%", "differential", 0.7, 0.0, 1.0, "Centre Differenial Torque Split", "Centre Differenial Torque to rear"],
+		],
 		"transferCase":{
-			"diffType": "lsd"
+			"diffType": "lsd",
+			"diffTorqueSplit": "$diffTorqueSplit"
 		}
 	},
 
@@ -275,8 +280,13 @@
 			"value":1000
 		},
 		"slotType" : "Transfer_Case_Type",
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+			["$diffTorqueSplit", "range", "%", "differential", 0.7, 0.0, 1.0, "Centre Differenial Torque Split", "Centre Differenial Torque to rear"],
+		],
 		"transferCase":{
-			"diffType": "viscous"
+			"diffType": "viscous",
+			"diffTorqueSplit": "$diffTorqueSplit"
 		}
 	},
 
@@ -297,8 +307,13 @@
 			"value":1500
 		},
 		"slotType" : "Transfer_Case_Type",
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+			["$diffTorqueSplit", "range", "%", "differential", 0.7, 0.0, 1.0, "Centre Differenial Torque Split", "Centre Differenial Torque to rear"],
+		],
 		"transferCase":{
-			"diffType": "activeLock"
+			"diffType": "activeLock",
+			"diffTorqueSplit": "$diffTorqueSplit"
 		}
 	},
 
@@ -308,8 +323,13 @@
 			"value":1500
 		},
 		"slotType" : "Transfer_Case_Type",
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+			["$diffTorqueSplit", "range", "%", "differential", 0.7, 0.0, 1.0, "Centre Differenial Torque Split", "Centre Differenial Torque to rear"],
+		],
 		"transferCase":{
-			"diffType": "torqueVectoring"
+			"diffType": "torqueVectoring",
+			"diffTorqueSplit": "$diffTorqueSplit"
 		}
 	},
 

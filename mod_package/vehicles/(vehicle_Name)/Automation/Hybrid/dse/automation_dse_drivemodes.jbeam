@@ -45,6 +45,7 @@
 						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 4, "hybridMode": "hybrid"}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
 						["controller", {"controllerName": "spoiler","mode": "off"}],
+						["controller", {"controllerName": "dynamicAWD2","split": 0.5}],
 					]
 				},
 				"off": {
@@ -70,6 +71,7 @@
 						["controller", {"controllerName": "hybridControl","awd": "partTime", "regen": 3, "hybridMode": "hybrid"}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
 						["controller", {"controllerName": "spoiler","mode": "auto"}],
+						["controller", {"controllerName": "dynamicAWD2","split": -1.0}],
 					]
 				},
 				"off2wd": {
@@ -93,6 +95,7 @@
 						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 3, "hybridMode": "hybrid"}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
 						["controller", {"controllerName": "spoiler","mode": "auto"}],
+						["controller", {"controllerName": "dynamicAWD2","split": 2.0}],
 					]
 				},
 				"comfort": {
@@ -126,6 +129,7 @@
 						["controller", {"controllerName": "hybridControl","awd": "partTime", "regen": 3, "hybridMode": "auto"}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
 						["controller", {"controllerName": "spoiler","mode": "auto"}],
+						["controller", {"controllerName": "dynamicAWD2","split": -1.0}],
 					]
 				},
 				"sport": {
@@ -160,6 +164,7 @@
 						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 2, "hybridMode": "hybrid"}],
 						["controller", {"controllerName": "rwsControl","val": 0}],
 						["controller", {"controllerName": "spoiler","mode": "on"}],
+						["controller", {"controllerName": "dynamicAWD2","split": -1.0}],
 					]
 				},
 				"corsa": {
@@ -185,6 +190,7 @@
 						["controller", {"controllerName": "hybridControl","awd": "fullTime", "regen": 1, "hybridMode": "hybrid"}],
 						["controller", {"controllerName": "rwsControl","val": 0}],
 						["controller", {"controllerName": "spoiler","mode": "on"}],
+						["controller", {"controllerName": "dynamicAWD2","split": -1.0}],
 					]
 				},
 				"eco": {
@@ -218,6 +224,7 @@
 						["controller", {"controllerName": "hybridControl","awd": "off", "regen": 5, "hybridMode": "electric"}],
 						["controller", {"controllerName": "rwsControl","val": 1}],
 						["controller", {"controllerName": "spoiler","mode": "off"}],
+						["controller", {"controllerName": "dynamicAWD2","split": 2.0}],
 					]
 				},
 			},

@@ -231,6 +231,30 @@
 		],
 	},
 
+	"Dynamic_awd_2": {
+		"information":{
+			"name":"Dynamic AWD Control for activeLock",
+			"value": 500
+		},
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+			["$defaultMainShaft", "range", "%", "Functions", 0, 0, 1, "default main shaft", "0 for RWD, 1 for FWD"{"subCategory":"Dynamic System", "stepDis": 1}],
+		],
+		"slotType" : "Dynamic_awd",
+        "controller": [
+        	["fileName"],
+			["dynamicSys/dynamicAWD2"{
+				"name" : "dynamicAWD2"
+				"diffName" : "transferCase",
+				"defaultMainShaft" : "$defaultMainShaft",
+            }],
+
+    	],
+		"actionsEnabled": [
+			["id"],
+		],
+	},
+
 	"Spoiler_Control": {
 		"information":{
 			"name":"Spoiler Control",
