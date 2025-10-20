@@ -130,7 +130,10 @@ Suggestion: Download and install [Visual Studio Code](https://code.visualstudio.
    "Rear_Wheel_Steering": "Rear_Wheel_Steering",
    "Suspension_Lift": "Suspension_Lift",
    ```
-   Adapted to mods: [MK's Dynamic Weather](https://www.beamng.com/resources/mks-dynamic-weather.33820/), [Advanced Driver Assistance Systems](https://www.beamng.com/resources/advanced-driver-assistance-systems.17384/)
+   Adapted to mods:\
+   [MK's Dynamic Weather](https://www.beamng.com/resources/mks-dynamic-weather.33820/),\
+   [Advanced Driver Assistance Systems](https://www.beamng.com/resources/advanced-driver-assistance-systems.17384/),\
+   [Advanced Driver Assistance Systems Plus](https://www.beamng.com/resources/advanced-driver-assistance-systems-plus-adas.35926//)
 
 
 

@@ -1,7 +1,7 @@
 -- lights.lua - 2025.6.12 17:37 - lights control
 -- by NZZ
--- version 0.0.9 alpha
--- final edit - 2025.8.11 23:25 extension version for AI drive 2025.8.15 @ line 237
+-- version 0.0.10 alpha
+-- final edit - 2025.10.20 20:13 extension version for AI drive 2025.8.15 @ line 237
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -234,7 +234,7 @@ local function updateGFX(dt)
     if electrics.values.running then
         running = 1
     end
-    if ai.mode == "traffic" then autoDrive = true else autoDrive = nil end
+    if ai.mode == "traffic" or autopilotPrevEnableElectrics then autoDrive = true else autoDrive = nil end
     if autoDrive then
         electrics.values.autoDrive = running * 2
         electrics.values.AuRuA = running

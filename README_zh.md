@@ -129,7 +129,10 @@
    "Rear_Wheel_Steering": "Rear_Wheel_Steering",
    "Suspension_Lift": "Suspension_Lift",
    ```
-   已适配模组：[MK's Dynamic Weather](https://www.beamng.com/resources/mks-dynamic-weather.33820/), [Advanced Driver Assistance Systems](https://www.beamng.com/resources/advanced-driver-assistance-systems.17384/)
+   已适配模组：\
+   [MK's Dynamic Weather](https://www.beamng.com/resources/mks-dynamic-weather.33820/),\
+   [Advanced Driver Assistance Systems](https://www.beamng.com/resources/advanced-driver-assistance-systems.17384/),\
+   [Advanced Driver Assistance Systems Plus](https://www.beamng.com/resources/advanced-driver-assistance-systems-plus-adas.35926//)
 
 
 
