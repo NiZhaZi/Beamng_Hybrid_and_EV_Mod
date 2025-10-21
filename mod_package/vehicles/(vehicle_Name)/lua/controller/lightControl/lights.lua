@@ -1,7 +1,7 @@
 -- lights.lua - 2025.6.12 17:37 - lights control
 -- by NZZ
--- version 0.0.10 alpha
--- final edit - 2025.10.20 20:13 extension version for AI drive 2025.8.15 @ line 237
+-- version 0.0.11 alpha
+-- final edit - 2025.10.21 21:47 extension version for AI drive 2025.8.15 @ line 237
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -30,6 +30,16 @@ local flowLightType = nil
 local enLight = nil
 
 local autoDrive = nil
+
+local autoFogLight = nil
+
+local function switchAutoFogLight()
+    if autoFogLight == nil then
+        autoFogLight = true
+    else
+        autoFogLight = not autoFogLight
+    end
+end
 
 local function updateGFX(dt)
 
@@ -216,6 +226,15 @@ local function updateGFX(dt)
 
     end
 
+    local fogLevel = tonumber(obj:getLastMailbox("fogLevel")) * 100
+    if autoFogLight then
+        if fogLevel >= 1 and electrics.values.fog == 0 then
+            electrics.values.fog = 1
+        elseif fogLevel < 1 and electrics.values.fog == 1 then
+            electrics.values.fog = 0
+        end
+    end
+
     if electrics.values.fog == 1 then
         electrics.values.turnAsisR = 1
         electrics.values.turnAsisL = 1
@@ -256,6 +275,9 @@ local function setsign()
 end 
 
 local function init(jbeamData)
+    obj:queueGameEngineLua('extensions.load("weatherToVe")')
+    autoFogLight = jbeamData.defaultAutoFogLight or true
+
     -- lightSign = 0
     -- electrics.values.saftyLight = 0
     -- electrics.values.fogLight = 0
@@ -278,7 +300,9 @@ local function init(jbeamData)
     electrics.values.innerLight = 0
 end
 
-local function reset()
+local function reset(jbeamData)
+    autoFogLight = jbeamData.defaultAutoFogLight or true
+
     enLight = lightNum
 
     electrics.values.muitiLightL = 0
@@ -295,6 +319,7 @@ end
 M.setsign = setsign
 
 M.switchInnerLight = switchInnerLight
+M.switchAutoFogLight = switchAutoFogLight
 
 M.updateGFX = updateGFX
 M.init = init

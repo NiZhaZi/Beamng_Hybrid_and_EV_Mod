@@ -34,7 +34,7 @@
 - 1. [x] Flow running light
 - 2. [x] Multiplexing running light and signal light
 - 3. [x] Different kinds of flow lights
-- 4. [ ] Auto fog light
+- 4. [x] Auto fog light
 
 ## [ ] Hot keys
 - 1. [ ] Rebind hot keys by rationalization

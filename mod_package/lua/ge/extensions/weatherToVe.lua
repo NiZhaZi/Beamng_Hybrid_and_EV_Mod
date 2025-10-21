@@ -13,6 +13,19 @@ local function getRainLevel()
     end
 end
 
+local function getFogLevel()
+    if dynamicWeatherMK_weather then
+        local fogLevel = dynamicWeatherMK_weather.getObjs().fog.fogDensity
+        if fogLevel then
+            return fogLevel
+        else
+            return 0
+        end
+    else
+        return 0
+    end
+end
+
 local function onExtensionLoaded()
 
 end
@@ -20,6 +33,7 @@ end
 local function onUpdate(dt, dtSim)
     -- local weather = dynamicWeatherMK_weather.getCurrentWeatherEvent()
     be:sendToMailbox("rainLevel", getRainLevel())
+    be:sendToMailbox("fogLevel", getFogLevel())
 end
 
 M.onExtensionLoaded = onExtensionLoaded
