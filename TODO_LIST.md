@@ -6,11 +6,13 @@
 - 3. [x] Multiple powertrain
 - 4. [x] Gearboxs with generator
 - 5. [x] Generator assist drive
+- 6. [ ] More intelligent REEV mode
 
 ## [ ] All wheel drive
 - 1. [x] Centre differential
 - 2. [x] Front and rear differential
 - 3. [x] Differential manual mode
+- 4. [ ] Vectoring control for activeLock differential
 
 ## [ ] Functions
 - 1. [x] Auto Hold
