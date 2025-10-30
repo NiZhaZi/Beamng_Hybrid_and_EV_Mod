@@ -16,14 +16,14 @@
 
  2. 从 GitHub 下载资源包和最新的发行版。
 
-    [主模组](https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod/archive/refs/heads/main.zip) 或通过[Git](https://git-scm.com)拉取仓库\
+    [主模组](https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod/archive/refs/heads/main.zip) 或通过[Git](https://git-scm.com)克隆仓库\
     [.pc 文件编辑助手](https://github.com/NiZhaZi/Hybrid-PC-Edit/releases)\
     [扭矩表生成器](https://github.com/NiZhaZi/Torque-Table-Creator/releases)\
     ![alt text](pictures/image2_1.png)
     ![alt text](pictures/image2_2.png)
     ![alt text](pictures/image2_3.png)
 
- 3. 解压从步骤2第一个链接下载的zip文件（或拉取的文件）。将“mod_package”文件夹下的所有文件复制到导出的汽车模组文件夹中。\
+ 3. 解压从步骤2第一个链接下载的zip文件（或克隆的文件）。将“mod_package”文件夹下的所有文件复制到导出的汽车模组文件夹中。\
     打开模组文件夹中的“vehicles”文件夹，复制“(vehicle_Name)”文件夹下的所有文件并粘贴到车名文件夹中。
 
     ![alt text](pictures/img3_1.png)
@@ -97,12 +97,6 @@
       "Camso_TC": "EV_TC",
       "Camso_ESC": "EV_ESC",
       "Camso_DriveModes": "EV_DriveModes_01",
-
-      "Dynamic_System": "",
-      "Dynamic_awd": "",
-      "Dynamic_lsd": "",
-      "Rear_Wheel_Steering": "",
-      "Suspension_Lift": "",
       ```
 
    5. 打开待修改汽车的 .pc 文件，将复制的内容粘贴到“parts”部分下。注释掉重复的行。如果不需要某项功能，可以删除引号内的内容。

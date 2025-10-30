@@ -16,14 +16,14 @@ Suggestion: Download and install [Visual Studio Code](https://code.visualstudio.
 
  2. Download the pack and latest release from GitHub.
 
-   [Main Mod](https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod/archive/refs/heads/main.zip) or pull the repository via [Git](https://git-scm.com)\
+   [Main Mod](https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod/archive/refs/heads/main.zip) or clone the repository via [Git](https://git-scm.com)\
    [.pc File Editor](https://github.com/NiZhaZi/Hybrid-PC-Edit/releases)\
    [Toque Table Creator](https://github.com/NiZhaZi/Torque-Table-Creator/releases)\
     ![alt text](pictures/image2_1.png)
     ![alt text](pictures/image2_2.png)
     ![alt text](pictures/image2_3.png)
 
- 3. Unzip the zip file from the first link of step 2 (or pulled files). Copy all files under "mod_package" folder to the mod folder of exported car.\
+ 3. Unzip the zip file from the first link of step 2 (or cloned files). Copy all files under "mod_package" folder to the mod folder of exported car.\
     Open "vehicles" folder in mod folder, copy all the files in "(vehicle_Name)" folder and paste them to the car name folder.
 
     ![alt text](pictures/img3_1.png)
@@ -98,12 +98,6 @@ Suggestion: Download and install [Visual Studio Code](https://code.visualstudio.
       "Camso_TC": "EV_TC",
       "Camso_ESC": "EV_ESC",
       "Camso_DriveModes": "EV_DriveModes_01",
-
-      "Dynamic_System": "",
-      "Dynamic_awd": "",
-      "Dynamic_lsd": "",
-      "Rear_Wheel_Steering": "",
-      "Suspension_Lift": "",
       ```
 
    5. Open the .pc file of the car which is waiting for being modified and paste the content under "parts" part. Comment the duplicate lines. If the function is not needed, the content in the quotation marks can be deleted.
