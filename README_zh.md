@@ -62,7 +62,7 @@
 
    2. 从 GitHub 下载资源包。
 
-      [主模组](https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod/archive/refs/heads/main.zip) 或通过Git拉取仓库\
+      [主模组](https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod/archive/refs/heads/main.zip) 或通过Git克隆仓库\
       [扭矩表生成器](https://github.com/NiZhaZi/Torque-Table-Creator/releases)
       ![alt text](pictures/image2_1.png)
       ![alt text](pictures/image2_3.png)

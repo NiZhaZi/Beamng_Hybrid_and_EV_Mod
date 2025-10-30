@@ -63,7 +63,7 @@ Suggestion: Download and install [Visual Studio Code](https://code.visualstudio.
 
    2. Download the pack from GitHub.
 
-      [Main Mod](https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod/archive/refs/heads/main.zip) or pull the repository via Git\
+      [Main Mod](https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod/archive/refs/heads/main.zip) or clone the repository via Git\
       [Toque Table Creator](https://github.com/NiZhaZi/Torque-Table-Creator/releases)
       ![alt text](pictures/image2_1.png)
       ![alt text](pictures/image2_3.png)
