@@ -1,0 +1,85 @@
+{
+	"CVT_Advance_Gearbox_E_Transmission": {
+		"information":{
+			"authors":"Camshaft Software",
+			"name":"Hybrid CVT Advance Transmission",
+			"value": 1100
+		},
+		"slotType" : "Camso_Transmission",
+		"slots": [
+			["type", "default", "description"],
+			["Camso_TransferCase", "", "Drive Type"],
+			["Shift_Logic", "CVT_Gearbox", "Shift Logic", {"coreSlot":true}],
+		],
+		
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+
+			["$gear_min", "range", ":1", "Gearing", 0.71337899444048, 0.1, 17, "Minimum ratio", "Lowest ratio that the transmission can use", {"subCategory": "Transmission", "stepDis": 0.01}],
+			["$gear_max", "range", ":1", "Gearing", 4.3461243639424, 0.1, 17, "Maximum ratio", "Highest ratio that the transmission can use", {"subCategory": "Transmission", "stepDis": 0.01}]
+
+			["$gear_R",  "range", ":1", "Gearing", 2.84, 0.1, 17, "Gear R",  "Gear ratio", {"subCategory": "Transmission", "stepDis": 0.01}],
+			["$gear_1",  "range", ":1", "Gearing", 2.70, 0.1, 17, "Gear 1",  "Gear ratio", {"subCategory": "Transmission", "stepDis": 0.01}],
+			["$gear_2",  "range", ":1", "Gearing", 2.11, 0.1, 17, "Gear 2",  "Gear ratio", {"subCategory": "Transmission", "stepDis": 0.01}],
+			["$gear_3",  "range", ":1", "Gearing", 1.65, 0.1, 17, "Gear 3",  "Gear ratio", {"subCategory": "Transmission", "stepDis": 0.01}],
+			["$gear_4",  "range", ":1", "Gearing", 1.33, 0.1, 17, "Gear 4",  "Gear ratio", {"subCategory": "Transmission", "stepDis": 0.01}],
+			["$gear_5",  "range", ":1", "Gearing", 1.10, 0.1, 17, "Gear 5",  "Gear ratio", {"subCategory": "Transmission", "stepDis": 0.01}],
+			["$gear_6",  "range", ":1", "Gearing", 0.93, 0.1, 17, "Gear 6",  "Gear ratio", {"subCategory": "Transmission", "stepDis": 0.01}],
+			["$gear_7",  "range", ":1", "Gearing", 0.80, 0.1, 17, "Gear 7",  "Gear ratio", {"subCategory": "Transmission", "stepDis": 0.01}],
+			["$gear_8",  "range", ":1", "Gearing", 0.70, 0.1, 17, "Gear 8",  "Gear ratio", {"subCategory": "Transmission", "stepDis": 0.01}],
+
+		],
+
+		"controller": [
+			["fileName"],
+			
+		],
+		
+		"gearbox": {
+			//https://wiki.beamng.com/AutomaticGearbox
+			"uiName": "Gearbox",
+			"minGearRatio": "$gear_8",
+			"maxGearRatio": "$gear_1",
+			"friction": 4.8283905538659, //Constant friction torque on input shaft
+			"oneWayViscousCoef": 25, //One way clutch - hill holding strength
+			"parkLockTorque": 1000, //Maximum holding torque of park mode
+			"gearboxNode:": ["engine0"] //node used to play gear damage sound
+		},
+		"clutch": {
+			//https://wiki.beamng.com/TorqueConverter
+			"uiName":"Torque Converter",
+			"converterDiameter": 0.16381935416552, //Affects stall RPM and torque carrying ability
+			"converterStiffness": 12, //Affects tightness of converter around cruising speeds
+			"couplingAVRatio": 0.92, //Speed ratio where the torque multiplication reaches 1:1
+			"stallTorqueRatio": 1.8, //Maximum torque multiplication value (occurs at stall)
+			"lockupClutchTorque": 157.8235244751 //Maximum holding torque of lockup clutch
+		},
+		"vehicleController": {
+			"automaticModes": "PRNDS",
+			"cvtHighRPM": 5800,
+			"cvtLowRPM": 1700,
+			"torqueConverterLockupRPM": 1800,
+			"aggressionSmoothingDown": 0.5,
+			"cvtAggression": 0.1,
+			"aggressionHoldOffThrottleDelay": 0,
+
+			"calculateOptimalLoadShiftPoints": false,
+			
+			"cvtTargetRPMMap":[
+            [0,50],
+            [0, 700, 1200],
+            [0.33, 1800, 2000],
+            [0.67, 2400, 2400],
+            [1, 6177, 6177],
+        	],
+			"cvtSportGearRatios": ["$gear_1", "$gear_2", "$gear_3", "$gear_4", "$gear_5", "$gear_6", "$gear_7", "$gear_8"], // Same as DCT, but with CVT limits
+		},
+
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"],
+			["torqueConverter", "clutch", "mainEngine", 1],
+			["ectGearbox", "gearbox", "clutch", 1]
+
+		]
+	}
+}

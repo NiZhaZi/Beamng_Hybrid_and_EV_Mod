@@ -1,0 +1,189 @@
+{
+	"Advance_Engine_ElectricController": {
+		"information": {
+			"authors": "Camshaft Software",
+			"name": "Advance Electric Motor Controller",
+			"value": 50
+		}
+		"slotType": "Camso_Engine",
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"]
+			["$EngineOffsetX", "range", "+m", "Vehicle Advanced Settings", 0, -4, 4, "Engine Offset X", "Lateral engine offset", {"stepDis":0.01, "subCategory":"Engine Offset"}],
+			["$EngineOffsetY", "range", "+m", "Vehicle Advanced Settings", 0, -4, 4, "Engine Offset Y", "Longitudinal engine offset", {"stepDis":0.01, "subCategory":"Engine Offset"}],
+			["$EngineOffsetZ", "range", "+m", "Vehicle Advanced Settings", 0, -4, 4, "Engine Offset Z", "Vertical engine offset", {"stepDis":0.01, "subCategory":"Engine Offset"}],
+			["$EngineOffsetXVis", "range", "+m", "Vehicle Advanced Settings", 0, -4, 4, "Visual Engine Offset X", "Visual lateral engine offset", {"stepDis":0.01, "subCategory":"Engine Offset"}],
+			["$EngineOffsetYVis", "range", "+m", "Vehicle Advanced Settings", 0, -4, 4, "Visual Engine Offset Y", "Visual longitudinal engine offset", {"stepDis":0.01, "subCategory":"Engine Offset"}],
+			["$EngineOffsetZVis", "range", "+m", "Vehicle Advanced Settings", 0, -4, 4, "Visual Engine Offset Z", "Visual vertical engine offset", {"stepDis":0.01, "subCategory":"Engine Offset"}],
+			["$ExhaustOffsetX", "range", "+m", "Vehicle Advanced Settings", 0, -4, 4, "Exhaust Offset X", "Lateral exhaust offset", {"stepDis":0.01, "subCategory":"Exhaust Offset"}],
+			["$ExhaustOffsetY", "range", "+m", "Vehicle Advanced Settings", 0, -4, 4, "Exhaust Offset Y", "Longitudinal exhaust offset", {"stepDis":0.01, "subCategory":"Exhaust Offset"}],
+			["$ExhaustOffsetZ", "range", "+m", "Vehicle Advanced Settings", 0, -4, 4, "Exhaust Offset Z", "Vertical exhaust offset", {"stepDis":0.01, "subCategory":"Exhaust Offset"}],
+			["$ExhaustOffsetXVis", "range", "+m", "Vehicle Advanced Settings", 0, -4, 4, "Visual Exhaust Offset X", "Visual lateral exhaust offset", {"stepDis":0.01, "subCategory":"Exhaust Offset"}],
+			["$ExhaustOffsetYVis", "range", "+m", "Vehicle Advanced Settings", 0, -4, 4, "Visual Exhaust Offset Y", "Visual longitudinal exhaust offset", {"stepDis":0.01, "subCategory":"Exhaust Offset"}],
+			["$ExhaustOffsetZVis", "range", "+m", "Vehicle Advanced Settings", 0, -4, 4, "Visual Exhaust Offset Z", "Visual vertical exhaust offset", {"stepDis":0.01, "subCategory":"Exhaust Offset"}],
+			// ["$torquesplitE", "range", "", "Motor Controller", 0.6700000166893, 0, 1, "Torque Split", "Power to Rear", {"stepDis": 0.01, "minDis":0, "maxDis":100}],
+			["$regenTorqueModRear", "range", "", "Motor Controller", 0.6, 0, 3, "Rear motor regenerative braking torque", "Maximum regenerative braking torque", {"stepDis": 1, "minDis":0, "maxDis":300}],
+			["$regenTorqueModFront", "range", "", "Motor Controller", 1, 0, 3, "Front motor regenerative braking torque", "Maximum regenerative braking torque", {"stepDis": 1, "minDis":0, "maxDis":300}],
+
+			["$FinalDriveRatioFront", "range", ":1", "Motor Controller", 5.25, 0, 100, "Front Motor Final Drive Ratio", "Final Drive Ratio Front", {"stepDis": 0.01, "minDis":0, "maxDis":100}],
+			["$FinalDriveRatioRear",  "range", ":1", "Motor Controller", 5.25, 0, 100, "Rear Motor Final Drive Ratio",  "Final Drive Ratio Rear",  {"stepDis": 0.01, "minDis":0, "maxDis":100}],
+			["$assistSteeringSpeed",  "range", "km/h", "Motor Controller", 75, 0, 600, "Assist Steering Speed",  "speed of when Assist Steering intervene",  {"stepDis": 1, "minDis":0, "maxDis":600}],
+
+			["$ondemandMaxRPM",  "range",  "RPM",   	"EV System",  50,         0,      99999,  "Ondemand Max RPM",      "Ondemand Max RPM Differencial",                		{"subCategory": "E AWD",        "stepDis":1.00}],
+			["$AWDMultiplier",   "range",  "X",     	"EV System",  1.08,       1,      99999,  "AWD Multiplier",        "Ondemand Max RPM Differencial Coef",           		{"subCategory": "E AWD",        "stepDis":0.01}],
+		],
+
+		"controller": [
+	        ["fileName"],
+			["advanceEV/evdrive", {"name": "evdrive"}],
+			["advanceEV/motorLimit", {"name": "motorLimit",}],
+	    ],
+
+		"evdrive": {
+			"mainMotorNames": ["rearMotor", "rearMotor_R"],
+			"subMotorNames": ["frontMotor", "frontMotor_R"],
+
+			"leftMotorNames": ["frontMotor", "rearMotor"],
+			"rightMotorNames": ["frontMotor_R", "rearMotor_R"],
+
+			"defaultEAWDMode": "partTime",
+			"ifAdvanceBrake": false,
+			"ifSportBrake": false,
+			"ifAssistSteering": false,
+			"assistSteeringSpeed": "$assistSteeringSpeed",
+
+			"ondemandMaxRPM": "$ondemandMaxRPM",
+    		"AWDMultiplier": "$AWDMultiplier",
+		},
+
+		"vehicleController": {
+			"shiftLogicName":"electricMotor",
+			"topSpeedLimitReverse": 15,
+			//"defaultRegen": 0.5,
+			//"brakeRegenCoef": 1,
+			"onePedalRegenCoef": 0.85
+		},
+
+		"actionsEnabled": [
+			["id"],
+			["switch onePedal brake mode(EV)"],
+			["switch onePedal CRBS mode(EV)"],
+			["switch sport brake mode(EV)"],
+
+			["switch to on-demand AWD"],
+			["switch to full-time AWD"],
+			["switch to main motor 2WD"],
+			["switch to sub motor 2WD"],
+
+			["reduce main output"],
+			["increase main output"],
+			["reduce sub output"],
+			["increase sub output"],
+		],
+		
+		"slots": [
+			["type", "default", "description"],
+			["Camso_engine_structure", "", "Engine Structure", {"coreSlot": true}],
+			["Camso_SpeedLimiter", "", "Speed Limiter", {"coreSlot": true}],
+			["Camso_ElectricMotor_F", "", "Front Motor", {"coreSlot": true}],
+			["Camso_ElectricMotor_R", "", "Rear Motor", {"coreSlot": true}],
+			["Motor_Drive_Type", "", "Motor Drive Type", {"coreSlot": true}],
+			["AVAS", "AVAS", "Automated Voice Annunciator Systemsery"]
+		]
+	},
+
+	"Front_Single_Rear_None": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F1R0",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["frontMotor"],
+		},
+	},
+
+	"Front_Dual_Rear_None": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F2R0",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["frontMotor", "frontMotor_R"],
+		},
+	},
+
+	"Front_None_Rear_Single": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F0R1",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["rearMotor"],
+		},
+	},
+
+	"Front_None_Rear_Dual": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F0R2",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["rearMotor", "rearMotor_R"],
+		},
+	},
+
+	"Front_Single_Rear_Single": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F1R1",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["frontMotor", "rearMotor"],
+		},
+	},
+
+	"Front_Single_Rear_Dual": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F1R2",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["frontMotor", "rearMotor", "rearMotor_R"],
+		},
+	},
+
+	"Front_Dual_Rear_Single": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F2R1",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["frontMotor", "frontMotor_R", "rearMotor"],
+		},
+	},
+
+	"Front_Dual_Rear_Dual": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Motor Drive Type F2R2",
+			"value": 0
+		}
+		"slotType": "Motor_Drive_Type",
+		"vehicleController": {
+			"motorNames": ["frontMotor", "frontMotor_R", "rearMotor", "rearMotor_R"],
+		},
+	},
+}

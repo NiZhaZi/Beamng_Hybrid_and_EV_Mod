@@ -1,0 +1,272 @@
+{
+	"Hybrid_Control_AWD": {
+		"information":{
+			"name":"Hybrid Control AWD",
+			"value": 0
+		},
+        "slots": [
+			["type", "default", "description"],
+			["auto", "auto_mode", "Auto Mode"],
+			["hybrid", "hybrid_mode", "Hybrid Mode"],
+			["electric", "electric_mode", "Electric Mode"],
+			["fuel", "fuel_mode", "Fuel Mode"],
+		],
+		"slotType" : "Hybrid_Control_Configure",
+
+		"controller": [
+			["fileName"],
+			["hybrid/hybridControl", {"name": "hybridControl",}],
+		],
+
+		"hybridControl":{
+			//get all motors Names
+			"motorNames": ["frontDriveShaft", "rearDriveShaft"],
+			//EV ondemand AWD settings
+			"mainMotorNames": ["rearDriveShaft"],
+			"subMotorNames": ["frontDriveShaft"],
+			//comfortable regen settings
+			"ifComfortRegen": true,
+			"comfortRegenBegine": 0.75,//should be bigger than comfortRegenEnd
+			"comfortRegenEnd": 0.15,
+		},
+	},
+
+	"Hybrid_Control_AWD_hybrid_gearbox": {
+		"information":{
+			"name":"Hybrid Control AWD for hybrid gearbox",
+			"value": 0
+		},
+        "slots": [
+			["type", "default", "description"],
+			["auto", "auto_mode", "Auto Mode"],
+			["hybrid", "hybrid_mode", "Hybrid Mode"],
+			["electric", "electric_mode", "Electric Mode"],
+			["fuel", "fuel_mode", "Fuel Mode"],
+		],
+		"slotType" : "Hybrid_Control_Configure",
+
+		"controller": [
+			["fileName"],
+			["hybrid/hybridControl", {"name": "hybridControl",}],
+		],
+
+		"hybridControl":{
+			//get all motors Names
+			"motorNames": ["awdmotor"],
+			//EV ondemand AWD settings
+			"mainMotorNames": ["awdmotor"],
+			"subMotorNames": [],
+			//comfortable regen settings
+			"ifComfortRegen": true,
+			"comfortRegenBegine": 0.75,//should be bigger than comfortRegenEnd
+			"comfortRegenEnd": 0.15,
+		},
+	},
+
+	"Hybrid_Control_FWD": {
+		"information":{
+			"name":"Hybrid Control FWD",
+			"value": 0
+		},
+        "slots": [
+			["type", "default", "description"],
+			["auto", "auto_mode", "Auto Mode"],
+			["hybrid", "hybrid_mode", "Hybrid Mode"],
+			["electric", "electric_mode", "Electric Mode"],
+			["fuel", "fuel_mode", "Fuel Mode"],
+		],
+		"slotType" : "Hybrid_Control_Configure",
+
+		"controller": [
+			["fileName"],
+			["hybrid/hybridControl", {"name": "hybridControl",}],
+		],
+
+		"hybridControl":{
+			//get all motors Names
+			"motorNames": ["frontDriveShaft", "rearMotor", "rearMotor_L", "rearMotor_R"],
+			//EV ondemand AWD settings
+			"mainMotorNames": ["frontDriveShaft"],
+			"subMotorNames": ["rearMotor", "rearMotor_L", "rearMotor_R"],
+			//comfortable regen settings
+			"ifComfortRegen": true,
+			"comfortRegenBegine": 0.75,//should be bigger than comfortRegenEnd
+			"comfortRegenEnd": 0.15,
+		},
+	},
+
+	"Hybrid_Control_RWD": {
+		"information":{
+			"name":"Hybrid Control RWD",
+			"value": 0
+		},
+        "slots": [
+			["type", "default", "description"],
+			["auto", "auto_mode", "Auto Mode"],
+			["hybrid", "hybrid_mode", "Hybrid Mode"],
+			["electric", "electric_mode", "Electric Mode"],
+			["fuel", "fuel_mode", "Fuel Mode"],
+		],
+		"slotType" : "Hybrid_Control_Configure",
+
+		"controller": [
+			["fileName"],
+			["hybrid/hybridControl", {"name": "hybridControl",}],
+		],
+
+		"hybridControl":{
+			//get all motors Names
+			"motorNames": ["rearDriveShaft", "frontMotor", "frontMotor_L", "frontMotor_R"],
+			//EV ondemand AWD settings
+			"mainMotorNames": ["rearDriveShaft"],
+			"subMotorNames": ["frontMotor", "frontMotor_L", "frontMotor_R"],
+			//comfortable regen settings
+			"ifComfortRegen": true,
+			"comfortRegenBegine": 0.75,//should be bigger than comfortRegenEnd
+			"comfortRegenEnd": 0.15,
+		},
+	},
+
+	"Hybrid_Control_Parallel": {
+		"information":{
+			"name":"Hybrid Control Parallel",
+			"value": 0
+		},
+        "slots": [
+			["type", "default", "description"],
+			["auto", "auto_mode", "Auto Mode"],
+			["hybrid", "hybrid_mode", "Hybrid Mode"],
+			["electric", "electric_mode", "Electric Mode"],
+			["fuel", "fuel_mode", "Fuel Mode"],
+		],
+		"slotType" : "Hybrid_Control_Configure",
+
+		"controller": [
+			["fileName"],
+			["hybrid/hybridControl", {"name": "hybridControl",}],
+		],
+		
+		"hybridControl":{
+			//get all motors Names
+			"motorNames": ["rearMotor", "rearMotor_L", "rearMotor_R", "frontMotor", "frontMotor_L", "frontMotor_R"],
+			//EV ondemand AWD settings
+			"mainMotorNames": [],
+			"subMotorNames": [],
+			//comfortable regen settings
+			"ifComfortRegen": true,
+			"comfortRegenBegine": 0.75,//should be bigger than comfortRegenEnd
+			"comfortRegenEnd": 0.15,
+		},
+	},
+
+	"Hybrid_Control_REEV": {
+		"information":{
+			"name":"Hybrid Control REEV",
+			"value": 0
+		},
+        "slots": [
+			["type", "default", "description"],
+			["auto", "", "Auto Mode"],
+			["hybrid", "", "Hybrid Mode"],
+			["electric", "electric_mode", "Electric Mode"],
+			["fuel", "", "Fuel Mode"],
+		],
+		"slotType" : "Hybrid_Control_Configure",
+
+		"controller": [
+			["fileName"],
+			["hybrid/hybridControl", {"name": "hybridControl",}],
+		],
+		
+		"hybridControl":{
+			//get all motors Names
+			"motorNames": ["rearMotor", "rearMotor_L", "rearMotor_R", "frontMotor", "frontMotor_L", "frontMotor_R"],
+			//EV ondemand AWD settings
+			"mainMotorNames": ["rearMotor", "rearMotor_L", "rearMotor_R"],
+			"subMotorNames": ["frontMotor", "frontMotor_L", "frontMotor_R"],
+			//comfortable regen settings
+			"ifComfortRegen": true,
+			"comfortRegenBegine": 0.75,//should be bigger than comfortRegenEnd
+			"comfortRegenEnd": 0.15,
+		},
+	},
+
+
+
+
+	"auto_mode": {
+		"information":{
+			"name":"Auto Mode",
+			"value": 0
+		},
+		
+		"slotType" : "auto",
+		
+		"hybridControl":{
+			"autoMode": "auto"
+		},
+		"actionsEnabled": [
+			["id"],
+			["Auto"],
+			["Engine Velocity Increase"],
+			["Engine Velocity Decrease"],
+			["Engine Velocity Reset"],
+		],
+
+	},
+
+	"hybrid_mode": {
+		"information":{
+			"name":"Hybrid Mode",
+			"value": 0
+		},
+		
+		"slotType" : "hybrid",
+		
+		"hybridControl":{
+			"hybridMode": "hybrid"
+		},
+		"actionsEnabled": [
+			["id"],
+			["Hybrid"],
+		],
+
+	},
+
+	"electric_mode": {
+		"information":{
+			"name":"Electric Mode",
+			"value": 0
+		},
+		
+		"slotType" : "electric",
+		
+		"hybridControl":{
+			"electricMode": "electric"
+		},
+		"actionsEnabled": [
+			["id"],
+			["EV"],
+		],
+
+	},
+
+	"fuel_mode": {
+		"information":{
+			"name":"Fuel Mode",
+			"value": 0
+		},
+		
+		"slotType" : "fuel",
+		
+		"hybridControl":{
+			"fuelMode": "fuel"
+		},
+		"actionsEnabled": [
+			["id"],
+			["ICE"],
+		],
+
+	},
+
+}

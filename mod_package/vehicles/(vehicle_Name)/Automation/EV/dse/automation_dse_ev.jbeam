@@ -1,0 +1,38 @@
+{
+	"EV_DSE_01": {
+		"information":{
+			"name":" EV Electronic Stability & Traction Control",
+			"value":250
+		}
+
+		"slotType" : "Camso_DSE",
+
+		"slots":[
+			["type", "default", "description"],
+			["Camso_DriveModes", "EV_DriveModes_01", "Drive Modes"] 
+			["Camso_TC", "", "Traction Control"] 
+			["Camso_ESC", "", "Stability Control"]
+			
+			["Functions", "Functions", "Functions"],
+			["licenseplate_design_2_1", "", "ADAS"] 
+		],
+
+		"controller": [
+			["fileName"],
+			["postCrashBrake",{"brakeThreshold": 60}],
+			["drivingDynamics/CMU", {"name":"CMU", "debugSettings": {"enableDebugMode": false, "peerIP": "127.0.0.1"}}],
+			["drivingDynamics/sensors/sensorHub"],
+			["drivingDynamics/sensors/virtualSensors" {"name":"sensors"}],
+			["drivingDynamics/sensors/vehicleData" {"name":"vehicleData"}],
+			["drivingDynamics/supervisors/components/motorTorqueControl" {"name":"motorTorqueControl"}],
+			["drivingDynamics/supervisors/components/brakeControl" {"name":"brakeControl"}],
+			["twoStepLaunch", {"rpmLimit":3600}],
+			["adaptiveBrakeLights"],
+		],
+
+		"vehicleData": {
+			"skewStiffnessFront": 150824.51527236,
+			"skewStiffnessRear": 126265.9453313
+		}
+	}
+}

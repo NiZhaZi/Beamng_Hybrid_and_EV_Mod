@@ -1,0 +1,133 @@
+{
+	"Hybrid_Main": {
+		"information":{
+			"name":"Hybrid Main",
+			"value":3000
+		},
+		"slotType" : "Hybrid_Main",
+		"slots": [
+			["type", "default", "description"],
+			["Battery", "Lithium_Titanate_Battery", "Battery"],
+			["Hybrid_Configure", "", "Hybrid Configure", {"coreSlot":true}],
+			["default_mode", "default_hybrid_mode", "Default Hybrid Mode", {"coreSlot":true}],
+			["AVAS", "AVAS", "Automated Voice Annunciator Systemsery"],
+		],
+		"variables": [
+			["name",             "type",   "unit",  	"category",       "default",  "min",  "max",  "title",                 "description"],
+			//AWD
+			["$ondemandMaxRPM",  "range",  "RPM",   	"Hybrid System",  50,         0,      99999,  "Ondemand Max RPM",      "Ondemand Max RPM Differencial",                		{"subCategory": "E AWD",        "stepDis":1.00}],
+			["$AWDMultiplier",   "range",  "X",     	"Hybrid System",  1.08,       1,      99999,  "AWD Multiplier",        "Ondemand Max RPM Differencial Coef",           		{"subCategory": "E AWD",        "stepDis":0.01}],
+			//AWD act when mianRPM - subRPM * AWDMultiplier >= ondemandMaxRPM
+			["$AdAWDDiffRPM",    "range",  "RPM",   	"Hybrid System",  250,        0,      99999,  "Advance AWD Diff RPM",  "Advance AWD Diff RPM",                         		{"subCategory": "E AWD",        "stepDis":1.00}],
+			//GearRatios
+			["$motorRatio1",     "range",  "X",     	"Hybrid System",  2.05,       0,      99999,  "Motor Ratio 1",         "Hybrid Mode Motor Gear Ratio",                 		{"subCategory": "Motor Ratio",  "stepDis":0.01}],
+			["$motorRatio2",     "range",  "X",     	"Hybrid System",  2.05,       0,      99999,  "Motor Ratio 2",         "EV Mode Motor Gear Ratio",           		   		{"subCategory": "Motor Ratio",  "stepDis":0.01}],
+			//auto mode settings
+			["$startVelocity",   "range",  "kph",   	"Hybrid System",  35,         5,      99999,  "Start Velocity",        "Velocity of Engine Start",           		   		{"subCategory": "Auto Mode",    "stepDis":1.00}],
+			["$connectVelocity", "range",  "kph",   	"Hybrid System",  40,         7,      99999,  "Connect Velocity",      "Velocity of Engine Involve",         		   		{"subCategory": "Auto Mode",    "stepDis":1.00}],
+			["$lowSpeed",        "range",  "kph",   	"Hybrid System",  0.5,        0.5,    100,    "Low Speed",       	   "Engine Start If Hign Throttle and Low Speed",  		{"subCategory": "Auto Mode",    "stepDis":0.01}],
+			["$lowACC",          "range",  "ms^(-2)",	"Hybrid System",  5.0,        0.5,    100,    "Low Accelerate",        "Engine Start If Hign Throttle and Low Accelerate",  {"subCategory": "Auto Mode",    "stepDis":0.01}],
+			//REEV mode settings
+			["$highEfficentRPM", "range",  "RPM",   	"Hybrid System",  3500,       0,      99999,  "High Efficent RPM",     "High Efficent Engine RPM",           		   		{"subCategory": "REEV Mode",    "stepDis":1.00}],
+			["$REEVRPM",         "range",  "RPM",   	"Hybrid System",  1500,       0,      99999,  "REEV RPM",              "Default REEV Engine RPM",           		   		{"subCategory": "REEV Mode",    "stepDis":1.00}],
+			["$REEVRPMProtect",  "range",  "RPM",   	"Hybrid System",  200,        0,      99999,  "REEV Protect RPM",      "Max REEV Engine RPM Less than Redline",        		{"subCategory": "REEV Mode",    "stepDis":1.00}],
+			// Vehicle controller
+			["$LimitReverse",    "range",  "kph",       "Hybrid System",  30,        10,      99999,  "Reverse Limit",         "Max Reverse Speed",        	                     	{"subCategory": "Vehicle Controller",    "stepDis":0.01}],
+		],
+		"controller": [
+			["fileName"],
+			["lightControl/lights"],
+		],
+		"vehicleController": {
+			"topSpeedLimitReverse": "$=$LimitReverse/3.6",
+		},
+		"hybridControl":{
+			//EV ondemand AWD settings
+			"ondemandMaxRPM" : "$ondemandMaxRPM",
+			"AWDMultiplier" : "$AWDMultiplier",
+			"defaultEAWDMode": "partTime",
+			"AdvanceAWD": false,
+			"AdAWDDiffRPM": "$AdAWDDiffRPM",
+			//ratio1 for hybrid mode, ratio2 for EV mode
+			"motorRatio1": "$motorRatio1",
+			"motorRatio2": "$motorRatio2",
+			//auto mode settings
+			"startVelocity" : "$startVelocity",
+			"connectVelocity" : "$connectVelocity",
+			"lowSpeed": "$lowSpeed", // km/h
+			"lowACC": "$lowACC", // m/s^(2)
+			//REEV mode settings
+			"highEfficentRPM": "$highEfficentRPM",
+			"REEVRPM": "$REEVRPM",
+			"REEVMutiplier": 2.0,
+			"REEVRPMProtect": "$REEVRPMProtect",
+			//brake mode settings
+			"defaultBrakeMode": "onePedal"
+			//electric reverse
+			"electricReverse": true,
+			//extra settings
+			"ifLowSpeedActive": true,
+			// "velocityRangeBegin": 120,
+			// "velocityRangEnd": 250,
+
+			"priusMode": false,
+		},
+		"clutch": {
+			// "electricsClutchRatioName":"hybridClutch"
+		},
+		"actionsEnabled": [
+			["id"],
+			["Select Hybrid Mode"],
+			["Enhance Energy Recovery"],
+			["Reduce Energy Recovery"],
+
+			["Switch onePedal brake mode"],
+			["Switch onePedal CRBS mode"],
+			["Switch sport brake mode"],
+		],
+	},
+
+	"default_auto_mode": {
+		"information":{
+			"name":"Default Mode Auto",
+			"value": 0
+		},
+		"slotType" : "default_mode",
+		"hybridControl":{
+			"defaultMode": "auto"
+		},
+	},
+
+	"default_hybrid_mode": {
+		"information":{
+			"name":"Default Mode Hybrid",
+			"value": 0
+		},
+		"slotType" : "default_mode",
+		"hybridControl":{
+			"defaultMode": "hybrid"
+		},
+	},
+
+	"default_electric_mode": {
+		"information":{
+			"name":"Default Mode Electric",
+			"value": 0
+		},
+		"slotType" : "default_mode",
+		"hybridControl":{
+			"defaultMode": "electric"
+		},
+	},
+
+	"default_fuel_mode": {
+		"information":{
+			"name":"Default Mode Fuel",
+			"value": 0
+		},
+		"slotType" : "default_mode",
+		"hybridControl":{
+			"defaultMode": "fuel"
+		},
+	},
+}

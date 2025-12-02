@@ -1,0 +1,65 @@
+{
+"bindings" :   [
+     {
+          "control": "alt z",
+          "action":  "switch onePedal brake mode"
+     },
+
+     {
+          "control": "alt x",
+          "action":  "switch onePedal CRBS mode"
+     },
+
+     {
+          "control": "alt c",
+          "action":  "switch sport brake mode"
+     },
+
+     {
+          "control": "shift alt u",
+          "action":  "switch to on-demand AWD"
+     },
+
+     {
+          "control": "shift alt i",
+          "action":  "switch to full-time AWD"
+     },
+
+     {
+          "control": "shift alt o",
+          "action":  "switch to main motor 2WD"
+     },
+
+     {
+          "control": "shift alt p",
+          "action":  "switch to sub motor 2WD"
+     },
+
+     {
+          "control": "ctrl alt u",
+          "action":  "reduce main output"
+     },
+
+     {
+          "control": "ctrl alt i",
+          "action":  "increase main output"
+     },
+
+     {
+          "control": "ctrl alt o",
+          "action":  "reduce sub output"
+     },
+
+     {
+          "control": "ctrl alt p",
+          "action":  "increase sub output"
+     }
+     
+],
+
+"name"              : "Keyboard"          , 
+"version"           : 1                   , 
+"devicetype"        : "keyboard"          , 
+"vidpid"            : "6F1D2B61"          , 
+"guid"              : "{6F1D2B61-D5A0-11CF-BFC7-444553540000}"
+}

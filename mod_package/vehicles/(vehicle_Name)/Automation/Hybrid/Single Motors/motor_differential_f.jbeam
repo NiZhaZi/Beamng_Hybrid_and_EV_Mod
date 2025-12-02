@@ -1,0 +1,121 @@
+{
+	"Front_Single_ElectricMotor": {
+		"information":{
+			"name":"Front Single Electric Motor",
+			"value": 4000
+		}
+		"slotType" : "Front_ElectricMotor",
+		"slots": [
+			["type", "default", "description"],
+			["Front_Single_Motors_Table","Front_Single_Motors_Table_95NM","Front Single Motors Table"],
+			// ["Single_Motors_Control", "Single_Motors_Control", "Single Motors Control"],
+			// ["Single_Motors_Configure","Front_Single_Motor","Single Motors Configure"],
+		],
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+			["$Front_Motor_Gear_Ratio", "range", "X", "Independent Motor", 4.75, 0.01, 100.00, "Independent Motor Ratio Front", "Gear Ratio of Independent Front Motor(s)", {"subCategory": "Front Motor", "stepDis": 0.01}],
+		],
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"],
+			["electricMotor", "frontMotor", "dummy", 0],
+			["shaft", "frontDriveShaft", "frontMotor", 1, {"gearRatio":"$Front_Motor_Gear_Ratio"}],
+			["differential", "frontDiff", "frontDriveShaft", 1],
+			["shaft", "halfshaftFL", "frontDiff", 1, {"breakTriggerBeam": "axle_FL", "uiName": "Front Left Halfshaft", "friction": 1}],
+			["shaft", "halfshaftFR", "frontDiff", 2, {"breakTriggerBeam": "axle_FR", "uiName": "Front Right Halfshaft", "friction": 1}]
+		],
+		"frontMotor": {
+			"inertia":0.40,
+			"friction":4,
+			"dynamicFriction":0.0005,
+			"electricalEfficiency":0.55,
+			"electricsThrottleFactorName": "throttleFactorRear",
+			"breakTriggerBeam":"engine", //Engine breaks if beam with this name is broken
+			"soundConfig": "soundConfigRear",
+			"energyStorage": "mainBattery", //Name of the fuel tank
+			"torqueReactionNodes":["engine1", "engine2", "engine3"],
+			"maximumWantedRegenTorque": 40,
+		},
+
+		"soundConfigRear": {
+			"sampleName": "ElectricMotor_02",
+			"mainGain": -10
+		},
+
+		"frontDiff":{
+			"diffType": "open",
+			"uiName": "Front Differential", 
+			"friction": 2.6452382432567,
+		},
+
+		"actionsEnabled": [
+			["id"],
+			["EV part-time AWD"],
+			["EV full-time AWD"],
+			["EV 2WD"],
+		],
+	},
+
+	"Front_Dual_ElectricMotor": {
+		"information":{
+			"name":"Front Dual Electric Motor",
+			"value": 4000
+		}
+		"slotType" : "Front_ElectricMotor",
+		"slots": [
+			["type", "default", "description"],
+			["Front_Dual_Motors_Table","Front_Dual_Motors_Table_95NM","Front Dual Motors Table"],
+			// ["Single_Motors_Control", "Single_Motors_Control", "Single Motors Control"],
+			// ["Single_Motors_Configure","Front_Dual_Motor","Single Motors Configure"],
+		],
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"],
+			["$Front_Motor_Gear_Ratio", "range", "X", "Independent Motor", 4.75, 0.01, 100.00, "Independent Motor Ratio Front", "Gear Ratio of Independent Front Motor(s)", {"subCategory": "Front Motor", "stepDis": 0.01}],
+		],
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"],
+			["electricMotor", "frontMotor_L", "dummy", 0],
+			["electricMotor", "frontMotor_R", "dummy", 0],
+			["shaft", "frontDriveShaft_L", "frontMotor_L", 1, {"gearRatio":"$Front_Motor_Gear_Ratio"}],
+			["shaft", "frontDriveShaft_R", "frontMotor_R", 1, {"gearRatio":"$Front_Motor_Gear_Ratio"}],
+			["shaft", "halfshaftFL", "frontDriveShaft_L", 1, {"breakTriggerBeam": "axle_FL", "uiName": "Front Left Halfshaft", "friction": 1}],
+			["shaft", "halfshaftFR", "frontDriveShaft_R", 1, {"breakTriggerBeam": "axle_FR", "uiName": "Front Right Halfshaft", "friction": 1}]
+		],
+		"frontMotor_L": {
+			"inertia":0.40,
+			"friction":4,
+			"dynamicFriction":0.0005,
+			"electricalEfficiency":0.55,
+			"electricsThrottleFactorName": "throttleFactorRear",
+			"breakTriggerBeam":"engine", //Engine breaks if beam with this name is broken
+			"soundConfig": "soundConfigRear",
+			"energyStorage": "mainBattery", //Name of the fuel tank
+			"torqueReactionNodes":["engine1", "engine2", "engine3"],
+			"maximumWantedRegenTorque": 40,
+		},
+		"frontMotor_R": {
+			"inertia":0.40,
+			"friction":4,
+			"dynamicFriction":0.0005,
+			"electricalEfficiency":0.55,
+			"electricsThrottleFactorName": "throttleFactorRear",
+			"breakTriggerBeam":"engine", //Engine breaks if beam with this name is broken
+			"soundConfig": "soundConfigRear",
+			"energyStorage": "mainBattery", //Name of the fuel tank
+			"torqueReactionNodes":["engine1", "engine2", "engine3"],
+			"maximumWantedRegenTorque": 40,
+		},
+
+		"soundConfigRear": {
+			"sampleName": "ElectricMotor_02",
+			"mainGain": -10
+		},
+
+		"actionsEnabled": [
+			["id"],
+			["EV part-time AWD"],
+			["EV full-time AWD"],
+			["EV 2WD"],
+		],
+	}
+
+}
