@@ -1,7 +1,7 @@
 -- lights.lua - 2025.6.12 17:37 - lights control
 -- by NZZ
--- version 0.0.11 alpha
--- final edit - 2025.10.21 21:47 extension version for AI drive 2025.8.15 @ line 237
+-- version 0.0.12 alpha
+-- final edit - 2025.12.10 23:25
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -112,46 +112,94 @@ local function updateGFX(dt)
         enLight = lightNum
     end 
 
-    for i = 0, lightNum + 2 do
-        if flowLightType == 1 and runningBegin < 0.6 then
+        local maxFlowIndex = lightNum + 2
+    local runningState = electrics.values.running
+
+    if runningBegin >= 0.6 then
+        -- After the animation, keep all lights on
+        for i = 0, maxFlowIndex do
             local lightStr = "flowRunning" .. tostring(i)
-            electrics.values[lightStr] = 0
+            electrics.values[lightStr] = runningState
+        end
+    elseif flowLightType == 1 then
+        -- Mode 1: simple forward filling (one by one on, stays on)
+        for i = 0, maxFlowIndex do
+            local lightStr = "flowRunning" .. tostring(i)
             if runningBegin > devide * i then
-                electrics.values[lightStr] = electrics.values.running
-            end
-        elseif flowLightType == 2 and runningBegin < 0.6 then
-            local lightStr = "flowRunning" .. tostring(i)
-            local lightStr2 = "flowRunning" .. tostring(i - 3)
-            electrics.values[lightStr] = 0
-            if runningBegin >= 0.55 then
-                electrics.values[lightStr] = electrics.values.running
-            elseif runningBegin > devide * i then
-                electrics.values[lightStr] = electrics.values.running
-                electrics.values[lightStr2] = 0
-            end
-        elseif flowLightType == 3 and runningBegin < 0.6 then
-            if i == enLight then
-                break
-            end
-            local lightStrEn = "flowRunning" .. tostring(enLight - 1)
-            local lightStr = "flowRunning" .. tostring(i)
-            local lightStr2 = "flowRunning" .. tostring(i - 1)
-            if i < enLight - 1 or not electrics.values.running then
+                electrics.values[lightStr] = runningState
+            else
                 electrics.values[lightStr] = 0
             end
-            if runningBegin > devideR * i then
-                electrics.values[lightStr] = electrics.values.running
-                electrics.values[lightStr2] = 0
-            end
-            if electrics.values[lightStrEn] == true then
-                enLight = enLight - 1
-                runningBegin = 0
-            end
-        else
+        end
+    elseif flowLightType == 2 then
+        -- Mode 2: flowing light with a short "tail"
+        for i = 0, maxFlowIndex do
             local lightStr = "flowRunning" .. tostring(i)
-            electrics.values[lightStr] = electrics.values.running
+            electrics.values[lightStr] = 0
+
+            if runningBegin >= 0.55 then
+                -- Near the end of animation: keep all lights on
+                electrics.values[lightStr] = runningState
+            elseif runningBegin > devide * i then
+                -- Turn on current light and turn off a light behind it
+                electrics.values[lightStr] = runningState
+
+                local prevIndex = i - 3
+                if prevIndex >= 0 then
+                    local lightStr2 = "flowRunning" .. tostring(prevIndex)
+                    electrics.values[lightStr2] = 0
+                end
+            end
+        end
+    elseif flowLightType == 3 then
+        -- Mode 3: single "dot" flowing from outside to inside
+        local currentEnLight = enLight or lightNum or 1
+        if currentEnLight < 1 then currentEnLight = 1 end
+        local lastIndex = currentEnLight - 1
+
+        for i = 0, lastIndex do
+            local lightStr = "flowRunning" .. tostring(i)
+            local lightStrPrev = "flowRunning" .. tostring(i - 1)
+
+            -- All lights except the last one in the current range are off by default
+            if i < lastIndex or not runningState then
+                electrics.values[lightStr] = 0
+            end
+
+            -- When time is enough for this index, move the "dot" forward
+            if runningBegin > devideR * i then
+                electrics.values[lightStr] = runningState
+                electrics.values[lightStrPrev] = 0
+            end
+        end
+
+        -- Check if the last light in the current range is actually on
+        -- It may be stored as boolean or number, so we handle both cases
+        local lightStrEn = "flowRunning" .. tostring(lastIndex)
+        local value = electrics.values[lightStrEn]
+        local isOn = false
+        if type(value) == "boolean" then
+            isOn = value
+        elseif type(value) == "number" then
+            isOn = value > 0
+        end
+
+        -- When the last light is on, shrink the range and reset timer
+        -- This prevents the last few lights from turning on all at once
+        if isOn then
+            if currentEnLight > 1 then
+                enLight = currentEnLight - 1
+            end
+            runningBegin = 0
+        end
+    else
+        -- Unknown mode: all lights simply follow the running state
+        for i = 0, maxFlowIndex do
+            local lightStr = "flowRunning" .. tostring(i)
+            electrics.values[lightStr] = runningState
         end
     end
+
 
     for i = 0, lightNum - 1 do
         local lightSourceStrL
