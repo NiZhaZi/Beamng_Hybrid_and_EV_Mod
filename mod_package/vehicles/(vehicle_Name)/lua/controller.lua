@@ -316,8 +316,8 @@ local function loadControllerExternal(fileName, controllerName, controllerData)
   if c.initSounds then
     c.initSounds(controllerJbeamData[controller.name])
   end
-  if c.initLasttage then
-    c.initLasttage(controllerJbeamData[controller.name])
+  if c.initLastStage then
+    c.initLastStage(controllerJbeamData[controller.name])
   end
 
   table.clear(sortedControllers)
@@ -394,10 +394,18 @@ local function adjustControllersPreInit(controllers)
 end
 
 local function registerRelocatedControllers()
-  registerRelocatedController("vehicleController", "vehicleController/eVehicleController") -- edited
+  --vehicle controller
+  registerRelocatedController("vehicleController", "vehicleController/eVehicleController")
+  --sound
   registerRelocatedController("AVAS", "sound/AVAS")
   registerRelocatedController("airbrakes", "sound/airbrakes")
   registerRelocatedController("reverseWarn", "sound/reverseWarn")
+  --braking
+  registerRelocatedController("adaptiveBrakeLights", "braking/adaptiveBrakeLights")
+  registerRelocatedController("brakedDifferentialSteering", "braking/brakedDifferentialSteering")
+  registerRelocatedController("compressionBrake", "braking/compressionBrake")
+  registerRelocatedController("postCrashBrake", "braking/postCrashBrake")
+  registerRelocatedController("transbrake", "braking/transbrake")
 end
 
 local function init()
@@ -462,7 +470,7 @@ local function init()
     local filePath = directory .. c.fileName
     local loadFunc = function()
       local controller = rerequire(filePath)
-      if controller then
+      if controller and type(controller) == "table" then
         local data = tableMergeRecursive(c, v.data[k] or {})
         c.name = c.name or k
         controllerJbeamData[c.name] = data
@@ -481,6 +489,8 @@ local function init()
             M.mainController = controller
           end
         end
+      else
+        error(string.format("Controller '%s' at '/%s.lua' is not a table, skipping...", k, filePath))
       end
     end
     local result, errorStr = pcall(loadFunc)
