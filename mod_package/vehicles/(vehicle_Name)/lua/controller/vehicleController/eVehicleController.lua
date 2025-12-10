@@ -2,9 +2,9 @@
 -- If a copy of the bCDDL was not distributed with this
 -- file, You can obtain one at http://beamng.com/bCDDL-1.1.txt
 
--- version V0.37.X for NZZ's hybrid mod
+-- version V0.38.X for NZZ's hybrid mod
 -- updata 0
--- 2025.9.16
+-- 2025.12.10
 
 local M = {}
 --Mandatory controller parameters
@@ -55,6 +55,8 @@ local energyStorageData = {
 }
 
 local shiftPreventionData = {
+  shiftPreventionSlipEnabled = false,
+  shiftPreventionJumpEnabled = false,
   wheelSlipUpThreshold = 0,
   wheelSlipDownThreshold = 0,
   wheelSlipShiftDown = false,
@@ -349,11 +351,8 @@ local function updateWheelSlip(dt)
   local averagePropulsedWheelSlip = wheelSlipCount > 0 and overallWheelSlip / wheelSlipCount or 0
   handBrakeHandling.smartParkingBrakeSlip = handBrakeHandling.smartParkingBrakeSlip / wheels.wheelCount
 
-  shiftPreventionData.wheelSlipShiftDown = true
-  if (averagePropulsedWheelSlip > shiftPreventionData.wheelSlipDownThreshold or groundContactCoef < 1) then -- and M.throttle <= 0.5 then
-    shiftPreventionData.wheelSlipShiftDown = false
-  end
-  shiftPreventionData.wheelSlipShiftUp = groundContactCoef >= 1 and averagePropulsedWheelSlip < shiftPreventionData.wheelSlipUpThreshold
+  shiftPreventionData.wheelSlipShiftDown = (groundContactCoef >= 1 or not shiftPreventionData.shiftPreventionJumpEnabled) and (averagePropulsedWheelSlip < shiftPreventionData.wheelSlipDownThreshold or not shiftPreventionData.shiftPreventionSlipEnabled)
+  shiftPreventionData.wheelSlipShiftUp = (groundContactCoef >= 1 or not shiftPreventionData.shiftPreventionJumpEnabled) and (averagePropulsedWheelSlip < shiftPreventionData.wheelSlipUpThreshold or not shiftPreventionData.shiftPreventionSlipEnabled)
 
   if not hasPressureWheels then
     shiftPreventionData.wheelSlipShiftDown = true
@@ -1015,6 +1014,9 @@ local function init(jbeamData)
 
   shiftPreventionData.wheelSlipUpThreshold = jbeamData.wheelSlipUpThreshold or 20000
   shiftPreventionData.wheelSlipDownThreshold = jbeamData.wheelSlipDownThreshold or 30000
+
+  shiftPreventionData.shiftPreventionSlipEnabled = jbeamData.shiftPreventionSlipEnabled == nil and true or jbeamData.shiftPreventionSlipEnabled
+  shiftPreventionData.shiftPreventionJumpEnabled = jbeamData.shiftPreventionJumpEnabled == nil and true or jbeamData.shiftPreventionJumpEnabled
 
   engine = powertrain.getDevice("mainEngine")
   gearbox = powertrain.getDevice("gearbox")
