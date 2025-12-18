@@ -1,7 +1,7 @@
 -- hybridContrl.lua - 2024.4.30 13:28 - hybrid control for hybrid Vehicles
 -- by NZZ
--- version 0.0.65 alpha
--- final edit - 2025.10.5 00:57
+-- version 0.0.66 alpha
+-- final edit - 2025.12.18 19:25
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -29,6 +29,7 @@ local AWDMultiplier = nil
 local controlLogicModule = nil
 local hybridMode = nil
 local isCrawl = 0
+local crawlRPM = nil
 local ifMotorOn = nil
 local motorRatio1 = nil
 local motorRatio2 = nil
@@ -508,7 +509,7 @@ local function updateGFX(dt)
     end
 
     if electrics.values.hybridMode ~= "electric" and electrics.values.autoModeStage ~= 1 then
-        proxyEngine:setTempRevLimiter(proxyEngine.maxRPM)
+        proxyEngine:resetTempRevLimiter()
     end
 
     -- electrics.values.reevThrottle = reevThrottle
@@ -579,20 +580,23 @@ local function updateGFX(dt)
     end
 
 
+    
     -- ecrawl
     local ifecrawl = false
-    if ecrawlMode and ifMotorOn and electrics.values.ignitionLevel == 2 and input.throttle == 0 then
-        if electrics.values.wheelspeed < (5 / 3.6)  then
-            electrics.values.mainThrottle = electrics.values.mainThrottle + 0.01
-            electrics.values.mainThrottle = math.min(electrics.values.mainThrottle, 0.2)
-        elseif electrics.values.wheelspeed > (6 / 3.6) then
-            electrics.values.mainThrottle = electrics.values.mainThrottle - 0.05
-            if electrics.values.wheelspeed < (10 / 3.6) then
-                electrics.values.mainThrottle = math.max(electrics.values.mainThrottle, 0.01)
+    if ecrawlMode and ifMotorOn and electrics.values.ignitionLevel == 2 and input.throttle == 0 and electrics.values.brake <= 0 then            
+        for _, v in ipairs(mainMotors) do
+            if v then
+                v:setTempRevLimiter(crawlRPM)
             end
         end
+        electrics.values.mainThrottle = 1
         ifecrawl = true
     else
+        for _, v in ipairs(mainMotors) do
+            if v then
+                v:resetTempRevLimiter()
+            end
+        end
         electrics.values.mainThrottle = electrics.values.throttle
     end
 
@@ -799,7 +803,14 @@ local function init(jbeamData)
 
     if #mainMotors == 0 and #subMotors == 0 then
         mainMotors = motors
+        for _, v in ipairs(mainMotors) do
+            if v then
+                v.electricsThrottleName = "mainThrottle"
+            end
+        end
     end
+
+    
 
     directMotors = {}
     local directmotorNames = jbeamData.directMotorNames
@@ -818,6 +829,7 @@ local function init(jbeamData)
     
     
     ecrawlMode = jbeamData.ecrawlMode or false
+    crawlRPM = jbeamData.crawlRPM or 25
 
     electricReverse = jbeamData.electricReverse == nil and true or jbeamData.electricReverse
     electrics.values.electricReverse = 0
