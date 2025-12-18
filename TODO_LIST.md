@@ -6,7 +6,8 @@
 - 3. [x] Multiple powertrain
 - 4. [x] Gearboxs with generator
 - 5. [x] Generator assist drive
-- 6. [ ] More intelligent REEV mode
+- 6. [ ] New EV crawl mode
+- 7. [ ] More intelligent REEV mode
 
 ## [ ] All wheel drive
 - 1. [x] Centre differential
