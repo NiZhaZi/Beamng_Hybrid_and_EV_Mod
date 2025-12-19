@@ -1,7 +1,7 @@
 -- hybridContrl.lua - 2024.4.30 13:28 - hybrid control for hybrid Vehicles
 -- by NZZ
--- version 0.0.66 alpha
--- final edit - 2025.12.18 19:25
+-- version 0.0.67 alpha
+-- final edit - 2025.12.19 13:35
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -582,6 +582,11 @@ local function updateGFX(dt)
 
     
     -- ecrawl
+    for _, v in ipairs(mainMotors) do 
+        if v.electricsThrottleName ~= "mainThrottle" then
+            v.electricsThrottleName = "mainThrottle"
+        end
+    end
     local ifecrawl = false
     if ecrawlMode and ifMotorOn and electrics.values.ignitionLevel == 2 and input.throttle == 0 and electrics.values.brake <= 0 then            
         for _, v in ipairs(mainMotors) do
