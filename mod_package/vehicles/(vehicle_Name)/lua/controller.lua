@@ -230,18 +230,32 @@ local function getControllerSafe(name)
   if controller then
     return controller
   else
-    log("D", "controller.getControllerSafe", string.format("Didn't find controller '%s', returning nilController.", name))
-    --log("D", "controller.getControllerSafe", debug.traceback())
-    --return our nilController that accepts all indexes and can be called without errors
-    return M.nilController
+    if relocatedControllers[name] then --check for relocated controllers
+      log("D", "controller.getControllersByType", string.format("Using relocated controller '%s' instead of original '%s'.", relocatedControllers[name], name))
+      controller = loadedControllers[relocatedControllers[name]]
+      if controller then --if we found a relocated controller
+        if not controller.hasCustomName then --and it has no custom name
+          return controller --use that one
+        else --if we do have a custom name that happens to match the typeName of a relocated controller, we ignore it out of precaution
+          log("D", "controller.getControllerSafe", string.format("Relocated controller has a custom name '%s', ignoring it...", controller.name))
+        end
+      end
+    end
   end
+  log("D", "controller.getControllerSafe", string.format("Didn't find controller '%s', returning nilController.", name))
+  --log("D", "controller.getControllerSafe", debug.traceback())
+  --return our nilController that accepts all indexes and can be called without errors
+  return M.nilController
 end
 
 local function getControllersByType(typeName)
   local controllers = {}
-  for _, v in pairs(loadedControllers) do
-    if v.typeName == typeName then
-      table.insert(controllers, v)
+  for _, c in pairs(loadedControllers) do
+    if c.typeName == typeName then
+      table.insert(controllers, c)
+    elseif relocatedControllers[typeName] and relocatedControllers[typeName] == c.typeName and not c.hasCustomName then --check if we have a relocated controller that matches
+      log("D", "controller.getControllersByType", string.format("Using relocated controller type '%s' instead of original '%s'.", relocatedControllers[typeName], typeName))
+      table.insert(controllers, c)
     end
   end
   return controllers
@@ -476,6 +490,9 @@ local function init()
         controllerJbeamData[c.name] = data
         controller.name = c.name
         controller.typeName = c.fileName
+        controller.hasCustomName = c.fileName ~= c.name
+        --log("I", "controller.init", string.format("Name: '%s', typeName: '%s', hasCustomName: '%s'", controller.name, controller.typeName, controller.hasCustomName))
+
         controller.init(data)
         controller.manualOrder = data.manualOrder
         loadedControllers[c.name] = controller
@@ -509,6 +526,8 @@ local function init()
       loadedControllers[dummyName] = controller
       controller.init()
       controller.name = dummyName
+      controller.typeName = dummyName
+      controller.hasCustomName = false
       M.mainController = controller
     end
   end
@@ -534,6 +553,8 @@ local function init()
       end
     end
   )
+
+  --dumpz(sortedControllers, 2)
 
   --  for k,v in pairs(sortedControllers) do
   --    print(string.format("%s -> %d", v.name, v.order))
