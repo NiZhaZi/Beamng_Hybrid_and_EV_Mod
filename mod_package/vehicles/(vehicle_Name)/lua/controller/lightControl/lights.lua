@@ -1,7 +1,7 @@
 -- lights.lua - 2025.6.12 17:37 - lights control
 -- by NZZ
--- version 0.0.12 alpha
--- final edit - 2025.12.10 23:25
+-- version 0.0.13 alpha
+-- final edit - 2026.4.4 20:41
 
 -- Full files at https://github.com/NiZhaZi/Beamng_Hybrid_and_EV_Mod
 
@@ -274,7 +274,13 @@ local function updateGFX(dt)
 
     end
 
-    local fogLevel = tonumber(obj:getLastMailbox("fogLevel")) * 100
+    local fogLevel
+    if tonumber(obj:getLastMailbox("fogLevel")) then
+        fogLevel = tonumber(obj:getLastMailbox("fogLevel")) * 100
+    else
+        fogLevel = 0
+    end
+    
     if autoFogLight then
         if fogLevel >= 1 and electrics.values.fog == 0 then
             electrics.values.fog = 1
