@@ -85,6 +85,9 @@ Suggestion: Download and install [Visual Studio Code](https://code.visualstudio.
       // "Motor_Drive_Type": "Front_Dual_Rear_Single",
       // "Motor_Drive_Type": "Front_Dual_Rear_Dual",
 
+      // "Main_Motor_Select": "Main_Motor_Select_F",
+	   "Main_Motor_Select": "Main_Motor_Select_R",
+
       "Camso_ElectricMotor_F": "Single_ElectricMotor_F",
       // "Camso_ElectricMotor_F": "Dual_ElectricMotor_F",
       "Camso_ElectricMotor_R": "Single_ElectricMotor_R",

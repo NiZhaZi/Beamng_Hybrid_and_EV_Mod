@@ -1,7 +1,7 @@
 **其他语言: [English](README.md), [汉语](README_zh.md).**\
 **待办清单: [待办清单](TODO_LIST.md).**
 
-# 这是一个用于将从《自动化：汽车公司大亨》导出的内燃机汽车，在《车祸模拟器》中转变为具有进阶控制功能的混合动力汽车和纯电动汽车的模组。
+# 这是一个用于将从《自动化：汽车公司大亨》导出的内燃机汽车，在《BeamNG.drive》中转变为具有进阶控制功能的混合动力汽车和纯电动汽车的模组。
 
 # 如果你想在媒体平台上发布包含此模组的内容，请提供此仓库的链接。
 
@@ -83,6 +83,9 @@
       // "Motor_Drive_Type": "Front_Single_Rear_Dual",
       // "Motor_Drive_Type": "Front_Dual_Rear_Single",
       // "Motor_Drive_Type": "Front_Dual_Rear_Dual",
+
+      // "Main_Motor_Select": "Main_Motor_Select_F",
+	   "Main_Motor_Select": "Main_Motor_Select_R",
 
       "Camso_ElectricMotor_F": "Single_ElectricMotor_F",
       // "Camso_ElectricMotor_F": "Dual_ElectricMotor_F",

@@ -39,9 +39,6 @@
 	    ],
 
 		"evdrive": {
-			"mainMotorNames": ["rearMotor", "rearMotor_R"],
-			"subMotorNames": ["frontMotor", "frontMotor_R"],
-
 			"leftMotorNames": ["frontMotor", "rearMotor"],
 			"rightMotorNames": ["frontMotor_R", "rearMotor_R"],
 
@@ -87,6 +84,7 @@
 			["Camso_ElectricMotor_F", "", "Front Motor", {"coreSlot": true}],
 			["Camso_ElectricMotor_R", "", "Rear Motor", {"coreSlot": true}],
 			["Motor_Drive_Type", "", "Motor Drive Type", {"coreSlot": true}],
+			["Main_Motor_Select", "", "Main Motor Selector", {"coreSlot": true}],
 			["AVAS", "AVAS", "Automated Voice Annunciator Systemsery"]
 		]
 	},
@@ -184,6 +182,33 @@
 		"slotType": "Motor_Drive_Type",
 		"vehicleController": {
 			"motorNames": ["frontMotor", "frontMotor_R", "rearMotor", "rearMotor_R"],
+		},
+	},
+
+
+	"Main_Motor_Select_F": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Main Motor Select Front",
+			"value": 0
+		}
+		"slotType": "Main_Motor_Select",
+		"evdrive": {
+			"mainMotorNames": ["frontMotor", "frontMotor_R"],
+			"subMotorNames": ["rearMotor", "rearMotor_R"],
+		},
+	},
+
+	"Main_Motor_Select_R": {
+		"information": {
+			"authors": "NZZ",
+			"name": "Main Motor Select Rear",
+			"value": 0
+		}
+		"slotType": "Main_Motor_Select",
+		"evdrive": {
+			"mainMotorNames": ["rearMotor", "rearMotor_R"],
+			"subMotorNames": ["frontMotor", "frontMotor_R"],
 		},
 	},
 }
