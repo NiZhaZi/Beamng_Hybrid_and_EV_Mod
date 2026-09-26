@@ -1,7 +1,7 @@
 -- autoContrl.lua - 2024.3.17 12:48 - auto functions control
 -- by NZZ
--- version 0.0.23 alpha
--- final edit - 2025.9.30 23:53
+-- version 0.0.24 alpha
+-- final edit - 2026.9.26 20:19
 
 local M = {}
 local debugTime = 0
@@ -156,7 +156,7 @@ local function updateGFX(dt)
                 electrics.values.autoholdActive = 1
             elseif input.brake > 0 then
                 brake = input.brake
-            elseif math.abs(vehicleInfo.posture.pitch) > 0.08 then
+            elseif math.abs(vehicleInfo.posture.pitch) > 0.12 then
                 brake = math.max(0, input.brake, -(1 / 0.10) * velocity + 1) -- auto stay
                 if vehicleHold() then
                     brake = 1
