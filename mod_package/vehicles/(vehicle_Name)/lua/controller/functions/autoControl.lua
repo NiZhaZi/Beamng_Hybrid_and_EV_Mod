@@ -1,7 +1,7 @@
 -- autoContrl.lua - 2024.3.17 12:48 - auto functions control
 -- by NZZ
--- version 0.0.24 alpha
--- final edit - 2026.9.26 20:19
+-- version 0.0.25 alpha
+-- final edit - 2026.10.3 12:18
 
 local M = {}
 local debugTime = 0
@@ -14,6 +14,8 @@ local brake = nil
 local throttle = nil
 
 local brakeLightRegenTorque = nil
+
+local HACAngle = nil
 
 local mode = {
     autoHold = nil,
@@ -156,7 +158,7 @@ local function updateGFX(dt)
                 electrics.values.autoholdActive = 1
             elseif input.brake > 0 then
                 brake = input.brake
-            elseif math.abs(vehicleInfo.posture.pitch) > 0.12 then
+            elseif math.abs(vehicleInfo.posture.pitch) > HACAngle then
                 brake = math.max(0, input.brake, -(1 / 0.10) * velocity + 1) -- auto stay
                 if vehicleHold() then
                     brake = 1
@@ -315,6 +317,8 @@ local function init(jbeamData)
             brakeLightRegenTorque = jbeamData.brakeLightRegenTorque
         end
     end
+
+    HACAngle = jbeamData.HACAngle or 0.08
 
 end
 
