@@ -2,9 +2,9 @@
 -- If a copy of the bCDDL was not distributed with this
 -- file, You can obtain one at http://beamng.com/bCDDL-1.1.txt
 
--- version V0.39.4 for NZZ's hybrid mod
--- updata 1
--- 2026.09.05
+-- version V0.40.4 for NZZ's hybrid mod
+-- updata 2
+-- 2026.10.30
 
 local M = {}
 --Mandatory controller parameters
@@ -197,14 +197,13 @@ local function setGearboxBehavior(behavior)
 
   gearboxHandling.behavior = behavior
   M.gearboxBehavior = behavior
-  guihooks.message(
-    {
-      txt = "vehicle.vehicleController.shifterModeChanged",
-      context = {shifterModeName = getGearboxBehaviorName()}
-    },
-    2,
-    "vehicle.shiftermode"
-  )
+  guihooks.messageForSeatedPlayers({
+    msg = "vehicle.vehicleController.shifterModeChanged",
+    context = {shifterModeName = getGearboxBehaviorName()},
+    compactMsg = "vehicle.vehicleController.shifterModeChangedCompact",
+    ttl = 2,
+    category = "vehicle.shiftermode"
+  })
   gearboxHandling.previousBehavior = gearboxHandling.behavior
 
   controlLogicModule.gearboxBehaviorChanged(behavior)
@@ -237,13 +236,16 @@ sharedFunctions.switchToRealisticBehavior = function(gearIndex)
 end
 
 sharedFunctions.warnCannotShiftSequential = function()
-  guihooks.trigger("Message", {
-    msg = "vehicle.vehicleController.cannotShiftSequential",
-    context = {shifterModeName = getGearboxBehaviorName()},
-    ttl = 2,
-    category = "vehicle.shiftLogic.cannotShift",
-    actionItems = {{ action = "toggleShifterMode", label = "ui.inputActions.vehicle.toggleShifterMode.title" }},
-  })
+  guihooks.trigger(
+    "Message",
+    {
+      msg = "vehicle.vehicleController.cannotShiftSequential",
+      context = {shifterModeName = getGearboxBehaviorName()},
+      ttl = 2,
+      category = "vehicle.shiftLogic.cannotShift",
+      actionItems = {{action = "toggleShifterMode", label = "ui.inputActions.vehicle.toggleShifterMode.title"}}
+    }
+  )
 end
 
 sharedFunctions.updateAvgAVSingleDevice = function(deviceName, deviceProperty)
@@ -660,7 +662,6 @@ local function shiftUpOnDown()
   end
   UpSignal = true -- edited
 end
-
 local function shiftUpOnUp()
   if controlLogicModule.shiftUpOnUp then
     controlLogicModule.shiftUpOnUp()
@@ -778,13 +779,13 @@ local function sendShiftPointDebugData()
 end
 
 local function applySettings()
-  gearboxHandling.autoClutch = settings.getValue("autoClutch", true)
-  gearboxHandling.autoThrottle = settings.getValue("autoThrottle", true)
+  gearboxHandling.autoClutch = settings.getValue("autoClutch", true, playerInfo.persona)
+  gearboxHandling.autoThrottle = settings.getValue("autoThrottle", true, playerInfo.persona)
   gearboxHandling.gearboxSafety = settings.getValue("gearboxSafety", true)
 
   --default changed, apply to current vehicle only
-  local gearboxBehavior = settings.getValue("defaultGearboxBehavior")
-  if playerInfo.firstPlayerSeated and gearboxBehavior ~= nil and gearboxBehavior ~= gearboxHandling.behavior then
+  local gearboxBehavior = settings.getValue("defaultGearboxBehavior", nil, playerInfo.persona)
+  if gearboxHandling.behaviorLookup and (playerInfo.persona ~= nil or playerInfo.firstPlayerSeated) and gearboxBehavior ~= nil and gearboxBehavior ~= gearboxHandling.behavior then
     setGearboxBehavior(gearboxBehavior)
   end
 end
@@ -960,7 +961,7 @@ local function reset(jbeamData)
   -- end
   -- energyStorageData.invEnergyStorageCount = energyStorageCount > 0 and 1 / energyStorageCount or 0
 
-  setGearboxBehavior(gearboxHandling.previousBehavior or settings.getValue("defaultGearboxBehavior") or "arcade")
+  setGearboxBehavior(gearboxHandling.previousBehavior or settings.getValue("defaultGearboxBehavior", nil, playerInfo.persona) or "arcade")
 
   --sendTorqueData()
 
@@ -1178,7 +1179,7 @@ local function init(jbeamData)
   --  drivingStrategy[v].init(M)
   --end
 
-  setGearboxBehavior(gearboxHandling.previousBehavior or settings.getValue("defaultGearboxBehavior") or "arcade")
+  setGearboxBehavior(gearboxHandling.previousBehavior or settings.getValue("defaultGearboxBehavior", nil, playerInfo.persona) or "arcade")
 
   registerQuickAccessMenu()
 
