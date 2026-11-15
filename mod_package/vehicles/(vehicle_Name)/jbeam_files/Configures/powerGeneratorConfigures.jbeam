@@ -11,8 +11,8 @@
 
 		"variables": [
 			["name",  "type",   "unit",  "category",       "default",  "min",  "max",  "title",            "description"],
-			//REEV mode settings
-			["$SOC",  "range",  "%",     "Hybrid System",  20,         0,      100,    "State of charge",  "State of charge when REEV on",  {"subCategory": "REEV Mode", "stepDis":0.01}],
+			//REEV mode settings // -1 for never work as a generator
+			["$SOC",  "range",  "%",     "Hybrid System",  20,         -1,      100,    "State of charge",  "State of charge when REEV on",  {"subCategory": "REEV Mode", "stepDis":0.01}],
 		],
 
 		"controller": [
